@@ -1,5 +1,4 @@
 ﻿
-
   <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -94,44 +93,44 @@
 </head>
 <body>
 
-  <h1>Наши товары</h1>
+  <h1>Mūsu preces</h1>
   <div class="products-list" id="products-list">
     <!-- Пример карточек товаров -->
     <div class="product-card simpleCart_shelfItem">
-  <img src="photo/2001.jpg" alt="Фото Иван Иванов" width="220" style="border-radius:0;"><br>
+  <img src="images/2001.jpg" alt="Фото Иван Иванов" width="220" style="border-radius:0;"><br>
       <h3 class="item_name">Multikatls RED COLORSENSE MC200</h3>
       <div class="price">
 
         <span class="item_price">129.00</span> EUR
       </div>
-      <a href="javascript:;" class="add-btn item_add">Добавить в корзину</a>
+      <a href="javascript:;" class="add-btn item_add">Pievienot grozam</a>
     </div>
     <div class="product-card simpleCart_shelfItem">
-<img src="photo/11E.jpg" alt="Фото Иван Иванов" width="200" style="border-radius:0;"><br>
+<img src="images/11E.jpg" alt="Фото Иван Иванов" width="200" style="border-radius:0;"><br>
       <h3 class="item_name">Tējkanna Colorsense A11E</h3>
       <div class="price">
         <span class="item_price">35.00</span> EUR
       </div>
-      <a href="javascript:;" class="add-btn item_add">Добавить в корзину</a>
+      <a href="javascript:;" class="add-btn item_add">Pievienot grozam</a>
     </div>
     <div class="product-card simpleCart_shelfItem">
-<img src="photo/15E1.jpg" alt="Фото Иван Иванов" width="200" style="border-radius:0;"><br>
+<img src="images/15E1.jpg" alt="Фото Иван Иванов" width="200" style="border-radius:0;"><br>
       <h3 class="item_name">Tējkanna Colorsense A15E</h3>
       <div class="price">
         <span class="item_price">39.00</span> EUR
       </div>
-      <a href="javascript:;" class="add-btn item_add">Добавить в корзину</a>
+      <a href="javascript:;" class="add-btn item_add">Pievienot grozam</a>
     </div>
     <!-- Добавь другие товары по аналогии -->
   </div>
 
   <div class="cart-area">
-    <h2>Корзина</h2>
+    <h2>Grozs</h2>
     <div class="cart-items">
       <div class="simpleCart_items"></div>
     </div>
     <div class="cart-total">
-      Всего: <span class="simpleCart_total"></span> EUR
+      Kopā: <span class="simpleCart_total"></span> EUR
     </div>
     <div>
       <a href="javascript:;" class="empty-cart-btn simpleCart_empty">Очистить корзину</a>
@@ -139,14 +138,14 @@
   </div>
 
   <div class="order-form">
-    <h2>Оформить заказ</h2>
+    <h2>Noformēt pasūtījumu</h2>
     <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
       <!-- Твой ключ Web3Forms -->
       <input type="hidden" name="access_key" value="c49dd88b-948d-4903-9295-d9ab1c7b8afc">
       <input type="hidden" name="cart_contents" id="cart_contents" value="">
 
       <label>
-        Ваше имя:
+        Jūsu vārds:
         <input type="text" name="name" required>
       </label>
       <label>
@@ -154,15 +153,15 @@
         <input type="email" name="email" required>
       </label>
       <label>
-        Телефон:
+        Тelefons:
         <input type="text" name="phone">
       </label>
       <label>
-        Комментарии к заказу:
+        Кomentāri:
         <textarea name="message" rows="4"></textarea>
       </label>
 
-      <button type="submit">Отправить заказ</button>
+      <button type="submit">Pasūtīt</button>
     </form>
   </div>
 
@@ -209,3 +208,5 @@
 </body>
 </html>
 
+
+  
