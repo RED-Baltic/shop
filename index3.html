@@ -1,0 +1,210 @@
+﻿
+
+  <!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>RED — Магазин / Корзина</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Подключаем стили — вставь свои или адаптируй под RED -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .products-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .product-card {
+      border: 1px solid #ccc;
+      padding: 15px;
+      width: calc(33% - 30px);
+      box-sizing: border-box;
+    }
+    .product-card h3 {
+      margin: 0 0 10px 0;
+    }
+    .product-card .price {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .product-card .add-btn {
+      display: inline-block;
+      padding: 8px 12px;
+      background-color: #e60000;
+      color: white;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .cart-area {
+      margin-top: 40px;
+      border: 1px solid #888;
+      padding: 20px;
+    }
+    .cart-items {
+      margin-bottom: 20px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .cart-item span {
+      margin-right: 10px;
+    }
+    .cart-total {
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+    .empty-cart-btn {
+      margin-top: 10px;
+      color: #555;
+      cursor: pointer;
+    }
+
+    .order-form {
+      margin-top: 30px;
+      border: 1px solid #aaa;
+      padding: 20px;
+    }
+    .order-form label {
+      display: block;
+      margin-bottom: 10px;
+    }
+    .order-form input, .order-form textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+    .order-form button {
+      padding: 10px 20px;
+      background-color: #e60000;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Наши товары</h1>
+  <div class="products-list" id="products-list">
+    <!-- Пример карточек товаров -->
+    <div class="product-card simpleCart_shelfItem">
+  <img src="images/2001.jpg" alt="Фото Иван Иванов" width="220" style="border-radius:0;"><br>
+      <h3 class="item_name">Multikatls RED COLORSENSE MC200</h3>
+      <div class="price">
+
+        <span class="item_price">129.00</span> EUR
+      </div>
+      <a href="javascript:;" class="add-btn item_add">Добавить в корзину</a>
+    </div>
+    <div class="product-card simpleCart_shelfItem">
+<img src="images/11E.jpg" alt="Фото Иван Иванов" width="200" style="border-radius:0;"><br>
+      <h3 class="item_name">Tējkanna Colorsense A11E</h3>
+      <div class="price">
+        <span class="item_price">35.00</span> EUR
+      </div>
+      <a href="javascript:;" class="add-btn item_add">Добавить в корзину</a>
+    </div>
+    <div class="product-card simpleCart_shelfItem">
+<img src="images/15E1.jpg" alt="Фото Иван Иванов" width="200" style="border-radius:0;"><br>
+      <h3 class="item_name">Tējkanna Colorsense A15E</h3>
+      <div class="price">
+        <span class="item_price">39.00</span> EUR
+      </div>
+      <a href="javascript:;" class="add-btn item_add">Добавить в корзину</a>
+    </div>
+    <!-- Добавь другие товары по аналогии -->
+  </div>
+
+  <div class="cart-area">
+    <h2>Корзина</h2>
+    <div class="cart-items">
+      <div class="simpleCart_items"></div>
+    </div>
+    <div class="cart-total">
+      Всего: <span class="simpleCart_total"></span> EUR
+    </div>
+    <div>
+      <a href="javascript:;" class="empty-cart-btn simpleCart_empty">Очистить корзину</a>
+    </div>
+  </div>
+
+  <div class="order-form">
+    <h2>Оформить заказ</h2>
+    <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
+      <!-- Твой ключ Web3Forms -->
+      <input type="hidden" name="access_key" value="c49dd88b-948d-4903-9295-d9ab1c7b8afc">
+      <input type="hidden" name="cart_contents" id="cart_contents" value="">
+
+      <label>
+        Ваше имя:
+        <input type="text" name="name" required>
+      </label>
+      <label>
+        Email:
+        <input type="email" name="email" required>
+      </label>
+      <label>
+        Телефон:
+        <input type="text" name="phone">
+      </label>
+      <label>
+        Комментарии к заказу:
+        <textarea name="message" rows="4"></textarea>
+      </label>
+
+      <button type="submit">Отправить заказ</button>
+    </form>
+  </div>
+
+  <!-- Подключение библиотек -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.cdnhub.io/simplecartjs/3.0.5/simplecart.min.js"></script>
+
+  <script>
+    // Инициализируем simpleCart
+    simpleCart({
+      cartColumns: [
+        { attr: "name", label: "Товар" },
+        { attr: "quantity", label: "Кол‑вo" },
+        { attr: "price", label: "Цена" },
+        { view: "remove", text: "Удалить" }
+      ],
+      currency: "EUR",
+      // Отключим стандартную кнопку checkout, т.к. мы используем свою форму
+      checkout: {
+        type: "", 
+      }
+    });
+
+    // Обработчик отправки формы
+    $('#orderForm').on('submit', function(e){
+      var items = simpleCart.items();
+      if (items.length === 0) {
+        alert("Корзина пуста");
+        e.preventDefault();
+        return false;
+      }
+      // Составляем список товаров
+      var summary = items.map(function(it){
+        return it.get('quantity') + ' × ' + it.get('name') + ' (' + it.get('price').toFixed(2) + ' EUR)';
+      }).join('\n');
+      var total = simpleCart.total().toFixed(2);
+      var cartText = summary + "\nВсего: " + total + " EUR";
+      $('#cart_contents').val(cartText);
+      // Можно очистить корзину после отправки, если хочется
+      // simpleCart.empty();
+    });
+  </script>
+
+</body>
+</html>
