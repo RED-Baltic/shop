@@ -1,127 +1,77 @@
-﻿
-  <!DOCTYPE html>
-<html lang="ru">
+﻿<!DOCTYPE html>
+<html lang="lv">
 <head>
   <meta charset="UTF-8">
-  <title>RED — Магазин / Корзина</title>
+  <title>RED — Veikals / Grozs</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Подключаем стили — вставь свои или адаптируй под RED -->
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .products-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .product-card {
-      border: 1px solid #ccc;
-      padding: 15px;
-      width: calc(33% - 30px);
-      box-sizing: border-box;
-    }
-    .product-card h3 {
-      margin: 0 0 10px 0;
-    }
-    .product-card .price {
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-    .product-card .add-btn {
-      display: inline-block;
-      padding: 8px 12px;
-      background-color: #e60000;
-      color: white;
-      text-decoration: none;
-      cursor: pointer;
-    }
+    body { font-family: Arial, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; }
+    .products-list { display: flex; flex-wrap: wrap; gap: 20px; }
+    .product-card { border: 1px solid #ccc; padding: 15px; width: calc(33% - 30px); box-sizing: border-box; }
+    .product-card h3 { margin: 0 0 10px 0; }
+    .product-card .price { font-weight: bold; margin-bottom: 10px; }
+    .product-card .add-btn { display: inline-block; padding: 8px 12px; background-color: #e60000; color: white; text-decoration: none; cursor: pointer; }
+    .cart-area { margin-top: 40px; border: 1px solid #888; padding: 20px; }
+    .cart-items { margin-bottom: 20px; }
 
-    .cart-area {
-      margin-top: 40px;
-      border: 1px solid #888;
-      padding: 20px;
-    }
-    .cart-items {
-      margin-bottom: 20px;
-    }
-    .cart-item {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-    .cart-item span {
-      margin-right: 10px;
-    }
-    .cart-total {
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-    .empty-cart-btn {
-      margin-top: 10px;
-      color: #555;
-      cursor: pointer;
-    }
-
-    .order-form {
-      margin-top: 30px;
-      border: 1px solid #aaa;
-      padding: 20px;
-    }
-    .order-form label {
-      display: block;
-      margin-bottom: 10px;
-    }
-    .order-form input, .order-form textarea {
+    /* Groza tabulas stils */
+    .simpleCart_items table {
       width: 100%;
-      padding: 8px;
-      margin-top: 5px;
+      border-collapse: collapse;
       margin-bottom: 15px;
-      box-sizing: border-box;
     }
-    .order-form button {
-      padding: 10px 20px;
-      background-color: #e60000;
-      color: white;
-      border: none;
-      cursor: pointer;
+    .simpleCart_items th, .simpleCart_items td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
     }
+    .simpleCart_items th {
+      background-color: #f5f5f5;
+    }
+    .simpleCart_items td.item-name {
+      text-align: left;
+    }
+
+    .cart-total { font-size: 1.2em; font-weight: bold; }
+    .empty-cart-btn { margin-top: 10px; color: #555; cursor: pointer; display:inline-block; }
+    .order-form { margin-top: 30px; border: 1px solid #aaa; padding: 20px; }
+    .order-form label { display: block; margin-bottom: 10px; }
+    .order-form input, .order-form textarea { width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; box-sizing: border-box; }
+    .order-form button { padding: 10px 20px; background-color: #e60000; color: white; border: none; cursor: pointer; }
   </style>
 </head>
 <body>
 
   <h1>Mūsu preces</h1>
   <div class="products-list" id="products-list">
-    <!-- Пример карточек товаров -->
     <div class="product-card simpleCart_shelfItem">
-  <img src="photo/2001.jpg" alt="Фото Иван Иванов" width="220" style="border-radius:0;"><br>
+      <img src="images/2001.jpg" alt="RED MC200 multivārāmais katls" width="220"><br>
       <h3 class="item_name">Multikatls RED COLORSENSE MC200</h3>
       <div class="price">
-
         <span class="item_price">129.00</span> EUR
       </div>
       <a href="javascript:;" class="add-btn item_add">Pievienot grozam</a>
     </div>
+
     <div class="product-card simpleCart_shelfItem">
-<img src="photo/11E.jpg" alt="Фото Иван Иванов" width="200" style="border-radius:0;"><br>
+      <img src="images/11E.jpg" alt="Tējkanna Colorsense A11E" width="200"><br>
       <h3 class="item_name">Tējkanna Colorsense A11E</h3>
       <div class="price">
         <span class="item_price">35.00</span> EUR
       </div>
       <a href="javascript:;" class="add-btn item_add">Pievienot grozam</a>
     </div>
+
+  
     <div class="product-card simpleCart_shelfItem">
-<img src="photo/15E1.jpg" alt="Фото Иван Иванов" width="200" style="border-radius:0;"><br>
+      <img src="images/15E1.jpg" alt="Tējkanna Colorsense A15E" width="200"><br>
       <h3 class="item_name">Tējkanna Colorsense A15E</h3>
       <div class="price">
         <span class="item_price">39.00</span> EUR
       </div>
       <a href="javascript:;" class="add-btn item_add">Pievienot grozam</a>
     </div>
-    <!-- Добавь другие товары по аналогии -->
+    <!-- Pievieno citus produktus pēc vajadzības -->
   </div>
 
   <div class="cart-area">
@@ -133,82 +83,87 @@
       Kopā: <span class="simpleCart_total"></span> EUR
     </div>
     <div>
-      <a href="javascript:;" class="empty-cart-btn simpleCart_empty">Notīrīt grozu</a>
+      <a href="javascript:;" class="empty-cart-btn simpleCart_empty">Iztīrīt grozu</a>
     </div>
   </div>
 
   <div class="order-form">
     <h2>Noformēt pasūtījumu</h2>
     <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
-      <!-- Твой ключ Web3Forms -->
       <input type="hidden" name="access_key" value="c49dd88b-948d-4903-9295-d9ab1c7b8afc">
       <input type="hidden" name="cart_contents" id="cart_contents" value="">
-
       <label>
         Jūsu vārds:
         <input type="text" name="name" required>
       </label>
       <label>
-        Email:
+        E-pasts:
         <input type="email" name="email" required>
       </label>
       <label>
-        Тelefons:
+        Telefons:
         <input type="text" name="phone">
       </label>
       <label>
-        Кomentāri:
+        Komentāri:
         <textarea name="message" rows="4"></textarea>
       </label>
-
       <button type="submit">Pasūtīt</button>
     </form>
   </div>
 
-  <!-- Подключение библиотек -->
+  <!-- bibliotēkas -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.cdnhub.io/simplecartjs/3.0.5/simplecart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/simplecartjs/3.0.5/simplecart.min.js"></script>
 
   <script>
-    // Инициализируем simpleCart
-    simpleCart({
-      cartColumns: [
-        { attr: "name", label: "Товар" },
-        { attr: "quantity", label: "Кол‑вo" },
-        { attr: "price", label: "Цена" },
-        { view: "remove", text: "Удалить" }
-      ],
-      currency: "EUR",
-      // Отключим стандартную кнопку checkout, т.к. мы используем свою форму
-      checkout: {
-        type: "", 
+    $(function() {
+      if (typeof simpleCart === 'undefined') {
+        console.error('simpleCart nav ielādēts. Pārbaudi CDN pieslēgumu.');
+        return;
       }
-    });
 
-    // Обработчик отправки формы
-    $('#orderForm').on('submit', function(e){
-      var items = simpleCart.items();
-      if (items.length === 0) {
-        alert("Корзина пуста");
-        e.preventDefault();
-        return false;
-      }
-      // Составляем список товаров
-      var summary = items.map(function(it){
-        return it.get('quantity') + ' × ' + it.get('name') + ' (' + it.get('price').toFixed(2) + ' EUR)';
-      }).join('\n');
-      var total = simpleCart.total().toFixed(2);
-      var cartText = summary + "\nВсего: " + total + " EUR";
-      $('#cart_contents').val(cartText);
-      // Можно очистить корзину после отправки, если хочется
-      // simpleCart.empty();
+      simpleCart({
+        cartStyle: "table", // <- tabulas izkārtojums
+        cartColumns: [
+          { attr: "name", label: "Prece", className: "item-name" },
+          { attr: "quantity", label: "Daudzums" },
+          { attr: "price", label: "Cena" },
+          { view: "remove", text: "Dzēst" }
+        ],
+        currency: "EUR",
+        checkout: { type: "" }
+      });
+
+      $('#orderForm').on('submit', function(e){
+        var items = simpleCart.items();
+        if (!items || items.length === 0) {
+          alert("Grozs ir tukšs");
+          e.preventDefault();
+          return false;
+        }
+        var summaryArr = [];
+        for (var i = 0; i < items.length; i++) {
+          var it = items[i];
+          var qty = it.get('quantity');
+          var name = it.get('name');
+          var price = parseFloat(it.get('price')).toFixed(2);
+          summaryArr.push(qty + ' × ' + name + ' (' + price + ' EUR)');
+        }
+        var total = parseFloat(simpleCart.total()).toFixed(2);
+        var cartText = summaryArr.join('\n') + "\nKopā: " + total + " EUR";
+        $('#cart_contents').val(cartText);
+      });
     });
   </script>
 
 </body>
 </html>
 
+ 
+
 
   
+
 
 
