@@ -161,33 +161,40 @@
     <h2>Noformēt pasūtījumu</h2>
     <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
       <input type="hidden" name="access_key" value="eecfee69-2466-4350-809f-888ed9faac05">
+      <input type="hidden" name="email_to" value="info.redmond.lv@gmail.com">
       <input type="hidden" name="cart_contents" id="cart_contents" value="">
+
       <label>
         Jūsu vārds:
         <input type="text" name="customer_name" required>
       </label>
+
       <label>
         E-pasts:
         <input type="email" name="email" required>
       </label>
+
       <label>
         Telefons:
         <input type="text" name="phone">
       </label>
+
       <!-- поле адреса Venipak -->
       <label id="locker-field" class="hidden">
         Venipak pakomāta adrese:
         <input type="text" name="locker_address">
       </label>
+
       <label>
         Komentāri:
         <textarea name="message" rows="4"></textarea>
       </label>
+
       <button type="submit">Pasūtīt</button>
     </form>
   </div>
 
-  <!-- bibliotēkas -->
+  <!-- библиотеки -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/simplecartjs/3.0.5/simplecart.min.js"></script>
 
@@ -258,9 +265,6 @@
 
 </body>
 </html>
-  
-
-
 
 
 
