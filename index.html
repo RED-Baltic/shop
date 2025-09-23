@@ -39,23 +39,18 @@
       cursor: pointer; 
       border-radius: 4px;
     }
-
-    /* Картинки будут сжиматься по ширине карточки */
     .product-card img {
       max-width: 100%;
       height: auto;
       display: block;
       margin: 0 auto 10px;
     }
-
     .cart-area { 
       margin-top: 40px; 
       border: 1px solid #888; 
       padding: 20px; 
     }
     .cart-items { margin-bottom: 20px; }
-
-    /* Groza tabulas stils */
     .simpleCart_items table {
       width: 100%;
       border-collapse: collapse;
@@ -72,15 +67,25 @@
     .simpleCart_items td.item-name {
       text-align: left;
     }
-
     .cart-total { font-size: 1.2em; font-weight: bold; }
     .empty-cart-btn { margin-top: 10px; color: #555; cursor: pointer; display:inline-block; }
+    .delivery-info { 
+      margin-top: 30px; 
+      border: 1px solid #aaa; 
+      padding: 20px; 
+      background: #f9f9f9; 
+    }
+    .delivery-info h2 { margin-top: 0; }
+    .delivery-info label {
+      display: block;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
     .order-form { margin-top: 30px; border: 1px solid #aaa; padding: 20px; }
     .order-form label { display: block; margin-bottom: 10px; }
     .order-form input, .order-form textarea { width: 100%; padding: 8px; margin-top: 5px; margin-bottom: 15px; box-sizing: border-box; }
     .order-form button { padding: 10px 20px; background-color: #e60000; color: white; border: none; cursor: pointer; }
-
-    /* Адаптивность: на телефонах карточки будут по одной в ряд */
+    .hidden { display: none; }
     @media (max-width: 900px) {
       .product-card {
         width: calc(50% - 20px);
@@ -138,26 +143,20 @@
     </div>
   </div>
 
-
-   <!-- Jaunais bloks par piegādi -->
+  <!-- Bloks par piegādi -->
   <div class="delivery-info">
     <h2>Piegāde</h2>
     <p>Lūdzu, izvēlieties piegādes veidu:</p>
     <label>
-      <input type="radio" name="delivery" value="Venipak pakomāts (1–3 
-
-darba dienas, 4.00 EUR)" required>
+      <input type="radio" name="delivery" value="Venipak pakomāts (1–3 darba dienas, 4.00 EUR)" required>
       Venipak pakomāts (1–3 darba dienas, 4.00 EUR)
     </label>
     <label>
-      <input type="radio" name="delivery" value="Pašizņemšana Mārupē, Lielā 
-
-19 k1 (BEZMAKSAS)">
+      <input type="radio" name="delivery" value="Pašizņemšana Mārupē, Lielā 19 k1 (BEZMAKSAS)">
       Pašizņemšana Mārupē, Lielā 19 k1 (BEZMAKSAS)
     </label>
   </div>
 
-  
   <div class="order-form">
     <h2>Noformēt pasūtījumu</h2>
     <form id="orderForm" action="https://api.web3forms.com/submit" method="POST">
@@ -165,7 +164,7 @@ darba dienas, 4.00 EUR)" required>
       <input type="hidden" name="cart_contents" id="cart_contents" value="">
       <label>
         Jūsu vārds:
-        <input type="text" name="name" required>
+        <input type="text" name="customer_name" required>
       </label>
       <label>
         E-pasts:
@@ -175,13 +174,12 @@ darba dienas, 4.00 EUR)" required>
         Telefons:
         <input type="text" name="phone">
       </label>
-      <label>
-
+      <!-- поле адреса Venipak -->
+      <label id="locker-field" class="hidden">
         Venipak pakomāta adrese:
-        <input type="text" name="name" required>
+        <input type="text" name="locker_address">
       </label>
       <label>
-        
         Komentāri:
         <textarea name="message" rows="4"></textarea>
       </label>
@@ -212,6 +210,18 @@ darba dienas, 4.00 EUR)" required>
         checkout: { type: "" }
       });
 
+      // pārslēdzam adreses lauku
+      $('input[name="delivery"]').on('change', function() {
+        if ($(this).val().startsWith("Venipak")) {
+          $('#locker-field').removeClass('hidden');
+          $('#locker-field input').attr('required', true);
+        } else {
+          $('#locker-field').addClass('hidden');
+          $('#locker-field input').removeAttr('required');
+        }
+      });
+
+      // form submit
       $('#orderForm').on('submit', function(e){
         var items = simpleCart.items();
         if (!items || items.length === 0) {
@@ -219,6 +229,7 @@ darba dienas, 4.00 EUR)" required>
           e.preventDefault();
           return false;
         }
+
         var summaryArr = [];
         for (var i = 0; i < items.length; i++) {
           var it = items[i];
@@ -228,7 +239,18 @@ darba dienas, 4.00 EUR)" required>
           summaryArr.push(qty + ' × ' + name + ' (' + price + ' EUR)');
         }
         var total = parseFloat(simpleCart.total()).toFixed(2);
-        var cartText = summaryArr.join('\n') + "\nKopā: " + total + " EUR";
+
+        var delivery = $('input[name="delivery"]:checked').val() || "Nav izvēlēts";
+        var lockerAddr = $('#locker-field input').val();
+
+        var cartText = summaryArr.join('\n') +
+                       "\nKopā: " + total + " EUR" +
+                       "\nPiegāde: " + delivery;
+
+        if (lockerAddr) {
+          cartText += "\nVenipak pakomāts: " + lockerAddr;
+        }
+
         $('#cart_contents').val(cartText);
       });
     });
@@ -236,11 +258,8 @@ darba dienas, 4.00 EUR)" required>
 
 </body>
 </html>
-
- 
-
-
   
+
 
 
 
