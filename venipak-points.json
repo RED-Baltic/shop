@@ -2806,10 +2806,38 @@
     "address": "Latgales iela 493",
     "pickup_point": "Venipak Pickup, Venipak Rīgas termināls",
     "postal_code": "2121"
-}
+},
+
+
+	 
+    {
+        "id": "1",
+        "country": "EE",
+        "city": "Tallinn",
+        "address": "Saha tee 9",
+        "pickup_point": "Venipak locker, Grossi Venipak pakiautomaat",
+        "postal_code": "74201"
+    },
+    {
+        "id": "2",
+        "country": "EE",
+        "city": "Tallinn",
+        "address": "Erika tn 14",
+        "pickup_point": "Venipak locker, Arsenali Keskus Venipak pakiautomaat",
+        "postal_code": "10416"
+    },
+    {
+        "id": "3",
+        "country": "EE",
+        "city": "Tallinn",
+        "address": "Toompuiestee 37/2",
+        "pickup_point": "Venipak locker, Balti Jaam Venipak pakiautomaat",
+        "postal_code": "10149"
+    }
 ]
 		
 		
 		
 		
+
 
