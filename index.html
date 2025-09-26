@@ -65,15 +65,26 @@
     }
     .lang-selector {
       margin-left:auto;
+      display: flex;
+      gap: 8px;
     }
-    .lang-selector label { color:var(--muted); margin-right:8px; font-size:14px; }
-    .lang-selector select {
-      padding:8px 10px;
-      border-radius:8px;
-      border:1px solid rgba(255,255,255,0.06);
-      background:#0b0b0b;
-      color:var(--text-light);
-      font-size:14px;
+    .lang-selector button {
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: #0b0b0b;
+      color: var(--text-light);
+      font-size: 14px;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease;
+    }
+    .lang-selector button.active {
+      background: var(--accent-red);
+      border-color: var(--accent-red);
+    }
+    .lang-selector button:hover {
+      background: var(--accent-red-dark);
+      border-color: var(--accent-red-dark);
     }
 
     .grid { display:grid; grid-template-columns:1fr; gap:28px; align-items:start; }
@@ -170,6 +181,36 @@
     }
     .simpleCart_items th { font-weight:700; }
 
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .quantity-controls button {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: var(--accent-red);
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .quantity-controls button:hover {
+      background: var(--accent-red-dark);
+    }
+    .quantity-controls input {
+      width: 40px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.06);
+      background: #fff;
+      color: var(--text-dark);
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
     .empty-cart-btn,
     .simpleCart_items .simpleCart_remove {
       display:inline-block;
@@ -254,13 +295,10 @@
         <h1>RED — Veikals</h1>
       </div>
       <div class="lang-selector">
-        <label for="lang">Valoda / Language / Язык / Keel:</label>
-        <select id="lang">
-          <option value="lv">Latviešu</option>
-          <option value="ru">Русский</option>
-          <option value="ee">Eesti</option>
-          <option value="lt">Lietuvių</option>
-        </select>
+        <button class="lang-btn active" data-lang="lv">LV</button>
+        <button class="lang-btn" data-lang="lt">LT</button>
+        <button class="lang-btn" data-lang="ru">RU</button>
+        <button class="lang-btn" data-lang="ee">EE</button>
       </div>
     </header>
 
@@ -323,7 +361,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/simplecartjs/3.0.5/simplecart.min.js"></script>
   <script>
     const translations = {
-      lv: { title:"Mūsu preces", cartTitle:"Grozs", cartTotal:"Kopā:", emptyCart:"Iztīrīt grozu", deliveryTitle:"Piegāde",
+      lv: { title:"RED", cartTitle:"Grozs", cartTotal:"Kopā:", emptyCart:"Iztīrīt grozu", deliveryTitle:"Piegāde",
         venipak:"Venipak pakomāts (1–3 darba dienas, 4.00 EUR)", pickup:"Pašizņemšana Mārupē, Lielā 19 k1 (BEZMAKSAS)",
         chooseLocker:"Izvēlieties pakomātu:", orderTitle:"Noformēt pasūtījumu", name:"Jūsu vārds:", email:"E-pasts:",
         phone:"Telefons:", comments:"Komentāri:", orderButton:"Pasūtīt",
@@ -395,18 +433,36 @@
       $('#comments-label').contents().first()[0].textContent=t.comments;
       $('#order-button').text(t.orderButton);
       loadProducts(lang);
+
+      // Update active button
+      $('.lang-btn').removeClass('active');
+      $(`.lang-btn[data-lang="${lang}"]`).addClass('active');
     }
 
     $(function(){
       setLanguage('lv');
-      $('#lang').on('change',function(){ setLanguage(this.value); });
+      $('.lang-btn').on('click', function(){
+        const lang = $(this).data('lang');
+        setLanguage(lang);
+      });
 
       simpleCart({
         cartStyle:"table",
         currency:"EUR",
         cartColumns:[
           { attr:"name", label:"Prece" },
-          { attr:"quantity", label:"Daudzums", view:"input" },
+          { 
+            label:"Daudzums", 
+            view: function(item, column){
+              return `
+                <div class="quantity-controls">
+                  <button class="decrement" data-id="${item.get('id')}">-</button>
+                  <input type="number" class="quantity-input" data-id="${item.get('id')}" value="${item.get('quantity')}" min="1">
+                  <button class="increment" data-id="${item.get('id')}">+</button>
+                </div>
+              `;
+            }
+          },
           { attr:"price", label:"Cena" },
           { view:"remove", text:"Dzēst" }
         ]
@@ -423,7 +479,7 @@
       function updateCartTotal(){
         let itemsTotal=parseFloat(simpleCart.total())||0;
         let deliveryCost=0;
-        const lang=$('#lang').val();
+        const lang=$('.lang-btn.active').data('lang');
         const deliveryType=$('input[name="delivery"]:checked').val();
         if(deliveryType==="Venipak pakomāts") deliveryCost=(lang==='ee')?6:4;
 
@@ -436,6 +492,38 @@
         $('.simpleCart_total').text(totalWithDelivery);
       }
 
+      // Handle increment and decrement buttons
+      $(document).on('click', '.increment', function(){
+        const id = $(this).data('id');
+        const item = simpleCart.find(id);
+        if(item) {
+          item.quantity(item.get('quantity') + 1);
+          simpleCart.update();
+        }
+      });
+
+      $(document).on('click', '.decrement', function(){
+        const id = $(this).data('id');
+        const item = simpleCart.find(id);
+        if(item && item.get('quantity') > 1) {
+          item.quantity(item.get('quantity') - 1);
+          simpleCart.update();
+        }
+      });
+
+      // Handle direct input changes
+      $(document).on('change', '.quantity-input', function(){
+        const id = $(this).data('id');
+        const item = simpleCart.find(id);
+        const newQuantity = parseInt($(this).val()) || 1;
+        if(item && newQuantity >= 1) {
+          item.quantity(newQuantity);
+          simpleCart.update();
+        } else {
+          $(this).val(item.get('quantity')); // Revert to current quantity if invalid
+        }
+      });
+
       $('input[name="delivery"]').on('change', updateCartTotal);
       simpleCart.bind('update', updateCartTotal);
 
@@ -445,7 +533,7 @@
         var summaryArr=items.map(it=>it.get('quantity')+' × '+it.get('name')+' ('+parseFloat(it.get('price')).toFixed(2)+' EUR)');
         var itemsTotal=parseFloat(simpleCart.total())||0;
         var deliveryType=$('input[name="delivery"]:checked').val()||"Nav izvēlēts";
-        const lang=$('#lang').val();
+        const lang=$('.lang-btn.active').data('lang');
         let deliveryCost=(deliveryType==="Venipak pakomāts")?((lang==='ee')?6:4):0;
         let totalWithDelivery=(itemsTotal+deliveryCost).toFixed(2);
         var lockerAddr=$('#locker-select option:selected').text();
@@ -457,6 +545,3 @@
   </script>
 </body>
 </html>
-
-
-
