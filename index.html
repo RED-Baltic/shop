@@ -106,6 +106,7 @@
       justify-content:space-between;
       transition: transform .22s ease, box-shadow .22s ease;
       min-height:440px;
+      cursor: pointer;
     }
     .product-card:hover{
       transform: translateY(-6px);
@@ -284,6 +285,84 @@
     .order-form button:hover { background:var(--accent-red-dark); }
     .order-form button:active { transform:translateY(1px); }
 
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+      padding-top: 60px;
+    }
+    .modal-content {
+      background-color: var(--card-light);
+      margin: 5% auto 15% auto;
+      padding: 20px;
+      border-radius: var(--radius);
+      width: 80%;
+      max-width: 600px;
+      color: var(--text-dark);
+      position: relative;
+    }
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      color: var(--text-dark);
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover,
+    .close:focus {
+      color: var(--accent-red);
+      text-decoration: none;
+    }
+    .modal img {
+      width: 50%; /* Reduced to half size */
+      height: auto;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .modal h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin: 0 0 10px 0;
+    }
+    .modal .description {
+      font-size: 14px;
+      margin-bottom: 14px;
+      color: var(--text-dark);
+    }
+    .modal .price {
+      font-weight: 700;
+      color: var(--accent-red);
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+    }
+    .modal .add-btn {
+      display: inline-block;
+      padding: 12px 18px;
+      background: var(--accent-red);
+      color: #fff;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      border: none;
+      text-decoration: none;
+      transition: transform .14s ease, background .14s ease;
+    }
+    .modal .add-btn:active { transform: translateY(1px); }
+    .modal .add-btn:hover { background: var(--accent-red-dark); }
+
     @media (max-width:1100px){ .products-list{ grid-template-columns:repeat(2,1fr);} }
     @media (max-width:700px){ .products-list{ grid-template-columns:1fr;} }
   </style>
@@ -361,6 +440,18 @@
     </main>
   </div>
 
+  <!-- Modal for product details -->
+  <div id="product-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <img src="" alt="">
+      <h3></h3>
+      <p class="description"></p>
+      <div class="price"></div>
+      <a href="javascript:;" class="add-btn">Pievienot grozam</a> <!-- Text will be updated based on lang -->
+    </div>
+  </div>
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/simplecartjs/3.0.5/simplecart.min.js"></script>
   <script>
@@ -369,34 +460,38 @@
         venipak:"Venipak pakomāts (1–3 darba dienas, 4.00 EUR)", pickup:"Pašizņemšana Mārupē, Lielā 19 k1 (BEZMAKSAS)",
         chooseLocker:"Izvēlieties pakomātu:", orderTitle:"Noformēt pasūtījumu", name:"Jūsu vārds:", email:"E-pasts:",
         phone:"Telefons:", comments:"Komentāri:", orderButton:"Pasūtīt",
+        addToCart: "Pievienot grozam",
         products:[
-          {name:"Multikatls RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg"},
-          {name:"Tējkanna Colorsense A11E", price:"45.00", img:"photo/11E.jpg"},
-          {name:"Tējkanna Colorsense A15E", price:"49.00", img:"photo/15E1.jpg"}
+          {name:"Multikatls RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Funkcijas: Automātiskā sildīšana līdz 12 st., Iepriekšēja automātiskās sildīšanas izslēgšana, Atliktais starts līdz 24 st., Ēdienu uzsildīšana, Multipavars, Vadības paneļa bloķēšana, Skaņas signālu izslēgšana, RGB indikācija, Programmas: Ātrā gatavošana (Ekspress), Rīsi/Putraimi, Zupa, Tvaicēšana, Vārīšana, Sautēšana, Sutināšana, Cepšana, Cepšana (Mīklas izstrādājumi), Pica, Plovs, Jogurts, Maize, Pasta, Piena putra, Vakuums, Fritēšana, Siera kūka, Multipavars (no 35 līdz 180 °C ar soli 1 °C), Jauda: 860 W"},
+          {name:"Tējkanna Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Krāsaina sensoru vadības panelis, 5 uzsildīšanas režīmi – 40°, 70°, 80°, 90°, 100° C, Automātiskā sildīšana – 2 stundas, Cool Touch tehnoloģija (inovatīva divsienu konstrukcija, kas nodrošina termosa efektu un aizsargā no apdegumiem), Programmu skaits: 5 (bērnu pārtika, baltā tēja, zaļā tēja, kafija, vārīšana), Temperatūras regulēšana 40°–100° C, solis 5°C, Rotācija par 360 grādiem, Tilpums: 1,7 l, Jauda: 2000 W"},
+          {name:"Tējkanna Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Krāsaina sensoru vadības panelis, 5 uzsildīšanas režīmi – 40°, 70°, 80°, 90°, 100° C, Automātiskā sildīšana – 2 stundas, Cool Touch tehnoloģija (inovatīva divsienu konstrukcija, kas nodrošina termosa efektu un aizsargā no apdegumiem), Programmu skaits: 5 (bērnu pārtika, baltā tēja, zaļā tēja, kafija, vārīšana), Temperatūras regulēšana 40°–100° C, solis 5°C, Rotācija par 360 grādiem, Tilpums: 1,7 l, Jauda: 2000 W"}
         ]},
       ru: { title:"Наши товары", cartTitle:"Корзина", cartTotal:"Итого:", emptyCart:"Очистить корзину", deliveryTitle:"Доставка",
         venipak:"Venipak (1–3 рабочих дня, 4.00 EUR)", pickup:"Самовывоз Mārupe, Lielā 19 k1 (БЕСПЛАТНО)", chooseLocker:"Выберите постамат:",
         orderTitle:"Оформить заказ", name:"Ваше имя:", email:"E-mail:", phone:"Телефон:", comments:"Комментарии:", orderButton:"Заказать",
+        addToCart: "Добавить в корзину",
         products:[
-          {name:"Мультиварка RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg"},
-          {name:"Чайник Colorsense A11E", price:"45.00", img:"photo/11E.jpg"},
-          {name:"Чайник Colorsense A15E", price:"49.00", img:"photo/15E1.jpg"}
+          {name:"Мультиварка RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Функции: Автоматический подогрев до 12 ч. ,Отключение автоматического подогрева заранее, Отложенный старт до 24 ч. ,Разогрев пищи ,Мультиповар ,Блокировка панели управления, Отключение звукового сигнала ,RGB индикация . Программы:  Быстрое приготовление (Экспресс), Рис/Крупы, Суп, На пару, Варка, Тушение, Томление, Жарка, Выпечка (Тесто), Пицца, Плов, Йогурт, Хлеб, Паста, Молочная каша, Вакуумирование, Фритюр, Чизкейк, Мультиповар (от 35 до 180 °C с шагом 1 °C), Мощность: 860 W"},
+          {name:"Чайник Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Цветной сенсорный панель управления , 5 режимов подогрева — 40°, 70°, 80°, 90°, 100° C , Автоматический подогрев — 2 часа , Регулировка температуры 40°–100° C, шаг 5°C, Поворот на 360 градусов, Технология Cool Touch (инновационная двухслойная конструкция, обеспечивающая эффект термоса и защищающая от ожогов). Количество программ: 5 (прикорм для детей, белый чай, зеленый чай, кофе, кипячение). Объем: 1,7 l, Мощность: 2000 W"},
+          {name:"Чайник Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Цветной сенсорный панель управления , 5 режимов подогрева — 40°, 70°, 80°, 90°, 100° C , Автоматический подогрев — 2 часа , Регулировка температуры 40°–100° C, шаг 5°C, Поворот на 360 градусов, Технология Cool Touch (инновационная двухслойная конструкция, обеспечивающая эффект термоса и защищающая от ожогов). Количество программ: 5 (прикорм для детей, белый чай, зеленый чай, кофе, кипячение). Объем: 1,7 l, Мощность: 2000 W"}
         ]},
       ee: { title:"Meie tooted", cartTitle:"Ostukorv", cartTotal:"Kokku:", emptyCart:"Tühjenda korv", deliveryTitle:"Kohaletoimetamine",
         venipak:"Venipak pakiautomaat (1–3 tööpäeva, 6.00 EUR)", chooseLocker:"Vali pakiautomaat:", orderTitle:"Esita tellimus",
         name:"Teie nimi:", email:"E-post:", phone:"Telefon:", comments:"Kommentaarid:", orderButton:"Esita",
+        addToCart: "Lisa ostukorvi",
         products:[
-          {name:"Multikeetja RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg"},
-          {name:"Veeketja Colorsense A11E", price:"45.00", img:"photo/11E.jpg"},
-          {name:"Veeketja Colorsense A15E", price:"49.00", img:"photo/15E1.jpg"}
+          {name:"Multikeetja RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "See multikeetja ColorSense tehnoloogiaga tagab täpse küpsetamise, määrates automaatselt valmisoleku värvimuutuse järgi. Mitmed programmid ja lihtne kasutamine."},
+          {name:"Veeketja Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Elektriline veekeetja ColorSense anduriga, mis muudab värvi vastavalt vee temperatuurile. Kompaktne, kiire ja ohutu automaatse väljalülitamisega."},
+          {name:"Veeketja Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Täiustatud veekeetja ColorSense tehnoloogiaga, suurema mahuga ja reguleeritava temperatuuriga. Ideaalne tee ja kohvi jaoks stiilse disainiga."}
         ]},
       lt: { title:"Mūsų produktai", cartTitle:"Krepšelis", cartTotal:"Iš viso:", emptyCart:"Išvalyti krepšelį", deliveryTitle:"Pristatymas",
         venipak:"Venipak paštomatas (1–3 darbo dienos, 4.00 EUR)", chooseLocker:"Pasirinkite paštomatą:", orderTitle:"Užsakymo pateikimas",
         name:"Jūsų vardas:", email:"El. paštas:", phone:"Telefonas:", comments:"Komentarai:", orderButton:"Užsakyti",
+        addToCart: "Pridėti į krepšelį",
         products:[
-          {name:"Daugiafunkcis puodas RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg"},
-          {name:"Virdulys Colorsense A11E", price:"45.00", img:"photo/11E.jpg"},
-          {name:"Virdulys Colorsense A15E", price:"49.00", img:"photo/15E1.jpg"}
+          {name:"Daugiafunkcis puodas RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Funkcijos:Automatinis šildymas iki 12 val., Išankstinis automatinio šildymo išjungimas, Atidėtas startas iki 24 val., Patiekalų pašildymas, Multipavirimo režimas, Valdymo skydelio blokavimas, Garso signalų išjungimas, RGB indikacija, Programos: Greitas virimas (Ekspresas), Ryžiai/Kruopos, Sriuba, Garinimas, Virimas, Troškinimas, Troškinimas (lėtas), Kepimas, Kepimas (tešlos gaminiai), Pica, Plovas, Jogurtas, Duona, Pasta, Pieniška košė, Vakuuminis virimas, Fritūravimas, Sūrio pyragas, Multipavirimo režimas (nuo 35 iki 180 °C kas 1 °C)., Galia: 860 W"},
+          {name:"Virdulys Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Spalvotas jutiklinis valdymo skydelis, 5 pašildymo režimai – 40°, 70°, 80°, 90°, 100 °C, Automatinis šildymo palaikymas – iki 2 val, Cool Touch technologija (inovatyvi dvigubų sienelių konstrukcija su termoso efektu ir apsauga nuo nudegimų), Programų skaičius: 5 (kūdikių maistas, balta arbata, žalia arbata, kava, virimas), Temperatūros reguliavimas 40–100 °C, žingsnis 5 °C, 360° pasukamas pagrindas, Talpa: 1,7 l, Galia: 2000 W"},
+          {name:"Virdulys Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Spalvotas jutiklinis valdymo skydelis, 5 pašildymo režimai – 40°, 70°, 80°, 90°, 100 °C, Automatinis šildymo palaikymas – iki 2 val, Cool Touch technologija (inovatyvi dvigubų sienelių konstrukcija su termoso efektu ir apsauga nuo nudegimų), Programų skaičius: 5 (kūdikių maistas, balta arbata, žalia arbata, kava, virimas), Temperatūros reguliavimas 40–100 °C, žingsnis 5 °C, 360° pasukamas pagrindas, Talpa: 1,7 l, Galia: 2000 W"}
         ]}
     };
 
@@ -405,7 +500,7 @@
       list.empty();
       translations[lang].products.forEach(p=>{
         list.append(`
-          <div class="product-card simpleCart_shelfItem">
+          <div class="product-card simpleCart_shelfItem" data-description="${p.description}">
             <img src="${p.img}" alt="${p.name}">
             <div>
               <h3 class="item_name">${p.name}</h3>
@@ -437,6 +532,9 @@
       $('#comments-label').contents().first()[0].textContent=t.comments;
       $('#order-button').text(t.orderButton);
       loadProducts(lang);
+
+      // Update modal add button text
+      $('#product-modal .add-btn').text(t.addToCart);
 
       // Update active button
       $('.lang-btn').removeClass('active');
@@ -545,10 +643,46 @@
         if(deliveryType==="Venipak pakomāts") cartText+="\\nVenipak pakomāts: "+lockerAddr;
         $('#cart_contents').val(cartText);
       });
+
+      // Modal functionality
+      const modal = $('#product-modal');
+      const closeBtn = $('.close');
+
+      $('#products-list').on('click', '.product-card', function(e) {
+        // Prevent opening modal if clicking on add button
+        if ($(e.target).closest('.add-btn').length) {
+          return;
+        }
+
+        const card = $(this);
+        modal.find('img').attr('src', card.find('img').attr('src'));
+        modal.find('h3').text(card.find('.item_name').text());
+        modal.find('.description').html(card.data('description'));
+        modal.find('.price').text(card.find('.item_price').text() + ' EUR');
+
+        // Handle add to cart from modal
+        modal.find('.add-btn').off('click').on('click', function() {
+          simpleCart.add({
+            name: card.find('.item_name').text(),
+            price: parseFloat(card.find('.item_price').text()),
+            quantity: 1
+          });
+          modal.hide(); // Optional: close modal after adding
+        });
+
+        modal.show();
+      });
+
+      closeBtn.on('click', function() {
+        modal.hide();
+      });
+
+      $(window).on('click', function(e) {
+        if (e.target === modal[0]) {
+          modal.hide();
+        }
+      });
     });
   </script>
 </body>
 </html>
-
-
-
