@@ -40,30 +40,12 @@
       justify-content:space-between;
       gap:20px;
       margin-bottom:28px;
+      flex-wrap: wrap;
     }
-    .brand { display:flex; align-items:center; gap:14px; }
-    .brand .logo {
-      width:60px;
-      height:60px;
-      background:var(--accent-red);
-      border-radius:50%;
-      box-shadow:0 4px 12px rgba(230,0,0,0.12);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:#fff;
-      font-weight:700;
-      font-family: 'mangal', serif;
-      font-size:36px;
-      line-height: 42px;
-      margin-top: -8px;
-    }
-    .brand h1 {
-      font-family: 'Playfair Display', serif;
-      font-size:20px;
-      margin:0;
-      color:var(--text-light);
-      letter-spacing:0.4px;
+    .header-center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
     }
     .header-image {
       height: 84px;
@@ -73,10 +55,12 @@
     }
     .lang-selector {
       display: flex;
-      gap: 8px;
+      gap: 4px; /* Уменьшаем расстояние между кнопками */
+      flex-wrap: wrap; /* Разрешаем перенос кнопок на новую строку */
+      max-width: 100%; /* Ограничиваем ширину */
     }
     .lang-selector button {
-      padding: 8px 12px;
+      padding: 6px 10px; /* Уменьшаем внутренние отступы */
       border-radius: 8px;
       border: 1px solid rgba(255,255,255,0.06);
       background: #0b0b0b;
@@ -84,6 +68,7 @@
       font-size: 14px;
       cursor: pointer;
       transition: background 0.2s ease, border-color 0.2s ease;
+      white-space: nowrap; /* Предотвращаем перенос текста внутри кнопок */
     }
     .lang-selector button.active {
       background: var(--accent-red);
@@ -372,17 +357,19 @@
     @media (max-width:1100px){ .products-list{ grid-template-columns:repeat(2,1fr);} }
     @media (max-width:700px){ 
       .products-list{ grid-template-columns:1fr;}
-      .header-image { height: 60px; } /* Уменьшаем размер изображения на мобильных */
+      .header-image { height: 60px; }
+      header { justify-content: center; }
+      .lang-selector { margin-left: 0; margin-top: 10px; width: 100%; justify-content: center; }
+      .lang-selector button { padding: 4px 8px; font-size: 12px; } /* Ещё более компактные кнопки на мобильных */
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div class="brand">
-        <div class="logo">R</div>
+      <div class="header-center">
+        <img src="photo/redd.jpg" alt="Logo" class="header-image">
       </div>
-      <img src="photo/redd.jpg" alt="Logo" class="header-image">
       <div class="lang-selector">
         <button class="lang-btn active" data-lang="lv">LV</button>
         <button class="lang-btn" data-lang="lt">LT</button>
