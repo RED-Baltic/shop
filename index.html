@@ -55,12 +55,12 @@
     }
     .lang-selector {
       display: flex;
-      gap: 4px; /* Уменьшаем расстояние между кнопками */
-      flex-wrap: wrap; /* Разрешаем перенос кнопок на новую строку */
-      max-width: 100%; /* Ограничиваем ширину */
+      gap: 4px;
+      flex-wrap: wrap;
+      max-width: 100%;
     }
     .lang-selector button {
-      padding: 6px 10px; /* Уменьшаем внутренние отступы */
+      padding: 6px 10px;
       border-radius: 8px;
       border: 1px solid rgba(255,255,255,0.06);
       background: #0b0b0b;
@@ -68,7 +68,7 @@
       font-size: 14px;
       cursor: pointer;
       transition: background 0.2s ease, border-color 0.2s ease;
-      white-space: nowrap; /* Предотвращаем перенос текста внутри кнопок */
+      white-space: nowrap;
     }
     .lang-selector button.active {
       background: var(--accent-red);
@@ -159,9 +159,11 @@
 
     .simpleCart_items table {
       width:100%;
+      max-width: 100%; /* Ограничиваем ширину таблицы */
       border-collapse:collapse;
       margin-bottom:12px;
       background:transparent;
+      overflow-x: auto; /* Добавляем прокрутку, если таблица не помещается */
     }
     .simpleCart_items th,
     .simpleCart_items td {
@@ -171,6 +173,7 @@
       font-size:14px;
       color:var(--text-light);
       background:transparent;
+      word-break: break-word; /* Разрешаем перенос текста */
     }
     .simpleCart_items th { font-weight:700; }
 
@@ -209,13 +212,14 @@
       display:inline-block;
       color:#fff !important;
       background:var(--accent-red);
-      padding:8px 10px;
+      padding:6px 10px; /* Уменьшаем padding для компактности */
       border-radius:8px;
       font-weight:700;
-      font-size:15px;
+      font-size:14px; /* Уменьшаем размер текста */
       text-decoration:none !important;
       cursor:pointer;
       border:none;
+      white-space: nowrap; /* Предотвращаем перенос текста */
     }
     .empty-cart-btn:hover,
     .simpleCart_items .simpleCart_remove:hover,
@@ -314,7 +318,7 @@
       text-decoration: none;
     }
     .modal img {
-      width: 50%; /* Reduced to half size */
+      width: 50%;
       height: auto;
       border-radius: 10px;
       margin-bottom: 14px;
@@ -360,7 +364,9 @@
       .header-image { height: 60px; }
       header { justify-content: center; }
       .lang-selector { margin-left: 0; margin-top: 10px; width: 100%; justify-content: center; }
-      .lang-selector button { padding: 4px 8px; font-size: 12px; } /* Ещё более компактные кнопки на мобильных */
+      .lang-selector button { padding: 4px 8px; font-size: 12px; }
+      .simpleCart_items table { font-size: 12px; } /* Уменьшаем размер текста в таблице */
+      .simpleCart_items .simpleCart_remove { padding: 4px 8px; font-size: 12px; } /* Компактная кнопка "Dzēst" */
     }
   </style>
 </head>
