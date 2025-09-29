@@ -504,7 +504,7 @@
           <div class="dropdown-content" id="details">
             <p>SIA REDMOND BALTIC</p>
             <p>40103604538</p>
-             <p>Lielā iela 19 K-1-1c, Mārupe, LV-2167</p>
+            <p>Lielā iela 19 K-1-1c, Mārupe, LV-2167</p>
             <p>LV13PARX0013541790004</p>
           </div>
         </div>
@@ -680,10 +680,65 @@
         ]}
     };
 
-    function loadProducts(lang){
+    function loadLockers(lang) {
+      let jsonFile;
+      if (lang === 'lv' || lang === 'ru') {
+        jsonFile = 'venipak-points.json';
+      } else if (lang === 'lt') {
+        jsonFile = 'venipakLT-points.json';
+      } else if (lang === 'ee') {
+        jsonFile = 'venipakEE-points.json';
+      }
+
+      const select = $('#locker-select');
+      select.empty();
+      select.append('<option value="">' + translations[lang].chooseLocker + '</option>');
+
+      $.getJSON(jsonFile, function(data) {
+        data.forEach(point => {
+          select.append('<option value="' + point.id + '">' + point.city + ', ' + point.address + ' (' + point.pickup_point + ')</option>');
+        });
+      }).fail(function() {
+        select.empty();
+        select.append('<option value="">Ошибка загрузки пакоматов</option>');
+      });
+    }
+
+    function setLanguage(lang) {
+      const t = translations[lang];
+      $('#cart-title').text(t.cartTitle);
+      $('#delivery-title').text(t.deliveryTitle);
+      $('#order-title').text(t.orderTitle);
+      $('#cart-total-label').text(t.cartTotal);
+      $('#empty-cart').text(t.emptyCart);
+      $('#venipak-label').text(t.venipak);
+      $('#choose-locker-label').text(t.chooseLocker);
+      if (lang === 'lv' || lang === 'ru') {
+        $('#pickup-label-container').show();
+        $('#pickup-label').text(t.pickup || "");
+      } else {
+        $('#pickup-label-container').hide();
+      }
+      $('#name-label').contents().first()[0].textContent = t.name;
+      $('#email-label').contents().first()[0].textContent = t.email;
+      $('#phone-label').contents().first()[0].textContent = t.phone;
+      $('#comments-label').contents().first()[0].textContent = t.comments;
+      $('#order-button').text(t.orderButton);
+      $('.dropdown-btn[data-target="contacts"]').text(t.contacts);
+      $('.dropdown-btn[data-target="details"]').text(t.details);
+      loadProducts(lang);
+      $('#product-modal .add-btn').text(t.addToCart);
+      $('.lang-btn').removeClass('active');
+      $(`.lang-btn[data-lang="${lang}"]`).addClass('active');
+
+      // Load lockers based on language
+      loadLockers(lang);
+    }
+
+    function loadProducts(lang) {
       const list = $('#products-list');
       list.empty();
-      translations[lang].products.forEach(p=>{
+      translations[lang].products.forEach(p => {
         list.append(`
           <div class="product-card simpleCart_shelfItem" data-description="${p.description}">
             <img src="${p.img}" alt="${p.name}">
@@ -699,51 +754,27 @@
       });
     }
 
-    function setLanguage(lang){
-      const t = translations[lang];
-      $('#cart-title').text(t.cartTitle);
-      $('#delivery-title').text(t.deliveryTitle);
-      $('#order-title').text(t.orderTitle);
-      $('#cart-total-label').text(t.cartTotal);
-      $('#empty-cart').text(t.emptyCart);
-      $('#venipak-label').text(t.venipak);
-      $('#choose-locker-label').text(t.chooseLocker);
-      if(lang==='lv'||lang==='ru'){
-        $('#pickup-label-container').show(); $('#pickup-label').text(t.pickup||"");
-      } else { $('#pickup-label-container').hide(); }
-      $('#name-label').contents().first()[0].textContent=t.name;
-      $('#email-label').contents().first()[0].textContent=t.email;
-      $('#phone-label').contents().first()[0].textContent=t.phone;
-      $('#comments-label').contents().first()[0].textContent=t.comments;
-      $('#order-button').text(t.orderButton);
-      $('.dropdown-btn[data-target="contacts"]').text(t.contacts);
-      $('.dropdown-btn[data-target="details"]').text(t.details);
-      loadProducts(lang);
-      $('#product-modal .add-btn').text(t.addToCart);
-      $('.lang-btn').removeClass('active');
-      $(`.lang-btn[data-lang="${lang}"]`).addClass('active');
-    }
-
-    $(function(){
+    $(function() {
       setLanguage('lv');
-      $('.lang-btn').on('click', function(){
+
+      $('.lang-btn').on('click', function() {
         const lang = $(this).data('lang');
         setLanguage(lang);
       });
 
-      $('.hamburger').on('click', function(){
+      $('.hamburger').on('click', function() {
         $(this).toggleClass('active');
         $('.dropdown-menu').toggleClass('active');
         $('.dropdown-content').removeClass('active');
       });
 
-      $('.dropdown-btn').on('click', function(){
+      $('.dropdown-btn').on('click', function() {
         const target = $(this).data('target');
         $('.dropdown-content').removeClass('active');
         $(`#${target}`).addClass('active');
       });
 
-      $(document).on('click', function(e){
+      $(document).on('click', function(e) {
         if (!$(e.target).closest('.hamburger, .dropdown-menu').length) {
           $('.hamburger').removeClass('active');
           $('.dropdown-menu').removeClass('active');
@@ -752,13 +783,13 @@
       });
 
       simpleCart({
-        cartStyle:"table",
-        currency:"EUR",
-        cartColumns:[
-          { attr:"name", label:"Prece" },
-          { 
-            label:"Daudzums", 
-            view: function(item, column){
+        cartStyle: "table",
+        currency: "EUR",
+        cartColumns: [
+          { attr: "name", label: "Prece" },
+          {
+            label: "Daudzums",
+            view: function(item, column) {
               return `
                 <div class="quantity-controls">
                   <button class="decrement" data-id="${item.get('id')}">-</button>
@@ -768,26 +799,31 @@
               `;
             }
           },
-          { 
-            attr:"price", 
-            label:"Cena",
-            view: function(item, column){
+          {
+            attr: "price",
+            label: "Cena",
+            view: function(item, column) {
               return parseFloat(item.get('price')).toFixed(2);
             }
           },
-          { view:"remove", text:"Dzēst" }
+          { view: "remove", text: "Dzēst" }
         ]
       });
 
-      $.getJSON('venipak-points.json',function(data){
-        const select=$('#locker-select');
-        select.empty();
-        data.forEach(point=>{
-          select.append('<option value="'+point.id+'">'+point.city+', '+point.address+' ('+point.pickup_point+')</option>');
-        });
+      // Show/hide locker field based on delivery option
+      $('input[name="delivery"]').on('change', function() {
+        const deliveryType = $(this).val();
+        if (deliveryType === "Venipak pakomāts") {
+          $('#locker-field').removeClass('hidden');
+          const lang = $('.lang-btn.active').data('lang');
+          loadLockers(lang);
+        } else {
+          $('#locker-field').addClass('hidden');
+        }
+        updateCartTotal();
       });
 
-      function updateCartTotal(){
+      function updateCartTotal() {
         let itemsTotal = parseFloat(simpleCart.total()) || 0;
         let deliveryCost = 0;
         const lang = $('.lang-btn.active').data('lang');
@@ -803,29 +839,29 @@
         $('.simpleCart_total').text(totalWithDelivery);
       }
 
-      $(document).on('click', '.increment', function(){
+      $(document).on('click', '.increment', function() {
         const id = $(this).data('id');
         const item = simpleCart.find(id);
-        if(item) {
+        if (item) {
           item.quantity(item.get('quantity') + 1);
           simpleCart.update();
         }
       });
 
-      $(document).on('click', '.decrement', function(){
+      $(document).on('click', '.decrement', function() {
         const id = $(this).data('id');
         const item = simpleCart.find(id);
-        if(item && item.get('quantity') > 1) {
+        if (item && item.get('quantity') > 1) {
           item.quantity(item.get('quantity') - 1);
           simpleCart.update();
         }
       });
 
-      $(document).on('change', '.quantity-input', function(){
+      $(document).on('change', '.quantity-input', function() {
         const id = $(this).data('id');
         const item = simpleCart.find(id);
         const newQuantity = parseInt($(this).val()) || 1;
-        if(item && newQuantity >= 1) {
+        if (item && newQuantity >= 1) {
           item.quantity(newQuantity);
           simpleCart.update();
         } else {
@@ -833,21 +869,24 @@
         }
       });
 
-      $('input[name="delivery"]').on('change', updateCartTotal);
       simpleCart.bind('update', updateCartTotal);
 
-      $('#orderForm').on('submit',function(e){
-        var items=simpleCart.items();
-        if(!items.length){ alert("Grozs ir tukšs"); e.preventDefault(); return false; }
-        var summaryArr=items.map(it=>it.get('quantity')+' × '+it.get('name')+' ('+parseFloat(it.get('price')).toFixed(2)+' EUR)');
-        var itemsTotal=parseFloat(simpleCart.total())||0;
-        var deliveryType=$('input[name="delivery"]:checked').val()||"Nav izvēlēts";
-        const lang=$('.lang-btn.active').data('lang');
-        let deliveryCost=(deliveryType==="Venipak pakomāts")?((lang==='ee')?6:4):0;
-        let totalWithDelivery=(itemsTotal+deliveryCost).toFixed(2);
-        var lockerAddr=$('#locker-select option:selected').text();
-        var cartText=summaryArr.join('\n')+"\nKopā: "+totalWithDelivery+" EUR\nPiegāde: "+deliveryType;
-        if(deliveryType==="Venipak pakomāts") cartText+="\nVenipak pakomāts: "+lockerAddr;
+      $('#orderForm').on('submit', function(e) {
+        var items = simpleCart.items();
+        if (!items.length) {
+          alert("Grozs ir tukšs");
+          e.preventDefault();
+          return false;
+        }
+        var summaryArr = items.map(it => it.get('quantity') + ' × ' + it.get('name') + ' (' + parseFloat(it.get('price')).toFixed(2) + ' EUR)');
+        var itemsTotal = parseFloat(simpleCart.total()) || 0;
+        var deliveryType = $('input[name="delivery"]:checked').val() || "Nav izvēlēts";
+        const lang = $('.lang-btn.active').data('lang');
+        let deliveryCost = (deliveryType === "Venipak pakomāts") ? ((lang === 'ee') ? 6 : 4) : 0;
+        let totalWithDelivery = (itemsTotal + deliveryCost).toFixed(2);
+        var lockerAddr = $('#locker-select option:selected').text();
+        var cartText = summaryArr.join('\n') + "\nKopā: " + totalWithDelivery + " EUR\nPiegāde: " + deliveryType;
+        if (deliveryType === "Venipak pakomāts") cartText += "\nVenipak pakomāts: " + lockerAddr;
         $('#cart_contents').val(cartText);
         $('#reply_to').val($('input[name="email"]').val());
       });
