@@ -41,12 +41,13 @@
       gap:20px;
       margin-bottom:28px;
       flex-wrap: wrap;
+      position: relative;
     }
     .header-left {
       display: flex;
       align-items: center;
       gap: 20px;
-      position: relative; /* Added to position dropdown relative to header-left */
+      position: relative;
     }
     .header-center {
       flex: 1;
@@ -115,13 +116,13 @@
     .dropdown-menu {
       display: none;
       position: absolute;
-      top: 100%; /* Position below the hamburger */
+      top: 100%;
       left: 0;
       background: var(--card-dark);
       border-radius: var(--radius);
       border: 1px solid rgba(255,255,255,0.06);
       box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-      min-width: 250px; /* Slightly wider for better readability */
+      min-width: 250px;
       z-index: 100;
     }
     .dropdown-menu.active {
@@ -154,6 +155,9 @@
     .dropdown-content p {
       margin: 0 0 10px;
       font-size: 14px;
+      color: var(--text-light);
+    }
+    #contacts p:nth-child(2) {
       color: var(--text-light);
     }
 
@@ -442,12 +446,18 @@
     @media (max-width:700px){ 
       .products-list{ grid-template-columns:1fr;}
       .header-image { height: 60px; }
-      header { justify-content: center; }
-      .lang-selector { margin-left: 0; margin-top: 10px; width: 100%; justify-content: center; }
+      .header-left { position: absolute; left: 20px; }
+      .lang-selector { 
+        position: absolute;
+        right: 20px;
+        top: 0;
+        margin-top: 0;
+        max-width: 150px;
+        justify-content: flex-end;
+      }
       .lang-selector button { padding: 4px 8px; font-size: 12px; }
       .simpleCart_items table { font-size: 12px; }
       .simpleCart_items .simpleCart_remove { padding: 4px 8px; font-size: 12px; }
-      .header-left { position: absolute; left: 20px; }
       .dropdown-menu { left: 10px; }
     }
   </style>
