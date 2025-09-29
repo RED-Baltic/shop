@@ -42,6 +42,12 @@
       margin-bottom:28px;
       flex-wrap: wrap;
     }
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative; /* Added to position dropdown relative to header-left */
+    }
     .header-center {
       flex: 1;
       display: flex;
@@ -77,6 +83,78 @@
     .lang-selector button:hover {
       background: var(--accent-red-dark);
       border-color: var(--accent-red-dark);
+    }
+
+    /* Hamburger Menu Styles */
+    .hamburger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      padding: 5px;
+    }
+    .hamburger span {
+      background: var(--text-light);
+      height: 3px;
+      margin: 3px 0;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -7px);
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%; /* Position below the hamburger */
+      left: 0;
+      background: var(--card-dark);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      min-width: 250px; /* Slightly wider for better readability */
+      z-index: 100;
+    }
+    .dropdown-menu.active {
+      display: block;
+    }
+    .dropdown-menu button {
+      display: block;
+      width: 100%;
+      padding: 12px 20px;
+      background: none;
+      border: none;
+      color: var(--text-light);
+      font-family: 'Lato', sans-serif;
+      font-size: 14px;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .dropdown-menu button:hover {
+      background: var(--accent-red-dark);
+    }
+    .dropdown-content {
+      display: none;
+      padding: 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .dropdown-content.active {
+      display: block;
+    }
+    .dropdown-content p {
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: var(--text-light);
     }
 
     .grid { display:grid; grid-template-columns:1fr; gap:28px; align-items:start; }
@@ -159,11 +237,11 @@
 
     .simpleCart_items table {
       width:100%;
-      max-width: 100%; /* Ограничиваем ширину таблицы */
+      max-width: 100%;
       border-collapse:collapse;
       margin-bottom:12px;
       background:transparent;
-      overflow-x: auto; /* Добавляем прокрутку, если таблица не помещается */
+      overflow-x: auto;
     }
     .simpleCart_items th,
     .simpleCart_items td {
@@ -173,7 +251,7 @@
       font-size:14px;
       color:var(--text-light);
       background:transparent;
-      word-break: break-word; /* Разрешаем перенос текста */
+      word-break: break-word;
     }
     .simpleCart_items th { font-weight:700; }
 
@@ -212,14 +290,14 @@
       display:inline-block;
       color:#fff !important;
       background:var(--accent-red);
-      padding:6px 10px; /* Уменьшаем padding для компактности */
+      padding:6px 10px;
       border-radius:8px;
       font-weight:700;
-      font-size:14px; /* Уменьшаем размер текста */
+      font-size:14px;
       text-decoration:none !important;
       cursor:pointer;
       border:none;
-      white-space: nowrap; /* Предотвращаем перенос текста */
+      white-space: nowrap;
     }
     .empty-cart-btn:hover,
     .simpleCart_items .simpleCart_remove:hover,
@@ -358,21 +436,46 @@
     .modal .add-btn:active { transform: translateY(1px); }
     .modal .add-btn:hover { background: var(--accent-red-dark); }
 
-    @media (max-width:1100px){ .products-list{ grid-template-columns:repeat(2,1fr);} }
+    @media (max-width:1100px){ 
+      .products-list{ grid-template-columns:repeat(2,1fr);} 
+    }
     @media (max-width:700px){ 
       .products-list{ grid-template-columns:1fr;}
       .header-image { height: 60px; }
       header { justify-content: center; }
       .lang-selector { margin-left: 0; margin-top: 10px; width: 100%; justify-content: center; }
       .lang-selector button { padding: 4px 8px; font-size: 12px; }
-      .simpleCart_items table { font-size: 12px; } /* Уменьшаем размер текста в таблице */
-      .simpleCart_items .simpleCart_remove { padding: 4px 8px; font-size: 12px; } /* Компактная кнопка "Dzēst" */
+      .simpleCart_items table { font-size: 12px; }
+      .simpleCart_items .simpleCart_remove { padding: 4px 8px; font-size: 12px; }
+      .header-left { position: absolute; left: 20px; }
+      .dropdown-menu { left: 10px; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
+      <div class="header-left">
+        <div class="hamburger">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="dropdown-menu">
+          <button class="dropdown-btn" data-target="contacts">Kontakti</button>
+          <button class="dropdown-btn" data-target="details">Rekvizīti</button>
+          <div class="dropdown-content" id="contacts">
+            <p>Lielā iela 19 K-1, Mārupe, LV-2167</p>
+            <p>+37127552280</p>
+            <p>info.redmond.lv@gmail.com</p>
+          </div>
+          <div class="dropdown-content" id="details">
+            <p>SIA REDMOND BALTIC</p>
+            <p>40103604538</p>
+            <p>LV13PARX0013541790004</p>
+          </div>
+        </div>
+      </div>
       <div class="header-center">
         <img src="photo/redd.jpg" alt="Logo" class="header-image">
       </div>
@@ -446,7 +549,7 @@
       <h3></h3>
       <p class="description"></p>
       <div class="price"></div>
-      <a href="javascript:;" class="add-btn">Pievienot grozam</a> <!-- Text will be updated based on lang -->
+      <a href="javascript:;" class="add-btn">Pievienot grozam</a>
     </div>
   </div>
 
@@ -454,38 +557,91 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/simplecartjs/3.0.5/simplecart.min.js"></script>
   <script>
     const translations = {
-      lv: { title:"RED", cartTitle:"Grozs", cartTotal:"Kopā:", emptyCart:"Iztīrīt grozu", deliveryTitle:"Piegāde",
-        venipak:"Venipak pakomāts (1–3 darba dienas, 4.00 EUR)", pickup:"Pašizņemšana Mārupē, Lielā 19 k1 (BEZMAKSAS)",
-        chooseLocker:"Izvēlieties pakomātu:", orderTitle:"Noformēt pasūtījumu", name:"Jūsu vārds:", email:"E-pasts:",
-        phone:"Telefons:", comments:"Komentāri:", orderButton:"Pasūtīt",
+      lv: { 
+        title:"RED", 
+        cartTitle:"Grozs", 
+        cartTotal:"Kopā:", 
+        emptyCart:"Iztīrīt grozu", 
+        deliveryTitle:"Piegāde",
+        venipak:"Venipak pakomāts (1–3 darba dienas, 4.00 EUR)", 
+        pickup:"Pašizņemšana Mārupē, Lielā 19 k1 (BEZMAKSAS)",
+        chooseLocker:"Izvēlieties pakomātu:", 
+        orderTitle:"Noformēt pasūtījumu", 
+        name:"Jūsu vārds:", 
+        email:"E-pasts:",
+        phone:"Telefons:", 
+        comments:"Komentāri:", 
+        orderButton:"Pasūtīt",
         addToCart: "Pievienot grozam",
+        contacts: "Kontakti",
+        details: "Rekvizīti",
         products:[
           {name:"Multikatls RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Funkcijas: Automātiskā sildīšana līdz 12 st., Iepriekšēja automātiskās sildīšanas izslēgšana, Atliktais starts līdz 24 st., Ēdienu uzsildīšana, Multipavars, Vadības paneļa bloķēšana, Skaņas signālu izslēgšana, RGB indikācija, Programmas: Ātrā gatavošana (Ekspress), Rīsi/Putraimi, Zupa, Tvaicēšana, Vārīšana, Sautēšana, Sutināšana, Cepšana, Cepšana (Mīklas izstrādājumi), Pica, Plovs, Jogurts, Maize, Pasta, Piena putra, Vakuums, Fritēšana, Siera kūka, Multipavars (no 35 līdz 180 °C ar soli 1 °C), Jauda: 860 W"},
           {name:"Tējkanna Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Krāsaina sensoru vadības panelis, 5 uzsildīšanas režīmi – 40°, 70°, 80°, 90°, 100° C, Automātiskā sildīšana – 2 stundas, Cool Touch tehnoloģija (inovatīva divsienu konstrukcija, kas nodrošina termosa efektu un aizsargā no apdegumiem), Programmu skaits: 5 (bērnu pārtika, baltā tēja, zaļā tēja, kafija, vārīšana), Temperatūras regulēšana 40°–100° C, solis 5°C, Rotācija par 360 grādiem, Tilpums: 1,7 l, Jauda: 2000 W"},
           {name:"Tējkanna Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Krāsaina sensoru vadības panelis, 5 uzsildīšanas režīmi – 40°, 70°, 80°, 90°, 100° C, Automātiskā sildīšana – 2 stundas, Cool Touch tehnoloģija (inovatīva divsienu konstrukcija, kas nodrošina termosa efektu un aizsargā no apdegumiem), Programmu skaits: 5 (bērnu pārtika, baltā tēja, zaļā tēja, kafija, vārīšana), Temperatūras regulēšana 40°–100° C, solis 5°C, Rotācija par 360 grādiem, Tilpums: 1,7 l, Jauda: 2000 W"}
         ]},
-      ru: { title:"Наши товары", cartTitle:"Корзина", cartTotal:"Итого:", emptyCart:"Очистить корзину", deliveryTitle:"Доставка",
-        venipak:"Venipak (1–3 рабочих дня, 4.00 EUR)", pickup:"Самовывоз Mārupe, Lielā 19 k1 (БЕСПЛАТНО)", chooseLocker:"Выберите постамат:",
-        orderTitle:"Оформить заказ", name:"Ваше имя:", email:"E-mail:", phone:"Телефон:", comments:"Комментарии:", orderButton:"Заказать",
+      ru: { 
+        title:"Наши товары", 
+        cartTitle:"Корзина", 
+        cartTotal:"Итого:", 
+        emptyCart:"Очистить корзину", 
+        deliveryTitle:"Доставка",
+        venipak:"Venipak (1–3 рабочих дня, 4.00 EUR)", 
+        pickup:"Самовывоз Mārupe, Lielā 19 k1 (БЕСПЛАТНО)", 
+        chooseLocker:"Выберите пакомат:",
+        orderTitle:"Оформить заказ", 
+        name:"Ваше имя:", 
+        email:"E-mail:", 
+        phone:"Телефон:", 
+        comments:"Комментарии:", 
+        orderButton:"Заказать",
         addToCart: "Добавить в корзину",
+        contacts: "Контакты",
+        details: "Реквизиты",
         products:[
           {name:"Мультиварка RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Функции: Автоматический подогрев до 12 ч. ,Отключение автоматического подогрева заранее, Отложенный старт до 24 ч. ,Разогрев пищи ,Мультиповар ,Блокировка панели управления, Отключение звукового сигнала ,RGB индикация . Программы:  Быстрое приготовление (Экспресс), Рис/Крупы, Суп, На пару, Варка, Тушение, Томление, Жарка, Выпечка (Тесто), Пицца, Плов, Йогурт, Хлеб, Паста, Молочная каша, Вакуумирование, Фритюр, Чизкейк, Мультиповар (от 35 до 180 °C с шагом 1 °C), Мощность: 860 W"},
           {name:"Чайник Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Цветной сенсорный панель управления , 5 режимов подогрева — 40°, 70°, 80°, 90°, 100° C , Автоматический подогрев — 2 часа , Регулировка температуры 40°–100° C, шаг 5°C, Поворот на 360 градусов, Технология Cool Touch (инновационная двухслойная конструкция, обеспечивающая эффект термоса и защищающая от ожогов). Количество программ: 5 (прикорм для детей, белый чай, зеленый чай, кофе, кипячение). Объем: 1,7 l, Мощность: 2000 W"},
           {name:"Чайник Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Цветной сенсорный панель управления , 5 режимов подогрева — 40°, 70°, 80°, 90°, 100° C , Автоматический подогрев — 2 часа , Регулировка температуры 40°–100° C, шаг 5°C, Поворот на 360 градусов, Технология Cool Touch (инновационная двухслойная конструкция, обеспечивающая эффект термоса и защищающая от ожогов). Количество программ: 5 (прикорм для детей, белый чай, зеленый чай, кофе, кипячение). Объем: 1,7 l, Мощность: 2000 W"}
         ]},
-      ee: { title:"Meie tooted", cartTitle:"Ostukorv", cartTotal:"Kokku:", emptyCart:"Tühjenda korv", deliveryTitle:"Kohaletoimetamine",
-        venipak:"Venipak pakiautomaat (1–3 tööpäeva, 6.00 EUR)", chooseLocker:"Vali pakiautomaat:", orderTitle:"Esita tellimus",
-        name:"Teie nimi:", email:"E-post:", phone:"Telefon:", comments:"Kommentaarid:", orderButton:"Esita",
+      ee: { 
+        title:"Meie tooted", 
+        cartTitle:"Ostukorv", 
+        cartTotal:"Kokku:", 
+        emptyCart:"Tühjenda korv", 
+        deliveryTitle:"Kohaletoimetamine",
+        venipak:"Venipak pakiautomaat (1–3 tööpäeva, 6.00 EUR)", 
+        chooseLocker:"Vali pakiautomaat:", 
+        orderTitle:"Esita tellimus",
+        name:"Teie nimi:", 
+        email:"E-post:", 
+        phone:"Telefon:", 
+        comments:"Kommentaarid:", 
+        orderButton:"Esita",
         addToCart: "Lisa ostukorvi",
+        contacts: "Kontaktid",
+        details: "Rekvisiidid",
         products:[
           {name:"Multikeetja RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "See multikeetja ColorSense tehnoloogiaga tagab täpse küpsetamise, määrates automaatselt valmisoleku värvimuutuse järgi. Mitmed programmid ja lihtne kasutamine."},
           {name:"Veeketja Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Elektriline veekeetja ColorSense anduriga, mis muudab värvi vastavalt vee temperatuurile. Kompaktne, kiire ja ohutu automaatse väljalülitamisega."},
           {name:"Veeketja Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Täiustatud veekeetja ColorSense tehnoloogiaga, suurema mahuga ja reguleeritava temperatuuriga. Ideaalne tee ja kohvi jaoks stiilse disainiga."}
         ]},
-      lt: { title:"Mūsų produktai", cartTitle:"Krepšelis", cartTotal:"Iš viso:", emptyCart:"Išvalyti krepšelį", deliveryTitle:"Pristatymas",
-        venipak:"Venipak paštomatas (1–3 darbo dienos, 4.00 EUR)", chooseLocker:"Pasirinkite paštomatą:", orderTitle:"Užsakymo pateikimas",
-        name:"Jūsų vardas:", email:"El. paštas:", phone:"Telefonas:", comments:"Komentarai:", orderButton:"Užsakyti",
+      lt: { 
+        title:"Mūsų produktai", 
+        cartTitle:"Krepšelis", 
+        cartTotal:"Iš viso:", 
+        emptyCart:"Išvalyti krepšelį", 
+        deliveryTitle:"Pristatymas",
+        venipak:"Venipak paštomatas (1–3 darbo dienos, 4.00 EUR)", 
+        chooseLocker:"Pasirinkite paštomatą:", 
+        orderTitle:"Užsakymo pateikimas",
+        name:"Jūsų vardas:", 
+        email:"El. paštas:", 
+        phone:"Telefonas:", 
+        comments:"Komentarai:", 
+        orderButton:"Užsakyti",
         addToCart: "Pridėti į krepšelį",
+        contacts: "Kontaktai",
+        details: "Rekvizitai",
         products:[
           {name:"Daugiafunkcis puodas RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Funkcijos:Automatinis šildymas iki 12 val., Išankstinis automatinio šildymo išjungimas, Atidėtas startas iki 24 val., Patiekalų pašildymas, Multipavirimo režimas, Valdymo skydelio blokavimas, Garso signalų išjungimas, RGB indikacija, Programos: Greitas virimas (Ekspresas), Ryžiai/Kruopos, Sriuba, Garinimas, Virimas, Troškinimas, Troškinimas (lėtas), Kepimas, Kepimas (tešlos gaminiai), Pica, Plovas, Jogurtas, Duona, Pasta, Pieniška košė, Vakuuminis virimas, Fritūravimas, Sūrio pyragas, Multipavirimo režimas (nuo 35 iki 180 °C kas 1 °C)., Galia: 860 W"},
           {name:"Virdulys Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Spalvotas jutiklinis valdymo skydelis, 5 pašildymo režimai – 40°, 70°, 80°, 90°, 100 °C, Automatinis šildymo palaikymas – iki 2 val, Cool Touch technologija (inovatyvi dvigubų sienelių konstrukcija su termoso efektu ir apsauga nuo nudegimų), Programų skaičius: 5 (kūdikių maistas, balta arbata, žalia arbata, kava, virimas), Temperatūros reguliavimas 40–100 °C, žingsnis 5 °C, 360° pasukamas pagrindas, Talpa: 1,7 l, Galia: 2000 W"},
@@ -529,6 +685,8 @@
       $('#phone-label').contents().first()[0].textContent=t.phone;
       $('#comments-label').contents().first()[0].textContent=t.comments;
       $('#order-button').text(t.orderButton);
+      $('.dropdown-btn[data-target="contacts"]').text(t.contacts);
+      $('.dropdown-btn[data-target="details"]').text(t.details);
       loadProducts(lang);
 
       // Update modal add button text
@@ -544,6 +702,29 @@
       $('.lang-btn').on('click', function(){
         const lang = $(this).data('lang');
         setLanguage(lang);
+      });
+
+      // Hamburger menu toggle
+      $('.hamburger').on('click', function(){
+        $(this).toggleClass('active');
+        $('.dropdown-menu').toggleClass('active');
+        $('.dropdown-content').removeClass('active'); // Hide all content on toggle
+      });
+
+      // Dropdown button click
+      $('.dropdown-btn').on('click', function(){
+        const target = $(this).data('target');
+        $('.dropdown-content').removeClass('active');
+        $(`#${target}`).addClass('active');
+      });
+
+      // Close dropdown when clicking outside
+      $(document).on('click', function(e){
+        if (!$(e.target).closest('.hamburger, .dropdown-menu').length) {
+          $('.hamburger').removeClass('active');
+          $('.dropdown-menu').removeClass('active');
+          $('.dropdown-content').removeClass('active');
+        }
       });
 
       simpleCart({
