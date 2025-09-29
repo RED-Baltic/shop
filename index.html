@@ -202,8 +202,9 @@
       margin-bottom:12px;
     }
     .product-card .add-btn {
-      display:inline-block;
-      padding:12px 18px;
+      display:block;
+      width: calc(100% - 0px);
+      padding:12px 0;
       background:var(--accent-red);
       color:#fff;
       border-radius:10px;
@@ -213,6 +214,7 @@
       border:none;
       text-decoration:none;
       transition: transform .14s ease, background .14s ease;
+      box-sizing: border-box;
     }
     .product-card .add-btn:active { transform: translateY(1px); }
     .product-card .add-btn:hover { background:var(--accent-red-dark); }
@@ -498,14 +500,12 @@
             <p>info.redmond.lv@gmail.com</p>
             <p>I-V -10.00-18.00</p>
             <p>VI -pēc vienošanās</p>
-            
           </div>
           <div class="dropdown-content" id="details">
             <p>SIA REDMOND BALTIC</p>
             <p>40103604538</p>
-            <p>Lielā iela 19 K-1-1c, Mārupe, LV-2167</p>
+             <p>Lielā iela 19 K-1-1c, Mārupe, LV-2167</p>
             <p>LV13PARX0013541790004</p>
-            
           </div>
         </div>
       </div>
@@ -559,6 +559,8 @@
           <input type="hidden" name="access_key" value="eecfee69-2466-4350-809f-888ed9faac05">
           <input type="hidden" name="email_to" value="info.redmond.lv@gmail.com">
           <input type="hidden" name="cart_contents" id="cart_contents" value="">
+          <input type="hidden" name="reply_to" id="reply_to" value="">
+          <input type="hidden" name="email_template" id="email_template" value="Thank you for your order!\n\nYour order details:\n[cart_contents]\n\nWe will process your order soon.\n\nBest regards,\nRED Solution Team">
 
           <label id="name-label">Jūsu vārds:<input type="text" name="customer_name" required></label>
           <label id="email-label">E-pasts:<input type="email" name="email" required></label>
@@ -844,9 +846,10 @@
         let deliveryCost=(deliveryType==="Venipak pakomāts")?((lang==='ee')?6:4):0;
         let totalWithDelivery=(itemsTotal+deliveryCost).toFixed(2);
         var lockerAddr=$('#locker-select option:selected').text();
-        var cartText=summaryArr.join('\\n')+"\\nKopā: "+totalWithDelivery+" EUR\\nPiegāde: "+deliveryType;
-        if(deliveryType==="Venipak pakomāts") cartText+="\\nVenipak pakomāts: "+lockerAddr;
+        var cartText=summaryArr.join('\n')+"\nKopā: "+totalWithDelivery+" EUR\nPiegāde: "+deliveryType;
+        if(deliveryType==="Venipak pakomāts") cartText+="\nVenipak pakomāts: "+lockerAddr;
         $('#cart_contents').val(cartText);
+        $('#reply_to').val($('input[name="email"]').val());
       });
 
       const modal = $('#product-modal');
@@ -888,5 +891,3 @@
   </script>
 </body>
 </html>
-
-
