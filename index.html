@@ -90,26 +90,26 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      width: 30px;
-      height: 30px;
+      width: 36px;
+      height: 36px;
       cursor: pointer;
-      padding: 5px;
+      padding: 6px;
     }
     .hamburger span {
       background: var(--text-light);
-      height: 3px;
-      margin: 3px 0;
+      height: 4px;
+      margin: 4px 0;
       border-radius: 2px;
       transition: all 0.3s ease;
     }
     .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
+      transform: rotate(45deg) translate(8px, 8px);
     }
     .hamburger.active span:nth-child(2) {
       opacity: 0;
     }
     .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(7px, -7px);
+      transform: rotate(-45deg) translate(8px, -8px);
     }
 
     .dropdown-menu {
@@ -468,13 +468,19 @@
         font-size: 10px;
       }
       .hamburger {
-        width: 24px;
-        height: 24px;
-        padding: 4px;
+        width: 30px;
+        height: 30px;
+        padding: 5px;
       }
       .hamburger span {
-        height: 2px;
-        margin: 2px 0;
+        height: 3px;
+        margin: 3px 0;
+      }
+      .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+      }
+      .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
       }
       .simpleCart_items table { font-size: 12px; }
       .simpleCart_items .simpleCart_remove { padding: 4px 8px; font-size: 12px; }
@@ -494,18 +500,12 @@
         <div class="dropdown-menu">
           <button class="dropdown-btn" data-target="contacts">Kontakti</button>
           <button class="dropdown-btn" data-target="details">Rekvizīti</button>
-          <div class="dropdown-content" id="contacts">
-            <p>Lielā iela 19 K-1, Mārupe, LV-2167</p>
-            <p>+37127552280</p>
-            <p>info.redmond.lv@gmail.com</p>
-            <p>I-V -10.00-18.00</p>
-            <p>VI -11.00-15.00 (pēc vienošanās)</p>
-          </div>
-          <div class="dropdown-content" id="details">
-            <p>SIA REDMOND BALTIC</p>
-            <p>40103604538</p>
-            <p>Lielā iela 19 K-1-1c, Mārupe, LV-2167</p>
-            <p>LV13PARX0013541790004</p>
+          <button class="dropdown-btn" data-target="payment">Apmaksa</button>
+          <div class="dropdown-content" id="contacts"></div>
+          <div class="dropdown-content" id="details"></div>
+          <div class="dropdown-content" id="payment">
+            <p>Skaidrā naudā vai ar kredītkarti veikalā</p>
+            <p>Bankas pārskaitījums (mēs sagatavosim rēķinu un nosūtīsim uz Jūsu noradīto e-pastu)</p>
           </div>
         </div>
       </div>
@@ -606,11 +606,30 @@
         addToCart: "Pievienot grozam",
         contacts: "Kontakti",
         details: "Rekvizīti",
+        payment: "Apmaksa",
+        contactsContent: [
+          "Lielā iela 19 K-1, Mārupe, LV-2167",
+          "+37127552280",
+          "info.redmond.lv@gmail.com",
+          "I-V -10.00-18.00",
+          "VI -11.00-15.00 (pēc vienošanās)"
+        ],
+        detailsContent: [
+          "SIA REDMOND BALTIC",
+          "40103604538",
+          "Lielā iela 19 K-1-1c, Mārupe, LV-2167",
+          "LV13PARX0013541790004"
+        ],
+        paymentContent: [
+          "Skaidrā naudā vai ar kredītkarti veikalā",
+          "Bankas pārskaitījums (mēs sagatavosim rēķinu un nosūtīsim uz Jūsu noradīto e-pastu)"
+        ],
         products:[
           {name:"Multikatls RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Funkcijas: Automātiskā sildīšana līdz 12 st., Iepriekšēja automātiskās sildīšanas izslēgšana, Atliktais starts līdz 24 st., Ēdienu uzsildīšana, Multipavars, Vadības paneļa bloķēšana, Skaņas signālu izslēgšana, RGB indikācija, Programmas: Ātrā gatavošana (Ekspress), Rīsi/Putraimi, Zupa, Tvaicēšana, Vārīšana, Sautēšana, Sutināšana, Cepšana, Cepšana (Mīklas izstrādājumi), Pica, Plovs, Jogurts, Maize, Pasta, Piena putra, Vakuums, Fritēšana, Siera kūka, Multipavars (no 35 līdz 180 °C ar soli 1 °C), Jauda: 860 W"},
           {name:"Tējkanna Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Krāsaina sensoru vadības panelis, 5 uzsildīšanas režīmi – 40°, 70°, 80°, 90°, 100° C, Automātiskā sildīšana – 2 stundas, Cool Touch tehnoloģija (inovatīva divsienu konstrukcija, kas nodrošina termosa efektu un aizsargā no apdegumiem), Programmu skaits: 5 (bērnu pārtika, baltā tēja, zaļā tēja, kafija, vārīšana), Temperatūras regulēšana 40°–100° C, solis 5°C, Rotācija par 360 grādiem, Tilpums: 1,7 l, Jauda: 2000 W"},
           {name:"Tējkanna Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Krāsaina sensoru vadības panelis, 5 uzsildīšanas režīmi – 40°, 70°, 80°, 90°, 100° C, Automātiskā sildīšana – 2 stundas, Cool Touch tehnoloģija (inovatīva divsienu konstrukcija, kas nodrošina termosa efektu un aizsargā no apdegumiem), Programmu skaits: 5 (bērnu pārtika, baltā tēja, zaļā tēja, kafija, vārīšana), Temperatūras regulēšana 40°–100° C, solis 5°C, Rotācija par 360 grādiem, Tilpums: 1,7 l, Jauda: 2000 W"}
-        ]},
+        ]
+      },
       ru: { 
         title:"Наши товары", 
         cartTitle:"Корзина", 
@@ -629,11 +648,30 @@
         addToCart: "Добавить в корзину",
         contacts: "Контакты",
         details: "Реквизиты",
+        payment: "Оплата",
+        contactsContent: [
+          "Ул. Лиела 19 K-1, Марупе, LV-2167",
+          "+37127552280",
+          "info.redmond.lv@gmail.com",
+          "Пн-Пт: 10:00-18:00",
+          "Сб: 11:00-15:00 (по договоренности)"
+        ],
+        detailsContent: [
+          "SIA REDMOND BALTIC",
+          "40103604538",
+          "Ул. Лиела 19 K-1-1c, Марупе, LV-2167",
+          "LV13PARX0013541790004"
+        ],
+        paymentContent: [
+          "Наличными или кредитной картой в магазине",
+          "Банковский перевод (мы подготовим счёт и отправим на указанный вами e-mail)"
+        ],
         products:[
-          {name:"Мультиварка RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Функции: Автоматический подогрев до 12 ч. ,Отключение автоматического подогрева заранее, Отложенный старт до 24 ч. ,Разогрев пищи ,Мультиповар ,Блокировка панели управления, Отключение звукового сигнала ,RGB индикация . Программы:  Быстрое приготовление (Экспресс), Рис/Крупы, Суп, На пару, Варка, Тушение, Томление, Жарка, Выпечка (Тесто), Пицца, Плов, Йогурт, Хлеб, Паста, Молочная каша, Вакуумирование, Фритюр, Чизкейк, Мультиповар (от 35 до 180 °C с шагом 1 °C), Мощность: 860 W"},
+          {name:"Мультиварка RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Функции: Автоматический подогрев до 12 ч. ,Отключение автоматического подогрева заранее, Отложенный старт до 24 ч. ,Разогрев пищи ,Мультиповар ,Блокировка панели управления, Отключение звукового сигнала ,RGB индикация . Программы:  Быстрое приготовление (Экспресс), Рис/Крупы, Суп, На пару, Варка, Тушение, Томление, Жарка, Выпечка, Пицца, Плов, Йогурт, Хлеб, Паста, Молочная каша, Вакуумирование, Фритюр, Чизкейк, Мультиповар (от 35 до 180 °C с шагом 1 °C), Мощность: 860 W"},
           {name:"Чайник Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Цветной сенсорный панель управления , 5 режимов подогрева — 40°, 70°, 80°, 90°, 100° C , Автоматический подогрев — 2 часа , Регулировка температуры 40°–100° C, шаг 5°C, Поворот на 360 градусов, Технология Cool Touch (инновационная двухслойная конструкция, обеспечивающая эффект термоса и защищающая от ожогов). Количество программ: 5 (прикорм для детей, белый чай, зеленый чай, кофе, кипячение). Объем: 1,7 l, Мощность: 2000 W"},
           {name:"Чайник Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Цветной сенсорный панель управления , 5 режимов подогрева — 40°, 70°, 80°, 90°, 100° C , Автоматический подогрев — 2 часа , Регулировка температуры 40°–100° C, шаг 5°C, Поворот на 360 градусов, Технология Cool Touch (инновационная двухслойная конструкция, обеспечивающая эффект термоса и защищающая от ожогов). Количество программ: 5 (прикорм для детей, белый чай, зеленый чай, кофе, кипячение). Объем: 1,7 l, Мощность: 2000 W"}
-        ]},
+        ]
+      },
       ee: { 
         title:"Meie tooted", 
         cartTitle:"Ostukorv", 
@@ -651,11 +689,26 @@
         addToCart: "Lisa ostukorvi",
         contacts: "Kontaktid",
         details: "Rekvisiidid",
+        payment: "Makse",
+        contactsContent: [
+          "+37127552280",
+          "info.redmond.lv@gmail.com"
+        ],
+        detailsContent: [
+          "SIA REDMOND BALTIC",
+          "40103604538",
+          "Lielā 19 K-1-1c, Mārupe, LV-2167",
+          "LV13PARX0013541790004"
+        ],
+        paymentContent: [
+          "Pangaülekanne (koostame arve ja saadame teie määratud e-postile)"
+        ],
         products:[
-        {name:"Multikeetja RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Programmid: Kiirkeetmine (Ekspress), Riis/Tangud, Supp, Aurutamine, Keetmine, Hautamine, Aeglane hautamine, Küpsetamine, Küpsetamine (taina tooted), Pitsa, Plov, Jogurt, Leib, Pasta, Piimapuder, Vaakumkeetmine, Fritüürimine, Juustukook, Multipott (35–180 °C, samm 1 °C). Võimsus: 860 W"},
+          {name:"Multikeetja RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Programmid: Kiirkeetmine (Ekspress), Riis/Tangud, Supp, Aurutamine, Keetmine, Hautamine, Aeglane hautamine, Küpsetamine, Küpsetamine (taina tooted), Pitsa, Plov, Jogurt, Leib, Pasta, Piimapuder, Vaakumkeetmine, Fritüürimine, Juustukook, Multipott (35–180 °C, samm 1 °C). Võimsus: 860 W"},
           {name:"Veeketja Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Värviline puutejuhtpaneel. 5 soojendusrežiimi – 40°, 70°, 80°, 90°, 100 °C. Automaatne soojas hoidmine – kuni 2 tundi. Cool Touch tehnoloogia (innovatiivne kahekordsete seinte konstruktsioon termose efektiga ja kaitsega põletuste eest). Programmide arv: 5 (beebitoit, valge tee, roheline tee, kohv, keetmine). Temperatuuri reguleerimine 40–100 °C, samm 5 °C. 360° pööratav alus. Maht: 1,7 l Võimsus: 2000 W"},
           {name:"Veeketja Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Värviline puutejuhtpaneel. 5 soojendusrežiimi – 40°, 70°, 80°, 90°, 100 °C. Automaatne soojas hoidmine – kuni 2 tundi. Cool Touch tehnoloogia (innovatiivne kahekordsete seinte konstruktsioon termose efektiga ja kaitsega põletuste eest). Programmide arv: 5 (beebitoit, valge tee, roheline tee, kohv, keetmine). Temperatuuri reguleerimine 40–100 °C, samm 5 °C. 360° pööratav alus. Maht: 1,7 l Võimsus: 2000 W"}
-        ]},
+        ]
+      },
       lt: { 
         title:"Mūsų produktai", 
         cartTitle:"Krepšelis", 
@@ -673,11 +726,26 @@
         addToCart: "Pridėti į krepšelį",
         contacts: "Kontaktai",
         details: "Rekvizitai",
+        payment: "Mokėjimas",
+        contactsContent: [
+          "+37127552280",
+          "info.redmond.lv@gmail.com"
+        ],
+        detailsContent: [
+          "SIA REDMOND BALTIC",
+          "40103604538",
+          "Lielā g. 19 K-1-1c, Mārupe, LV-2167",
+          "LV13PARX0013541790004"
+        ],
+        paymentContent: [
+          "Banko pavedimas (paruošime sąskaitą ir išsiųsime jūsų nurodytu el. paštu)"
+        ],
         products:[
           {name:"Daugiafunkcis puodas RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Funkcijos:Automatinis šildymas iki 12 val., Išankstinis automatinio šildymo išjungimas, Atidėtas startas iki 24 val., Patiekalų pašildymas, Multipavirimo režimas, Valdymo skydelio blokavimas, Garso signalų išjungimas, RGB indikacija, Programos: Greitas virimas (Ekspresas), Ryžiai/Kruopos, Sriuba, Garinimas, Virimas, Troškinimas, Troškinimas (lėtas), Kepimas, Kepimas (tešlos gaminiai), Pica, Plovas, Jogurtas, Duona, Pasta, Pieniška košė, Vakuuminis virimas, Fritūravimas, Sūrio pyragas, Multipavirimo režimas (nuo 35 iki 180 °C kas 1 °C)., Galia: 860 W"},
           {name:"Virdulys Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Spalvotas jutiklinis valdymo skydelis, 5 pašildymo režimai – 40°, 70°, 80°, 90°, 100 °C, Automatinis šildymo palaikymas – iki 2 val, Cool Touch technologija (inovatyvi dvigubų sienelių konstrukcija su termoso efektu ir apsauga nuo nudegimų), Programų skaičius: 5 (kūdikių maistas, balta arbata, žalia arbata, kava, virimas), Temperatūros reguliavimas 40–100 °C, žingsnis 5 °C, 360° pasukamas pagrindas, Talpa: 1,7 l, Galia: 2000 W"},
           {name:"Virdulys Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Spalvotas jutiklinis valdymo skydelis, 5 pašildymo režimai – 40°, 70°, 80°, 90°, 100 °C, Automatinis šildymo palaikymas – iki 2 val, Cool Touch technologija (inovatyvi dvigubų sienelių konstrukcija su termoso efektu ir apsauga nuo nudegimų), Programų skaičius: 5 (kūdikių maistas, balta arbata, žalia arbata, kava, virimas), Temperatūros reguliavimas 40–100 °C, žingsnis 5 °C, 360° pasukamas pagrindas, Talpa: 1,7 l, Galia: 2000 W"}
-        ]}
+        ]
+      }
     };
 
     function loadLockers(lang) {
@@ -726,6 +794,29 @@
       $('#order-button').text(t.orderButton);
       $('.dropdown-btn[data-target="contacts"]').text(t.contacts);
       $('.dropdown-btn[data-target="details"]').text(t.details);
+      $('.dropdown-btn[data-target="payment"]').text(t.payment);
+
+      // Update contacts dropdown content
+      const $contactsContent = $('#contacts');
+      $contactsContent.empty();
+      t.contactsContent.forEach(text => {
+        $contactsContent.append(`<p>${text}</p>`);
+      });
+
+      // Update details dropdown content
+      const $detailsContent = $('#details');
+      $detailsContent.empty();
+      t.detailsContent.forEach(text => {
+        $detailsContent.append(`<p>${text}</p>`);
+      });
+
+      // Update payment dropdown content
+      const $paymentContent = $('#payment');
+      $paymentContent.empty();
+      t.paymentContent.forEach(text => {
+        $paymentContent.append(`<p>${text}</p>`);
+      });
+
       loadProducts(lang);
       $('#product-modal .add-btn').text(t.addToCart);
       $('.lang-btn').removeClass('active');
@@ -765,13 +856,15 @@
       $('.hamburger').on('click', function() {
         $(this).toggleClass('active');
         $('.dropdown-menu').toggleClass('active');
-        $('.dropdown-content').removeClass('active');
+        $('.dropdown-content').removeClass('active'); // Hide all dropdown contents when toggling hamburger
       });
 
       $('.dropdown-btn').on('click', function() {
         const target = $(this).data('target');
-        $('.dropdown-content').removeClass('active');
-        $(`#${target}`).addClass('active');
+        $('.dropdown-content').removeClass('active'); // Hide all dropdown contents
+        $(`#${target}`).toggleClass('active'); // Toggle only the clicked section
+        $('.dropdown-menu').addClass('active'); // Ensure dropdown menu stays open
+        $('.hamburger').addClass('active'); // Ensure hamburger stays in active state
       });
 
       $(document).on('click', function(e) {
@@ -930,8 +1023,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
