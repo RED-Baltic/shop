@@ -437,6 +437,15 @@
     .modal .add-btn:active { transform: translateY(1px); }
     .modal .add-btn:hover { background: var(--accent-red-dark); }
 
+    #order-confirmation-modal .modal-content p {
+      font-size: 14px;
+      margin: 10px 0;
+      color: var(--text-dark);
+    }
+    #order-confirmation-modal .modal-content strong {
+      color: var(--accent-red);
+    }
+
     @media (max-width:1100px){ 
       .products-list{ grid-template-columns:repeat(2,1fr);} 
     }
@@ -544,7 +553,7 @@
           </label>
           <div id="locker-field" class="hidden">
             <label id="choose-locker-label" style="display:block; color:var(--muted); margin-bottom:8px;">Izvēlieties pakomātu:</label>
-            <select id="locker-select"><option value="">Ielādē pakomātus...</option></select>
+            <select id="locker-select" name="locker" required><option value="">Ielādē pakomātus...</option></select>
           </div>
           <label id="pickup-label-container" style="display:block; margin-top:12px; color:var(--text-light); font-weight:600;">
             <input type="radio" name="delivery" value="Pašizņemšana Mārupē">
@@ -559,8 +568,9 @@
           <input type="hidden" name="access_key" value="c49dd88b-948d-4903-9295-d9ab1c7b8afc">
           <input type="hidden" name="email_to" value="galasmail@inbox.lv">
           <input type="hidden" name="cart_contents" id="cart_contents" value="">
+          <input type="hidden" name="order_id" id="order_id" value="">
           <input type="hidden" name="reply_to" id="reply_to" value="">
-          <input type="hidden" name="email_template" id="email_template" value="Thank you for your order!\n\nYour order details:\n[cart_contents]\n\nWe will process your order soon.\n\nBest regards,\nRED Solution Team">
+          <input type="hidden" name="email_template" id="email_template" value="Thank you for your order!\n\nOrder ID: [order_id]\n\nYour order details:\n[cart_contents]\n\nWe will process your order soon.\n\nBest regards,\nRED Solution Team">
 
           <label id="name-label">Jūsu vārds:<input type="text" name="customer_name" required></label>
           <label id="email-label">E-pasts:<input type="email" name="email" required></label>
@@ -584,9 +594,24 @@
     </div>
   </div>
 
+  <div id="order-confirmation-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Pasūtījums saņemts</h3>
+      <p><strong>Pasūtījuma ID:</strong> <span id="confirmation-order-id"></span></p>
+      <p><strong>Pasūtījuma detaļas:</strong></p>
+      <p id="confirmation-cart-details"></p>
+    </div>
+  </div>
+
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/simplecartjs/3.0.5/simplecart.min.js"></script>
   <script>
+    // Function to generate a simple 6-digit numeric order ID
+    function generateSimpleOrderId() {
+      return Math.floor(100000 + Math.random() * 900000).toString();
+    }
+
     const translations = {
       lv: { 
         title:"RED", 
@@ -607,6 +632,11 @@
         contacts: "Kontakti",
         details: "Rekvizīti",
         payment: "Apmaksa",
+        orderConfirmationTitle: "Pasūtījums saņemts",
+        errorEmptyCart: "Grozs ir tukšs",
+        errorDelivery: "Lūdzu, izvēlieties piegādes metodi",
+        errorLocker: "Lūdzu, izvēlieties pakomātu",
+        errorSubmission: "Pasūtījuma nosūtīšana neizdevās. Lūdzu, mēģiniet vēlreiz.",
         contactsContent: [
           "Lielā iela 19 K-1, Mārupe, LV-2167",
           "+37127552280",
@@ -649,6 +679,11 @@
         contacts: "Контакты",
         details: "Реквизиты",
         payment: "Оплата",
+        orderConfirmationTitle: "Заказ получен",
+        errorEmptyCart: "Корзина пуста",
+        errorDelivery: "Пожалуйста, выберите способ доставки",
+        errorLocker: "Пожалуйста, выберите пакомат",
+        errorSubmission: "Не удалось отправить заказ. Пожалуйста, попробуйте снова.",
         contactsContent: [
           "Ул. Лиела 19 K-1, Марупе, LV-2167",
           "+37127552280",
@@ -690,6 +725,11 @@
         contacts: "Kontaktid",
         details: "Rekvisiidid",
         payment: "Makse",
+        orderConfirmationTitle: "Tellimus saadud",
+        errorEmptyCart: "Ostukorv on tühi",
+        errorDelivery: "Palun valige kohaletoimetamise viis",
+        errorLocker: "Palun valige pakiautomaat",
+        errorSubmission: "Tellimuse saatmine ebaõnnestus. Palun proovige uuesti.",
         contactsContent: [
           "+37127552280",
           "info.redmond.lv@gmail.com"
@@ -727,6 +767,11 @@
         contacts: "Kontaktai",
         details: "Rekvizitai",
         payment: "Mokėjimas",
+        orderConfirmationTitle: "Užsakymas gautas",
+        errorEmptyCart: "Krepšelis tuščias",
+        errorDelivery: "Prašome pasirinkti pristatymo būdą",
+        errorLocker: "Prašome pasirinkti paštomatą",
+        errorSubmission: "Nepavyko išsiųsti užsakymo. Bandykite dar kartą.",
         contactsContent: [
           "+37127552280",
           "info.redmond.lv@gmail.com"
@@ -766,9 +811,10 @@
         data.forEach(point => {
           select.append('<option value="' + point.id + '">' + point.city + ', ' + point.address + ' (' + point.pickup_point + ')</option>');
         });
-      }).fail(function() {
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.error('Ошибка загрузки пакоматов:', textStatus, errorThrown);
         select.empty();
-        select.append('<option value="">Ошибка загрузки пакоматов</option>');
+        select.append('<option value="">' + translations[lang].errorLocker + '</option>');
       });
     }
 
@@ -795,22 +841,23 @@
       $('.dropdown-btn[data-target="contacts"]').text(t.contacts);
       $('.dropdown-btn[data-target="details"]').text(t.details);
       $('.dropdown-btn[data-target="payment"]').text(t.payment);
+      $('#order-confirmation-modal h3').text(t.orderConfirmationTitle);
 
-      // Update contacts dropdown content
+      // Обновление содержимого выпадающего меню контактов
       const $contactsContent = $('#contacts');
       $contactsContent.empty();
       t.contactsContent.forEach(text => {
         $contactsContent.append(`<p>${text}</p>`);
       });
 
-      // Update details dropdown content
+      // Обновление содержимого выпадающего меню реквизитов
       const $detailsContent = $('#details');
       $detailsContent.empty();
       t.detailsContent.forEach(text => {
         $detailsContent.append(`<p>${text}</p>`);
       });
 
-      // Update payment dropdown content
+      // Обновление содержимого выпадающего меню оплаты
       const $paymentContent = $('#payment');
       $paymentContent.empty();
       t.paymentContent.forEach(text => {
@@ -822,7 +869,7 @@
       $('.lang-btn').removeClass('active');
       $(`.lang-btn[data-lang="${lang}"]`).addClass('active');
 
-      // Load lockers based on language
+      // Загрузка пакоматов в зависимости от языка
       loadLockers(lang);
     }
 
@@ -856,15 +903,15 @@
       $('.hamburger').on('click', function() {
         $(this).toggleClass('active');
         $('.dropdown-menu').toggleClass('active');
-        $('.dropdown-content').removeClass('active'); // Hide all dropdown contents when toggling hamburger
+        $('.dropdown-content').removeClass('active'); // Скрыть все содержимое выпадающего меню при переключении гамбургера
       });
 
       $('.dropdown-btn').on('click', function() {
         const target = $(this).data('target');
-        $('.dropdown-content').removeClass('active'); // Hide all dropdown contents
-        $(`#${target}`).toggleClass('active'); // Toggle only the clicked section
-        $('.dropdown-menu').addClass('active'); // Ensure dropdown menu stays open
-        $('.hamburger').addClass('active'); // Ensure hamburger stays in active state
+        $('.dropdown-content').removeClass('active'); // Скрыть все содержимое выпадающего меню
+        $(`#${target}`).toggleClass('active'); // Переключить только выбранный раздел
+        $('.dropdown-menu').addClass('active'); // Убедиться, что меню остается открытым
+        $('.hamburger').addClass('active'); // Убедиться, что гамбургер остается в активном состоянии
       });
 
       $(document).on('click', function(e) {
@@ -903,15 +950,18 @@
         ]
       });
 
-      // Show/hide locker field based on delivery option
+      // Показать/скрыть поле выбора пакомата в зависимости от способа доставки
       $('input[name="delivery"]').on('change', function() {
         const deliveryType = $(this).val();
+        const select = $('#locker-select');
         if (deliveryType === "Venipak pakomāts") {
           $('#locker-field').removeClass('hidden');
+          select.prop('required', true);
           const lang = $('.lang-btn.active').data('lang');
           loadLockers(lang);
         } else {
           $('#locker-field').addClass('hidden');
+          select.prop('required', false);
         }
         updateCartTotal();
       });
@@ -965,26 +1015,125 @@
       simpleCart.bind('update', updateCartTotal);
 
       $('#orderForm').on('submit', function(e) {
+        e.preventDefault(); // Предотвратить стандартную отправку формы
+        const lang = $('.lang-btn.active').data('lang');
+        const t = translations[lang];
+
+        // Валидация формы
         var items = simpleCart.items();
         if (!items.length) {
-          alert("Grozs ir tukšs");
-          e.preventDefault();
+          alert(t.errorEmptyCart);
           return false;
         }
+        var deliveryType = $('input[name="delivery"]:checked').val();
+        if (!deliveryType) {
+          alert(t.errorDelivery);
+          return false;
+        }
+        if (deliveryType === "Venipak pakomāts" && $('#locker-select').val() === "") {
+          alert(t.errorLocker);
+          return false;
+        }
+        var email = $('input[name="email"]').val();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          alert(t.email + " некорректен");
+          return false;
+        }
+
+        // Подготовка данных заказа
         var summaryArr = items.map(it => it.get('quantity') + ' × ' + it.get('name') + ' (' + parseFloat(it.get('price')).toFixed(2) + ' EUR)');
         var itemsTotal = parseFloat(simpleCart.total()) || 0;
-        var deliveryType = $('input[name="delivery"]:checked').val() || "Nav izvēlēts";
-        const lang = $('.lang-btn.active').data('lang');
-        let deliveryCost = (deliveryType === "Venipak pakomāts") ? ((lang === 'ee') ? 6 : 4) : 0;
-        let totalWithDelivery = (itemsTotal + deliveryCost).toFixed(2);
+        var deliveryCost = (deliveryType === "Venipak pakomāts") ? ((lang === 'ee') ? 6 : 4) : 0;
+        var totalWithDelivery = (itemsTotal + deliveryCost).toFixed(2);
         var lockerAddr = $('#locker-select option:selected').text();
-        var cartText = summaryArr.join('\n') + "\nKopā: " + totalWithDelivery + " EUR\nPiegāde: " + deliveryType;
-        if (deliveryType === "Venipak pakomāts") cartText += "\nVenipak pakomāts: " + lockerAddr;
+        var orderId = generateSimpleOrderId();
+        var cartText = `Order ID: ${orderId}\n\n` + summaryArr.join('\n') + "\nИтого: " + totalWithDelivery + " EUR\nДоставка: " + deliveryType;
+        if (deliveryType === "Venipak pakomāts") cartText += "\nПакомат: " + lockerAddr;
         $('#cart_contents').val(cartText);
-        $('#reply_to').val($('input[name="email"]').val());
+        $('#order_id').val(orderId);
+        $('#reply_to').val(email);
+
+        // Показать модальное окно подтверждения
+        $('#confirmation-order-id').text(orderId);
+        $('#confirmation-cart-details').html(cartText.replace(/\n/g, '<br>'));
+        $('#order-confirmation-modal').show();
+
+        // Отправка формы
+        $.ajax({
+          url: 'https://api.web3forms.com/submit',
+          method: 'POST',
+          data: $('#orderForm').serialize(),
+          success: function(response, textStatus, xhr) {
+            console.log('Успешный ответ:', {
+              status: xhr.status,
+              response: response,
+              responseText: xhr.responseText
+            });
+            let isSuccess = xhr.status >= 200 && xhr.status < 300;
+            let parsedResponse = null;
+            let errorMessage = t.errorSubmission;
+            if (typeof response === 'string') {
+              try {
+                parsedResponse = JSON.parse(response);
+                isSuccess = isSuccess && (!parsedResponse.hasOwnProperty('success') || parsedResponse.success);
+                if (!isSuccess && parsedResponse.message) {
+                  errorMessage += ': ' + parsedResponse.message;
+                }
+              } catch (e) {
+                console.warn('Не удалось распарсить JSON:', e, xhr.responseText);
+                // Если ответ не JSON, но статус 2xx, считаем успехом (так как email отправляется)
+                isSuccess = xhr.status >= 200 && xhr.status < 300;
+              }
+            } else if (response && typeof response === 'object') {
+              parsedResponse = response;
+              isSuccess = isSuccess && (!response.hasOwnProperty('success') || response.success);
+              if (!isSuccess && response.message) {
+                errorMessage += ': ' + response.message;
+              }
+            }
+
+            if (isSuccess) {
+              console.log('Заказ успешно отправлен, очищаем корзину');
+              simpleCart.empty();
+              updateCartTotal();
+              // Модальное окно остается открытым до ручного закрытия
+            } else {
+              console.error('Ошибка отправки:', errorMessage, parsedResponse || response);
+              alert(errorMessage);
+              $('#order-confirmation-modal').hide();
+            }
+          },
+          error: function(xhr, status, error) {
+            console.error('Ошибка AJAX:', {
+              status: xhr.status,
+              statusText: status,
+              error: error,
+              responseText: xhr.responseText
+            });
+            let errorMessage = t.errorSubmission;
+            try {
+              const parsedError = JSON.parse(xhr.responseText);
+              if (parsedError.message) {
+                errorMessage += ': ' + parsedError.message;
+              }
+            } catch (e) {
+              console.warn('Не удалось распарсить ошибку как JSON:', e);
+            }
+            // Если статус 2xx, считаем успехом, так как email отправляется
+            if (xhr.status >= 200 && xhr.status < 300) {
+              console.log('Статус 2xx в ошибке, считаем успехом');
+              simpleCart.empty();
+              updateCartTotal();
+            } else {
+              alert(errorMessage);
+              $('#order-confirmation-modal').hide();
+            }
+          }
+        });
       });
 
       const modal = $('#product-modal');
+      const confirmationModal = $('#order-confirmation-modal');
       const closeBtn = $('.close');
 
       $('#products-list').on('click', '.product-card', function(e) {
@@ -1012,15 +1161,18 @@
 
       closeBtn.on('click', function() {
         modal.hide();
+        confirmationModal.hide();
       });
 
       $(window).on('click', function(e) {
         if (e.target === modal[0]) {
           modal.hide();
         }
+        if (e.target === confirmationModal[0]) {
+          confirmationModal.hide();
+        }
       });
     });
   </script>
 </body>
 </html>
-
