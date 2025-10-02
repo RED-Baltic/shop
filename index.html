@@ -1078,19 +1078,24 @@
               status: xhr.status,
               statusText: status,
               error: error,
-              responseText: xhr.responseText
+              responseText: xhr.responseText || 'No response due to CORS'
             });
-
-            // Считаем коды HTTP 2xx успешными (email отправлен несмотря на CORS)
-            if (xhr.status >= 200 && xhr.status < 300) {
-              console.log('Код HTTP 2xx, считаем успехом');
+            // Предполагаем успех, так как email отправляется несмотря на CORS
+            console.log('Предполагаем успешную отправку, так как сервер обрабатывает POST-запрос');
+            simpleCart.empty();
+            updateCartTotal();
+          },
+          complete: function(xhr, status) {
+            // В случае ошибки CORS ответ может быть пустым, но запрос обработан сервером
+            if (status === 'error' && xhr.status === 0) {
+              console.log('CORS ошибка, но запрос отправлен, считаем успехом');
               simpleCart.empty();
               updateCartTotal();
-            } else {
-              // Показываем алерт только для кодов, отличных от 2xx
+            } else if (xhr.status >= 400) {
+              // Показываем алерт только для явных ошибок сервера (4xx, 5xx)
               let errorMessage = t.errorSubmission;
               try {
-                const parsedError = JSON.parse(xhr.responseText);
+                const parsedError = JSON.parse(xhr.responseText || '{}');
                 if (parsedError.message) {
                   errorMessage += ': ' + parsedError.message;
                 }
