@@ -1069,39 +1069,9 @@
               response: response,
               responseText: xhr.responseText
             });
-            let isSuccess = xhr.status >= 200 && xhr.status < 300;
-            let parsedResponse = null;
-            let errorMessage = t.errorSubmission;
-            if (typeof response === 'string') {
-              try {
-                parsedResponse = JSON.parse(response);
-                isSuccess = isSuccess && (!parsedResponse.hasOwnProperty('success') || parsedResponse.success);
-                if (!isSuccess && parsedResponse.message) {
-                  errorMessage += ': ' + parsedResponse.message;
-                }
-              } catch (e) {
-                console.warn('Не удалось распарсить JSON:', e, xhr.responseText);
-                // Если ответ не JSON, но статус 2xx, считаем успехом (так как email отправляется)
-                isSuccess = xhr.status >= 200 && xhr.status < 300;
-              }
-            } else if (response && typeof response === 'object') {
-              parsedResponse = response;
-              isSuccess = isSuccess && (!response.hasOwnProperty('success') || response.success);
-              if (!isSuccess && response.message) {
-                errorMessage += ': ' + response.message;
-              }
-            }
-
-            if (isSuccess) {
-              console.log('Заказ успешно отправлен, очищаем корзину');
-              simpleCart.empty();
-              updateCartTotal();
-              // Модальное окно остается открытым до ручного закрытия
-            } else {
-              console.error('Ошибка отправки:', errorMessage, parsedResponse || response);
-              alert(errorMessage);
-              $('#order-confirmation-modal').hide();
-            }
+            // Очистка корзины при успешной отправке
+            simpleCart.empty();
+            updateCartTotal();
           },
           error: function(xhr, status, error) {
             console.error('Ошибка AJAX:', {
@@ -1110,21 +1080,23 @@
               error: error,
               responseText: xhr.responseText
             });
-            let errorMessage = t.errorSubmission;
-            try {
-              const parsedError = JSON.parse(xhr.responseText);
-              if (parsedError.message) {
-                errorMessage += ': ' + parsedError.message;
-              }
-            } catch (e) {
-              console.warn('Не удалось распарсить ошибку как JSON:', e);
-            }
-            // Если статус 2xx, считаем успехом, так как email отправляется
+
+            // Считаем коды HTTP 2xx успешными (email отправлен несмотря на CORS)
             if (xhr.status >= 200 && xhr.status < 300) {
-              console.log('Статус 2xx в ошибке, считаем успехом');
+              console.log('Код HTTP 2xx, считаем успехом');
               simpleCart.empty();
               updateCartTotal();
             } else {
+              // Показываем алерт только для кодов, отличных от 2xx
+              let errorMessage = t.errorSubmission;
+              try {
+                const parsedError = JSON.parse(xhr.responseText);
+                if (parsedError.message) {
+                  errorMessage += ': ' + parsedError.message;
+                }
+              } catch (e) {
+                console.warn('Не удалось распарсить ошибку как JSON:', e);
+              }
               alert(errorMessage);
               $('#order-confirmation-modal').hide();
             }
