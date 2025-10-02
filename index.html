@@ -635,6 +635,7 @@
         totalLabel: "Kopā:",
         deliveryLabel: "Piegāde:",
         lockerLabel: "Pakomāts:",
+        contactSoon: "Drīzumā mēs ar jums sazināsimies, lai precizētu detaļas",
         errorEmptyCart: "Grozs ir tukšs",
         errorDelivery: "Lūdzu, izvēlieties piegādes metodi",
         errorLocker: "Lūdzu, izvēlieties pakomātu",
@@ -688,6 +689,7 @@
         totalLabel: "Итого:",
         deliveryLabel: "Доставка:",
         lockerLabel: "Пакомат:",
+        contactSoon: "В ближайшее время мы с Вами свяжемся для уточнения деталей",
         errorEmptyCart: "Корзина пуста",
         errorDelivery: "Пожалуйста, выберите способ доставки",
         errorLocker: "Пожалуйста, выберите пакомат",
@@ -740,6 +742,7 @@
         totalLabel: "Kokku:",
         deliveryLabel: "Kohaletoimetamine:",
         lockerLabel: "Pakiautomaat:",
+        contactSoon: "Võtame teiega peagi ühendust, et täpsustada üksikasju",
         errorEmptyCart: "Ostukorv on tühi",
         errorDelivery: "Palun valige kohaletoimetamise viis",
         errorLocker: "Palun valige pakiautomaat",
@@ -788,6 +791,7 @@
         totalLabel: "Iš viso:",
         deliveryLabel: "Pristatymas:",
         lockerLabel: "Paštomatas:",
+        contactSoon: "Artimiausiu metu susisieksime su jumis dėl detalių patikslinimo",
         errorEmptyCart: "Krepšelis tuščias",
         errorDelivery: "Prašome pasirinkti pristatymo būdą",
         errorLocker: "Prašome pasirinkti paštomatą",
@@ -1071,8 +1075,7 @@
         var lockerAddr = $('#locker-select option:selected').text();
         var orderId = generateSimpleOrderId();
         var deliveryText = deliveryType === "Pašizņemšana Mārupē" ? t.pickupOption : deliveryType;
-        var cartText = `Order ID: ${orderId}\n\n` + summaryArr.join('\n') + `\n${t.totalLabel} ${totalWithDelivery} EUR\n${t.deliveryLabel} ${deliveryText}`;
-        if (deliveryType === "Venipak pakomāts") cartText += `\n${t.lockerLabel} ${lockerAddr}`;
+        var cartText = `Order ID: ${orderId}\n\n` + summaryArr.join('\n') + `\n${t.totalLabel} ${totalWithDelivery} EUR\n${t.deliveryLabel} ${deliveryText}` + (deliveryType === "Venipak pakomāts" ? `\n${t.lockerLabel} ${lockerAddr}` : '') + `\n\n${t.contactSoon}`;
         $('#cart_contents').val(cartText);
         $('#order_id').val(orderId);
 
