@@ -513,8 +513,6 @@
       header {
         flex-wrap: nowrap;
         gap: 10px;
-        justify-content: center; /* Center the header content */
-        position: relative;
       }
       .header-image {
         max-height: 40px;
@@ -523,17 +521,6 @@
       .header-left {
         position: absolute;
         left: 10px;
-        z-index: 10; /* Ensure hamburger is above other elements */
-      }
-      .header-center {
-        flex: 0; /* Prevent stretching, allow natural width */
-        justify-content: center;
-      }
-      .header-right {
-        position: absolute;
-        right: 10px;
-        z-index: 10; /* Ensure language selector is above other elements */
-        max-width: 100px;
       }
       .hamburger {
         width: 30px;
@@ -557,27 +544,7 @@
       .lang-selector .lang-btn { padding: 4px 8px; }
       .lang-dropdown { min-width: 80px; }
       .phone-number { font-size: 12px; }
-      .banner {
-        max-height: 300px; /* Increase banner height */
-        object-fit: cover; /* Ensure banner fills the space */
-      }
-      .product-card {
-        min-height: 360px; /* Reduce product card height */
-        padding: 14px; /* Slightly reduce padding */
-      }
-      .product-card img {
-        height: 200px; /* Reduce image height in product cards */
-      }
-      .product-card h3 {
-        font-size: 0.95rem; /* Slightly smaller font for title */
-      }
-      .product-card .price {
-        font-size: 0.95rem; /* Slightly smaller font for price */
-      }
-      .product-card .add-btn {
-        padding: 10px 0; /* Reduce button padding */
-        font-size: 14px; /* Slightly smaller font */
-      }
+      .header-right { max-width: 200px; }
     }
   </style>
 </head>
@@ -606,6 +573,7 @@
         <img src="photo/redd.jpg" alt="Logo" class="header-image">
       </div>
       <div class="header-right">
+        
         <div class="lang-selector">
           <button class="lang-btn" id="current-lang">LV</button>
           <div class="lang-dropdown">
@@ -1282,3 +1250,5 @@
   </script>
 </body>
 </html>
+
+
