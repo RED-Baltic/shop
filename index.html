@@ -445,6 +445,12 @@
     #order-confirmation-modal .modal-content strong {
       color: var(--accent-red);
     }
+    .contact-soon {
+      font-size: 16px;
+      font-weight: 700;
+      display: block;
+      margin-top: 10px;
+    }
 
     @media (max-width:1100px){ 
       .products-list{ grid-template-columns:repeat(2,1fr);} 
@@ -1075,13 +1081,14 @@
         var lockerAddr = $('#locker-select option:selected').text();
         var orderId = generateSimpleOrderId();
         var deliveryText = deliveryType === "Pašizņemšana Mārupē" ? t.pickupOption : deliveryType;
-        var cartText = `Order ID: ${orderId}\n\n` + summaryArr.join('\n') + `\n${t.totalLabel} ${totalWithDelivery} EUR\n${t.deliveryLabel} ${deliveryText}` + (deliveryType === "Venipak pakomāts" ? `\n${t.lockerLabel} ${lockerAddr}` : '') + `\n\n${t.contactSoon}`;
-        $('#cart_contents').val(cartText);
+        var cartTextForModal = `Order ID: ${orderId}\n\n` + summaryArr.join('\n') + `\n${t.totalLabel} ${totalWithDelivery} EUR\n${t.deliveryLabel} ${deliveryText}` + (deliveryType === "Venipak pakomāts" ? `\n${t.lockerLabel} ${lockerAddr}` : '') + `\n\n<span class="contact-soon">${t.contactSoon}</span>`;
+        var cartTextForEmail = `Order ID: ${orderId}\n\n` + summaryArr.join('\n') + `\n${t.totalLabel} ${totalWithDelivery} EUR\n${t.deliveryLabel} ${deliveryText}` + (deliveryType === "Venipak pakomāts" ? `\n${t.lockerLabel} ${lockerAddr}` : '') + `\n\n**${t.contactSoon}**`;
+        $('#cart_contents').val(cartTextForEmail);
         $('#order_id').val(orderId);
 
         // Показать модальное окно подтверждения
         $('#confirmation-order-id').text(orderId);
-        $('#confirmation-cart-details').html(cartText.replace(/\n/g, '<br>'));
+        $('#confirmation-cart-details').html(cartTextForModal.replace(/\n/g, '<br>'));
         $('#order-confirmation-modal').show();
 
         // Отправка формы
