@@ -33,14 +33,13 @@
     }
     .wrap { width:100%; max-width:var(--container-width); }
 
-    /* Новый стиль для баннера */
     .banner {
       width: 100%;
       height: auto;
       display: block;
       border-radius: var(--radius);
-      margin-bottom: 28px; /* Соответствует grid-gap для гармоничного отступа */
-      box-shadow: 0 6px 20px rgba(2,6,12,0.45); /* Легкая тень, как у product-card, для consistency */
+      margin-bottom: 28px;
+      box-shadow: 0 6px 20px rgba(2,6,12,0.45);
     }
 
     header {
@@ -61,7 +60,13 @@
     .header-center {
       flex: 1;
       display: flex;
+      align-items: center;
       justify-content: center;
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
     }
     .header-image {
       max-height: 53px;
@@ -71,29 +76,63 @@
       object-fit: contain;
     }
     .lang-selector {
-      display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
-      max-width: 100%;
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
-    .lang-selector button {
-      padding: 6px 10px;
+    .lang-selector .lang-btn {
+      padding: 6px 12px;
       border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.06);
-      background: #0b0b0b;
+      border: 1px solid var(--accent-red);
+      background: var(--accent-red);
       color: var(--text-light);
       font-size: 14px;
       cursor: pointer;
       transition: background 0.2s ease, border-color 0.2s ease;
       white-space: nowrap;
     }
-    .lang-selector button.active {
-      background: var(--accent-red);
-      border-color: var(--accent-red);
-    }
-    .lang-selector button:hover {
+    .lang-selector .lang-btn:hover {
       background: var(--accent-red-dark);
       border-color: var(--accent-red-dark);
+    }
+    .lang-dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--card-dark);
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+      min-width: 100px;
+      z-index: 100;
+      padding: 10px 0;
+    }
+    .lang-selector:hover .lang-dropdown {
+      display: block;
+    }
+    .lang-dropdown button {
+      display: block;
+      width: 100%;
+      padding: 8px 20px;
+      background: var(--card-dark);
+      border: none;
+      color: var(--text-light);
+      font-size: 14px;
+      text-align: left;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .lang-dropdown button:hover {
+      background: var(--card-dark);
+      color: var(--accent-red);
+    }
+    .phone-number {
+      color: var(--text-light);
+      font-size: 14px;
+      font-weight: 600;
+      white-space: nowrap;
     }
 
     .hamburger {
@@ -133,6 +172,7 @@
       box-shadow: 0 8px 30px rgba(0,0,0,0.6);
       min-width: 250px;
       z-index: 100;
+      padding: 10px 0;
     }
     .dropdown-menu.active {
       display: block;
@@ -344,6 +384,7 @@
     .order-form label { display:block; color:var(--muted); font-weight:600; margin-bottom:6px; }
     .order-form input[type="text"],
     .order-form input[type="email"],
+    .order-form input[type="tel"],
     .order-form textarea {
       width:100%;
       padding:10px 12px;
@@ -465,6 +506,7 @@
 
     @media (max-width:1100px){ 
       .products-list{ grid-template-columns:repeat(2,1fr);} 
+      .header-right { max-width: 300px; }
     }
     @media (max-width:700px){ 
       .products-list{ grid-template-columns:1fr;}
@@ -479,19 +521,6 @@
       .header-left {
         position: absolute;
         left: 10px;
-      }
-      .lang-selector {
-        position: absolute;
-        right: 10px;
-        gap: 2px;
-        max-width: 120px;
-        flex-shrink: 1;
-        flex-grow: 0;
-        justify-content: flex-end;
-      }
-      .lang-selector button {
-        padding: 3px 4px;
-        font-size: 10px;
       }
       .hamburger {
         width: 30px;
@@ -511,6 +540,11 @@
       .simpleCart_items table { font-size: 12px; }
       .simpleCart_items .simpleCart_remove { padding: 4px 8px; font-size: 12px; }
       .dropdown-menu { left: 10px; }
+      .lang-selector { font-size: 12px; }
+      .lang-selector .lang-btn { padding: 4px 8px; }
+      .lang-dropdown { min-width: 80px; }
+      .phone-number { font-size: 12px; }
+      .header-right { max-width: 200px; }
     }
   </style>
 </head>
@@ -538,16 +572,21 @@
       <div class="header-center">
         <img src="photo/redd.jpg" alt="Logo" class="header-image">
       </div>
-      <div class="lang-selector">
-        <button class="lang-btn active" data-lang="lv">LV</button>
-        <button class="lang-btn" data-lang="lt">LT</button>
-        <button class="lang-btn" data-lang="ru">RU</button>
-        <button class="lang-btn" data-lang="ee">EE</button>
+      <div class="header-right">
+        <span class="phone-number">+37127552280</span>
+        <div class="lang-selector">
+          <button class="lang-btn" id="current-lang">LV</button>
+          <div class="lang-dropdown">
+            <button class="lang-btn" data-lang="lv">LV</button>
+            <button class="lang-btn" data-lang="lt">LT</button>
+            <button class="lang-btn" data-lang="ru">RU</button>
+            <button class="lang-btn" data-lang="ee">EE</button>
+          </div>
+        </div>
       </div>
     </header>
 
     <main>
-      <!-- Новый баннер над продуктами -->
       <img src="photo/baner.jpg" alt="Banner" class="banner">
 
       <div class="products-list" id="products-list"></div>
@@ -591,7 +630,7 @@
           <input type="hidden" name="order_id" id="order_id" value="">
           <label id="name-label">Jūsu vārds:<input type="text" name="customer_name" required></label>
           <label id="email-label">E-pasts:<input type="email" name="email" required></label>
-          <label id="phone-label">Telefons:<input type="text" name="phone"></label>
+          <label id="phone-label">Telefons:<input type="tel" name="phone" required></label>
           <label id="comments-label">Komentāri:<textarea name="message" rows="4"></textarea></label>
           <button type="submit" id="order-button">Pasūtīt</button>
         </form>
@@ -889,21 +928,24 @@
       $('#order-id-label').text(t.orderIdLabel);
       $('#order-details-label').text(t.orderDetailsLabel);
 
-      // Обновление содержимого выпадающего меню контактов
+      // Update current language display
+      $('#current-lang').text(lang.toUpperCase());
+
+      // Update contents of contacts dropdown
       const $contactsContent = $('#contacts');
       $contactsContent.empty();
       t.contactsContent.forEach(text => {
         $contactsContent.append(`<p>${text}</p>`);
       });
 
-      // Обновление содержимого выпадающего меню реквизитов
+      // Update contents of details dropdown
       const $detailsContent = $('#details');
       $detailsContent.empty();
       t.detailsContent.forEach(text => {
         $detailsContent.append(`<p>${text}</p>`);
       });
 
-      // Обновление содержимого выпадающего меню оплаты
+      // Update contents of payment dropdown
       const $paymentContent = $('#payment');
       $paymentContent.empty();
       t.paymentContent.forEach(text => {
@@ -912,11 +954,12 @@
 
       loadProducts(lang);
       $('#product-modal .add-btn').text(t.addToCart);
-      $('.lang-btn').removeClass('active');
-      $(`.lang-btn[data-lang="${lang}"]`).addClass('active');
 
-      // Загрузка пакоматов в зависимости от языка
+      // Load lockers based on language
       loadLockers(lang);
+
+      // Update HTML lang attribute
+      $('html').attr('lang', lang);
     }
 
     function loadProducts(lang) {
@@ -931,7 +974,7 @@
               <div class="price"><span class="item_price">${p.price}</span> EUR</div>
             </div>
             <div style="margin-top:12px;">
-              <a href="javascript:;" class="add-btn item_add">${translations[lang].orderButton}</a>
+              <a href="javascript:;" class="add-btn item_add">${translations[lang].addToCart}</a>
             </div>
           </div>
         `);
@@ -941,23 +984,36 @@
     $(function() {
       setLanguage('lv');
 
-      $('.lang-btn').on('click', function() {
+      // Handle language selection
+      $('.lang-selector').on('mouseenter', function() {
+        $('.lang-dropdown').show();
+      });
+
+      $('.lang-selector').on('mouseleave', function() {
+        $('.lang-dropdown').hide();
+      });
+
+      $('.lang-dropdown').on('click', '.lang-btn', function(e) {
+        e.preventDefault();
         const lang = $(this).data('lang');
-        setLanguage(lang);
+        if (lang) {
+          setLanguage(lang);
+          $('.lang-dropdown').hide();
+        }
       });
 
       $('.hamburger').on('click', function() {
         $(this).toggleClass('active');
         $('.dropdown-menu').toggleClass('active');
-        $('.dropdown-content').removeClass('active'); // Скрыть все содержимое выпадающего меню при переключении гамбургера
+        $('.dropdown-content').removeClass('active');
       });
 
       $('.dropdown-btn').on('click', function() {
         const target = $(this).data('target');
-        $('.dropdown-content').removeClass('active'); // Скрыть все содержимое выпадающего меню
-        $(`#${target}`).toggleClass('active'); // Переключить только выбранный раздел
-        $('.dropdown-menu').addClass('active'); // Убедиться, что меню остается открытым
-        $('.hamburger').addClass('active'); // Убедиться, что гамбургер остается в активном состоянии
+        $('.dropdown-content').removeClass('active');
+        $(`#${target}`).toggleClass('active');
+        $('.dropdown-menu').addClass('active');
+        $('.hamburger').addClass('active');
       });
 
       $(document).on('click', function(e) {
@@ -965,6 +1021,9 @@
           $('.hamburger').removeClass('active');
           $('.dropdown-menu').removeClass('active');
           $('.dropdown-content').removeClass('active');
+        }
+        if (!$(e.target).closest('.lang-selector').length) {
+          $('.lang-dropdown').hide();
         }
       });
 
@@ -996,14 +1055,13 @@
         ]
       });
 
-      // Показать/скрыть поле выбора пакомата в зависимости от способа доставки
       $('input[name="delivery"]').on('change', function() {
         const deliveryType = $(this).val();
         const select = $('#locker-select');
         if (deliveryType === "Venipak pakomāts") {
           $('#locker-field').removeClass('hidden');
           select.prop('required', true);
-          const lang = $('.lang-btn.active').data('lang');
+          const lang = $('#current-lang').text().toLowerCase();
           loadLockers(lang);
         } else {
           $('#locker-field').addClass('hidden');
@@ -1015,7 +1073,7 @@
       function updateCartTotal() {
         let itemsTotal = parseFloat(simpleCart.total()) || 0;
         let deliveryCost = 0;
-        const lang = $('.lang-btn.active').data('lang');
+        const lang = $('#current-lang').text().toLowerCase();
         const t = translations[lang];
         const deliveryType = $('input[name="delivery"]:checked').val();
         if (deliveryType === "Venipak pakomāts") deliveryCost = (lang === 'ee') ? 6 : 4;
@@ -1062,11 +1120,10 @@
       simpleCart.bind('update', updateCartTotal);
 
       $('#orderForm').on('submit', function(e) {
-        e.preventDefault(); // Предотвратить стандартную отправку формы
-        const lang = $('.lang-btn.active').data('lang');
+        e.preventDefault();
+        const lang = $('#current-lang').text().toLowerCase();
         const t = translations[lang];
 
-        // Валидация формы
         var items = simpleCart.items();
         if (!items.length) {
           alert(t.errorEmptyCart);
@@ -1087,7 +1144,6 @@
           return false;
         }
 
-        // Подготовка данных заказа
         var summaryArr = items.map(it => it.get('quantity') + ' × ' + it.get('name') + ' (' + parseFloat(it.get('price')).toFixed(2) + ' EUR)');
         var itemsTotal = parseFloat(simpleCart.total()) || 0;
         var deliveryCost = (deliveryType === "Venipak pakomāts") ? ((lang === 'ee') ? 6 : 4) : 0;
@@ -1100,12 +1156,10 @@
         $('#cart_contents').val(cartTextForEmail);
         $('#order_id').val(orderId);
 
-        // Показать модальное окно подтверждения
         $('#confirmation-order-id').text(orderId);
         $('#confirmation-cart-details').html(cartTextForModal.replace(/\n/g, '<br>'));
         $('#order-confirmation-modal').show();
 
-        // Отправка формы
         $.ajax({
           url: 'https://api.web3forms.com/submit',
           method: 'POST',
@@ -1116,7 +1170,6 @@
               response: response,
               responseText: xhr.responseText
             });
-            // Очистка корзины при успешной отправке
             simpleCart.empty();
             updateCartTotal();
           },
@@ -1127,19 +1180,16 @@
               error: error,
               responseText: xhr.responseText || 'No response due to CORS'
             });
-            // Предполагаем успех, так как email отправляется несмотря на CORS
             console.log('Предполагаем успешную отправку, так как сервер обрабатывает POST-запрос');
             simpleCart.empty();
             updateCartTotal();
           },
           complete: function(xhr, status) {
-            // В случае ошибки CORS ответ может быть пустым, но запрос обработан сервером
             if (status === 'error' && xhr.status === 0) {
               console.log('CORS ошибка, но запрос отправлен, считаем успехом');
               simpleCart.empty();
               updateCartTotal();
             } else if (xhr.status >= 400) {
-              // Показываем алерт только для явных ошибок сервера (4xx, 5xx)
               let errorMessage = t.errorSubmission;
               try {
                 const parsedError = JSON.parse(xhr.responseText || '{}');
