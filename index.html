@@ -632,6 +632,9 @@
         orderConfirmationTitle: "Pasūtījums saņemts",
         orderIdLabel: "Pasūtījuma ID:",
         orderDetailsLabel: "Pasūtījuma detaļas:",
+        totalLabel: "Kopā:",
+        deliveryLabel: "Piegāde:",
+        lockerLabel: "Pakomāts:",
         errorEmptyCart: "Grozs ir tukšs",
         errorDelivery: "Lūdzu, izvēlieties piegādes metodi",
         errorLocker: "Lūdzu, izvēlieties pakomātu",
@@ -682,6 +685,9 @@
         orderConfirmationTitle: "Заказ получен",
         orderIdLabel: "ID заказа:",
         orderDetailsLabel: "Детали заказа:",
+        totalLabel: "Итого:",
+        deliveryLabel: "Доставка:",
+        lockerLabel: "Пакомат:",
         errorEmptyCart: "Корзина пуста",
         errorDelivery: "Пожалуйста, выберите способ доставки",
         errorLocker: "Пожалуйста, выберите пакомат",
@@ -731,6 +737,9 @@
         orderConfirmationTitle: "Tellimus saadud",
         orderIdLabel: "Tellimuse ID:",
         orderDetailsLabel: "Tellimuse detailid:",
+        totalLabel: "Kokku:",
+        deliveryLabel: "Kohaletoimetamine:",
+        lockerLabel: "Pakiautomaat:",
         errorEmptyCart: "Ostukorv on tühi",
         errorDelivery: "Palun valige kohaletoimetamise viis",
         errorLocker: "Palun valige pakiautomaat",
@@ -776,6 +785,9 @@
         orderConfirmationTitle: "Užsakymas gautas",
         orderIdLabel: "Užsakymo ID:",
         orderDetailsLabel: "Užsakymo detalės:",
+        totalLabel: "Iš viso:",
+        deliveryLabel: "Pristatymas:",
+        lockerLabel: "Paštomatas:",
         errorEmptyCart: "Krepšelis tuščias",
         errorDelivery: "Prašome pasirinkti pristatymo būdą",
         errorLocker: "Prašome pasirinkti paštomatą",
@@ -980,13 +992,14 @@
         let itemsTotal = parseFloat(simpleCart.total()) || 0;
         let deliveryCost = 0;
         const lang = $('.lang-btn.active').data('lang');
+        const t = translations[lang];
         const deliveryType = $('input[name="delivery"]:checked').val();
         if (deliveryType === "Venipak pakomāts") deliveryCost = (lang === 'ee') ? 6 : 4;
 
         $('.simpleCart_items .delivery-row').remove();
         const $tbody = $('.simpleCart_items table tbody');
         if ($tbody.length && deliveryCost > 0) {
-          $tbody.append('<tr class="delivery-row"><td>Доставка</td><td>1</td><td>' + deliveryCost.toFixed(2) + '</td><td></td></tr>');
+          $tbody.append('<tr class="delivery-row"><td>' + t.deliveryLabel + '</td><td>1</td><td>' + deliveryCost.toFixed(2) + '</td><td></td></tr>');
         }
         const totalWithDelivery = (itemsTotal + deliveryCost).toFixed(2);
         $('.simpleCart_total').text(totalWithDelivery);
@@ -1058,8 +1071,8 @@
         var lockerAddr = $('#locker-select option:selected').text();
         var orderId = generateSimpleOrderId();
         var deliveryText = deliveryType === "Pašizņemšana Mārupē" ? t.pickupOption : deliveryType;
-        var cartText = `Order ID: ${orderId}\n\n` + summaryArr.join('\n') + "\nИтого: " + totalWithDelivery + " EUR\nДоставка: " + deliveryText;
-        if (deliveryType === "Venipak pakomāts") cartText += "\nПакомат: " + lockerAddr;
+        var cartText = `Order ID: ${orderId}\n\n` + summaryArr.join('\n') + `\n${t.totalLabel} ${totalWithDelivery} EUR\n${t.deliveryLabel} ${deliveryText}`;
+        if (deliveryType === "Venipak pakomāts") cartText += `\n${t.lockerLabel} ${lockerAddr}`;
         $('#cart_contents').val(cartText);
         $('#order_id').val(orderId);
 
