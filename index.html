@@ -33,6 +33,16 @@
     }
     .wrap { width:100%; max-width:var(--container-width); }
 
+    /* Новый стиль для баннера */
+    .banner {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: var(--radius);
+      margin-bottom: 28px; /* Соответствует grid-gap для гармоничного отступа */
+      box-shadow: 0 6px 20px rgba(2,6,12,0.45); /* Легкая тень, как у product-card, для consistency */
+    }
+
     header {
       display:flex;
       align-items:center;
@@ -537,6 +547,9 @@
     </header>
 
     <main>
+      <!-- Новый баннер над продуктами -->
+      <img src="photo/baner.jpg" alt="Banner" class="banner">
+
       <div class="products-list" id="products-list"></div>
 
       <section class="panel">
