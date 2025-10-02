@@ -569,14 +569,10 @@
           <input type="hidden" name="email_to" value="galasmail@inbox.lv">
           <input type="hidden" name="cart_contents" id="cart_contents" value="">
           <input type="hidden" name="order_id" id="order_id" value="">
-          <input type="hidden" name="reply_to" id="reply_to" value="">
-          <input type="hidden" name="email_template" id="email_template" value="Thank you for your order!\n\nOrder ID: [order_id]\n\nYour order details:\n[cart_contents]\n\nWe will process your order soon.\n\nBest regards,\nRED Solution Team">
-
           <label id="name-label">Jūsu vārds:<input type="text" name="customer_name" required></label>
           <label id="email-label">E-pasts:<input type="email" name="email" required></label>
           <label id="phone-label">Telefons:<input type="text" name="phone"></label>
           <label id="comments-label">Komentāri:<textarea name="message" rows="4"></textarea></label>
-
           <button type="submit" id="order-button">Pasūtīt</button>
         </form>
       </section>
@@ -1051,7 +1047,6 @@
         if (deliveryType === "Venipak pakomāts") cartText += "\nПакомат: " + lockerAddr;
         $('#cart_contents').val(cartText);
         $('#order_id').val(orderId);
-        $('#reply_to').val(email);
 
         // Показать модальное окно подтверждения
         $('#confirmation-order-id').text(orderId);
