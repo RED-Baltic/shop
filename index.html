@@ -270,8 +270,8 @@ header {
 
 .product-card img {
   width: 100%;
-  height: 200px;
-  object-fit: contain;
+  height: 250px; /* Increased height for desktop to fill container */
+  object-fit: cover; /* Changed to cover to fill container while maintaining aspect ratio */
   border-radius: 10px;
   margin-bottom: 14px;
   background: #f0f0f0;
@@ -661,10 +661,11 @@ header {
   }
   .product-card {
     padding: 12px;
+    min-height: 300px; /* Reduced min-height to make cards less vertically stretched */
   }
   .product-card img {
-    height: 150px;
-    object-fit: contain;
+    height: 120px; /* Adjusted height for mobile to maintain proportions */
+    object-fit: cover; /* Changed to cover to fill container */
     width: 100%;
   }
   header {
@@ -710,37 +711,37 @@ header {
   .simpleCart_items table {
     font-size: 12px;
     width: 100%;
-    table-layout: auto; /* Позволяет ячейкам адаптироваться к содержимому */
+    table-layout: auto;
   }
   .simpleCart_items th,
   .simpleCart_items td {
-    padding: 8px 4px; /* Уменьшаем отступы для компактности */
-    white-space: nowrap; /* Предотвращаем перенос текста в ячейках */
-    overflow: hidden; /* Скрываем переполнение текста */
-    text-overflow: ellipsis; /* Добавляем многоточие для длинного текста */
-    max-width: 120px; /* Ограничиваем ширину ячеек для названий товаров */
+    padding: 8px 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
   }
   .simpleCart_items th:first-child,
   .simpleCart_items td:first-child {
-    max-width: 150px; /* Даем больше места для столбца с названием товара */
-    white-space: normal; /* Разрешаем перенос для названий, чтобы они оставались читаемыми */
-    word-wrap: break-word; /* Обеспечиваем перенос слов для длинных названий */
+    max-width: 150px;
+    white-space: normal;
+    word-wrap: break-word;
   }
   .simpleCart_items .quantity-controls {
     display: flex;
     flex-wrap: nowrap;
-    gap: 4px; /* Уменьшаем промежуток между элементами */
+    gap: 4px;
   }
   .simpleCart_items .quantity-controls input {
-    width: 30px; /* Уменьшаем ширину поля ввода количества */
+    width: 30px;
   }
   .simpleCart_items .simpleCart_remove {
-    padding: 4px 6px; /* Уменьшаем размер кнопки удаления */
+    padding: 4px 6px;
     font-size: 11px;
   }
   .cart-items {
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Плавная прокрутка на мобильных устройствах */
+    -webkit-overflow-scrolling: touch;
   }
   .dropdown-menu {
     left: 10px;
@@ -857,7 +858,7 @@ header {
             </label>
             <label style="display:block; color:var(--text-light); font-weight:600; margin-bottom:8px;">
               <input type="radio" name="payment" value="Bankas pārskaitījums">
-              <span id="bank-transfer-label" style="margin-left:8px; color:var(--muted); font-weight:600;">Bankas pārskaitījums (mēs sagatavosim rēķinu un nosūtīsim uz Jūsu e-pastu)</span>
+              <span id="bank-transfer-label" style="margin-left:8px; color:var(--muted); font-weight:600;">Bankas pārskaitījums (mēs sagatavosim rēķinu un nosūtīsim uz Jūsu noradīto e-pastu)</span>
             </label>
           </div>
         </section>
