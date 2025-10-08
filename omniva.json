@@ -1,0 +1,1003 @@
+[
+    {
+        "id": "1",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Anniņmuižas bulvāris 40a",
+        "pickup_point": "Omniva locker, Rīgas Anniņmuižas RIMI pakomāts"
+    },
+    {
+        "id": "2",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Anniņmuižas bulvāris 90",
+        "pickup_point": "Omniva locker, Rīgas Jūrmalas gatves RIMI pakomāts"
+    },
+    {
+        "id": "3",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Augusta Dombrovska iela 23",
+        "pickup_point": "Omniva locker, Rīgas Vecmīlgrāvja RIMI pakomāts"
+    },
+    {
+        "id": "4",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Bauskas iela 120A",
+        "pickup_point": "Omniva locker, Rīgas Bauskas ielas RIMI pakomāts"
+    },
+    {
+        "id": "5",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Biķernieku iela 16A",
+        "pickup_point": "Omniva locker, Rīgas Biķernieku ielas 16A MEGO pakomāts"
+    },
+    {
+        "id": "6",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Biķernieku iela 160/6",
+        "pickup_point": "Omniva locker, Rīgas Biķernieku RIMI pakomāts"
+    },
+    {
+        "id": "7",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Brīvības gatve 201",
+        "pickup_point": "Omniva locker, Rīgas Elkor Plaza pakomāts"
+    },
+    {
+        "id": "8",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Brīvības gatve 253",
+        "pickup_point": "Omniva locker, Rīgas Neste DUS Brīvības pakomāts"
+    },
+    {
+        "id": "9",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Brīvības gatve 434b",
+        "pickup_point": "Omniva locker, Rīgas T/C Juglas Centrs pakomāts"
+    },
+    {
+        "id": "10",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Brīvības iela 372",
+        "pickup_point": "Omniva locker, Rīgas T/C Alfa pakomāts"
+    },
+    {
+        "id": "11",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Deglava iela 67",
+        "pickup_point": "Omniva locker, Rīgas Deglava ielas Maxima XXX pakomāts"
+    },
+    {
+        "id": "12",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Duntes iela 19A",
+        "pickup_point": "Omniva locker, Rīgas T/C Sky&More pakomāts"
+    },
+    {
+        "id": "13",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Dzelzavas iela 86",
+        "pickup_point": "Omniva locker, Rīgas Dzelzavas ielas Supernetto pakomāts"
+    },
+    {
+        "id": "14",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Dzirciema iela 1",
+        "pickup_point": "Omniva locker, Rīgas Botāniskā dārza Maxima pakomāts"
+    },
+    {
+        "id": "15",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Dzirciema iela 42",
+        "pickup_point": "Omniva locker, Rīgas Iļģuciema RIMI pakomāts"
+    },
+    {
+        "id": "16",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Dzirnavu iela 83",
+        "pickup_point": "Omniva locker, Rīgas Dzirnavu ielas pakomāts"
+    },
+    {
+        "id": "17",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Elizabetes iela 26",
+        "pickup_point": "Omniva locker, Rīgas Stacijas laukuma pakomāts"
+    },
+    {
+        "id": "18",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "G. Astras iela 7",
+        "pickup_point": "Omniva locker, Rīgas G.Astras ielas Lukoil pakomāts"
+    },
+    {
+        "id": "19",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Gaiļezera iela 8",
+        "pickup_point": "Omniva locker, Rīgas T/C Penta pakomāts"
+    },
+    {
+        "id": "20",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Gobas iela 13",
+        "pickup_point": "Omniva locker, Rīgas Bolderājas Mego pakomāts"
+    },
+    {
+        "id": "21",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Grostonas iela 1",
+        "pickup_point": "Omniva locker, Rīgas Grostonas iela Prisma pakomāts"
+    },
+    {
+        "id": "22",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Ieriķu iela 3",
+        "pickup_point": "Omniva locker, Rīgas T/C DOMINA pakomāts"
+    },
+    {
+        "id": "23",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Imantas 15. līnija 7",
+        "pickup_point": "Omniva locker, Rīgas RIMI Gramzdas pakomāts"
+    },
+    {
+        "id": "24",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "K.Valdemāra 62",
+        "pickup_point": "Omniva locker, Rīgas Briāna ielas Rimi pakomāts"
+    },
+    {
+        "id": "25",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Kleistu iela 9",
+        "pickup_point": "Omniva locker, Rīgas Kleistu ielas Mego pakomāts"
+    },
+    {
+        "id": "26",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Krasta iela 46",
+        "pickup_point": "Omniva locker, Rīgas T/C Mols pakomāts"
+    },
+    {
+        "id": "27",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Kurzemes prospekts 1a",
+        "pickup_point": "Omniva locker, Rīgas T/C Damme pakomāts"
+    },
+    {
+        "id": "28",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Kurzemes prospekts 132",
+        "pickup_point": "Omniva locker, Rīgas Kurzemes prospekta Mego pakomāts"
+    },
+    {
+        "id": "29",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Lidoņu iela 27",
+        "pickup_point": "Omniva locker, Rīgas Lidoņu iela RIMI pakomāts"
+    },
+    {
+        "id": "30",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Lielirbes iela 29",
+        "pickup_point": "Omniva locker, Rīgas T/C Spice pakomāts"
+    },
+    {
+        "id": "31",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Maskavas iela 357",
+        "pickup_point": "Omniva locker, Rīgas T/C Dole pakomāts"
+    },
+    {
+        "id": "32",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Maskavas iela 400",
+        "pickup_point": "Omniva locker, Rīgas T/C ZOOM pakomāts"
+    },
+    {
+        "id": "33",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Matīsa iela 25",
+        "pickup_point": "Omniva locker, Bērnu pasaule RIMI pakomāts"
+    },
+    {
+        "id": "34",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Mīlgrāvja iela 6",
+        "pickup_point": "Omniva locker, Rīgas T/C RIMI Mīlgrāvis pakomāts"
+    },
+    {
+        "id": "35",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Mūkusalas iela 71",
+        "pickup_point": "Omniva locker, Rīgas T/C Riga Plaza pakomāts"
+    },
+    {
+        "id": "36",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Mūkusalas iela 73",
+        "pickup_point": "Omniva locker, Rīgas Mūkusalas Maxima XX pakomāts"
+    },
+    {
+        "id": "37",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Nīcgales iela 2",
+        "pickup_point": "Omniva locker, Rīgas T/C Minska pakomāts"
+    },
+    {
+        "id": "38",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Nīcgales iela 53",
+        "pickup_point": "Omniva locker, Rīgas T/C RIMI Nīcgale pakomāts"
+    },
+    {
+        "id": "39",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Parādes iela 5B",
+        "pickup_point": "Omniva locker, Rīgas Parādes ielas Mego pakomāts"
+    },
+    {
+        "id": "40",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Pilsoņu iela 1k-1",
+        "pickup_point": "Omniva locker, Rīgas Āgenskalna Maxima X pakomāts"
+    },
+    {
+        "id": "41",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Prāgas iela 1",
+        "pickup_point": "Omniva locker, Rīgas Autoostas pakomāts"
+    },
+    {
+        "id": "42",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Prūšu iela 2",
+        "pickup_point": "Omniva locker, Rīgas Mego Prūšu iela 2 pakomāts"
+    },
+    {
+        "id": "43",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Pulkveža brieža iela 33",
+        "pickup_point": "Omniva locker, Rīgas P.Brieža ielas RIMI pakomāts"
+    },
+    {
+        "id": "44",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Saharova iela 14",
+        "pickup_point": "Omniva locker, Rīgas Saharova ielas Mego pakomāts"
+    },
+    {
+        "id": "45",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Stirnu iela 26",
+        "pickup_point": "Omniva locker, Rīgas T/C Stirnu Rimi pakomāts"
+    },
+    {
+        "id": "46",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Talejas iela 1",
+        "pickup_point": "Omniva locker, Rīgas Valsts Ieņēmumu Dienesta pakomāts"
+    },
+    {
+        "id": "47",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Tilta iela 32",
+        "pickup_point": "Omniva locker, Rīgas RIMI Tilta ielas pakomāts"
+    },
+    {
+        "id": "48",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Ulbrokas iela 6",
+        "pickup_point": "Omniva locker, Rīgas Maxima X Ulbrokas iela pakomāts"
+    },
+    {
+        "id": "49",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Valdemāra iela 112",
+        "pickup_point": "Omniva locker, Rīgas T/C Valdemārs pakomāts"
+    },
+    {
+        "id": "50",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Valdeķu iela 56",
+        "pickup_point": "Omniva locker, Rīgas Ziepniekkalna MEGO pakomāts"
+    },
+    {
+        "id": "51",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Vienības gatve 144",
+        "pickup_point": "Omniva locker, Rīgas Vienības gatves Neste pakomāts"
+    },
+    {
+        "id": "52",
+        "country": "LV",
+        "city": "Rīga",
+        "address": "Āzenes iela 5",
+        "pickup_point": "Omniva locker, Rīgas T/C Olimpia pakomāts"
+    },
+    {
+        "id": "53",
+        "country": "LV",
+        "city": "Ādaži",
+        "address": "Gaujas iela 6",
+        "pickup_point": "Omniva locker, Ādaži T/C Supernetto pakomāts"
+    },
+    {
+        "id": "54",
+        "country": "LV",
+        "city": "Ādaži",
+        "address": "Rīgas gatve 5",
+        "pickup_point": "Omniva locker, Ādaži T/C Apelsīns pakomāts"
+    },
+    {
+        "id": "55",
+        "country": "LV",
+        "city": "Aizkraukle",
+        "address": "Āboltiņi",
+        "pickup_point": "Omniva locker, Aizkraukles T/C Iga pakomāts"
+    },
+    {
+        "id": "56",
+        "country": "LV",
+        "city": "Aizpute",
+        "address": "Zvaigžņu iela 2",
+        "pickup_point": "Omniva locker, Aizputes TOP Zvaigžņu iela pakomāts"
+    },
+    {
+        "id": "57",
+        "country": "LV",
+        "city": "Alūksne",
+        "address": "Pils iela 9b",
+        "pickup_point": "Omniva locker, Alūksnes T/C Maxima X pakomāts"
+    },
+    {
+        "id": "58",
+        "country": "LV",
+        "city": "Auce",
+        "address": "Baznīcas iela 1",
+        "pickup_point": "Omniva locker, Auces TOP pakomāts"
+    },
+    {
+        "id": "59",
+        "country": "LV",
+        "city": "Baldone",
+        "address": "Rīgas iela 79",
+        "pickup_point": "Omniva locker, Baldones MEGO pakomāts"
+    },
+    {
+        "id": "60",
+        "country": "LV",
+        "city": "Baloži",
+        "address": "Rīgas iela 14",
+        "pickup_point": "Omniva locker, Baloži Mego pakomāts"
+    },
+    {
+        "id": "61",
+        "country": "LV",
+        "city": "Balvi",
+        "address": "Partizānu iela 8",
+        "pickup_point": "Omniva locker, Balvu TOP pakomāts"
+    },
+    {
+        "id": "62",
+        "country": "LV",
+        "city": "Bauska",
+        "address": "Zaļā iela 3",
+        "pickup_point": "Omniva locker, Bauskas Supernetto pakomāts"
+    },
+    {
+        "id": "63",
+        "country": "LV",
+        "city": "Brocēni",
+        "address": "Lielcieceres iela 1",
+        "pickup_point": "Omniva locker, Brocēnu MEGO pakomāts"
+    },
+    {
+        "id": "64",
+        "country": "LV",
+        "city": "Carnikava",
+        "address": "Rīgas iela 14",
+        "pickup_point": "Omniva locker, Carnikavas Mego pakomāts"
+    },
+    {
+        "id": "65",
+        "country": "LV",
+        "city": "Cēsis",
+        "address": "Gaujas iela 1/3",
+        "pickup_point": "Omniva locker, Cēsu Gaujas ielas Maxima pakomāts"
+    },
+    {
+        "id": "66",
+        "country": "LV",
+        "city": "Cēsis",
+        "address": "Valmieras iela 17a",
+        "pickup_point": "Omniva locker, Cēsu Maxima XX pakomāts"
+    },
+    {
+        "id": "67",
+        "country": "LV",
+        "city": "Dagda",
+        "address": "Daugavpils iela 6",
+        "pickup_point": "Omniva locker, Dagdas TOP pakomāts"
+    },
+    {
+        "id": "68",
+        "country": "LV",
+        "city": "Daugavpils",
+        "address": "Cietokšņa iela 60",
+        "pickup_point": "Omniva locker, Daugavpils T/C Ditton pakomāts"
+    },
+    {
+        "id": "69",
+        "country": "LV",
+        "city": "Daugavpils",
+        "address": "Raipoles iela 11",
+        "pickup_point": "Omniva locker, Daugavpils Aveņu centrs pakomāts"
+    },
+    {
+        "id": "70",
+        "country": "LV",
+        "city": "Daugavpils",
+        "address": "Valkas iela 1",
+        "pickup_point": "Omniva locker, Daugavpils Mego Valkas iela pakomāts"
+    },
+    {
+        "id": "71",
+        "country": "LV",
+        "city": "Dobele",
+        "address": "Brīvības iela 30",
+        "pickup_point": "Omniva locker, Dobeles RIMI pakomāts"
+    },
+    {
+        "id": "72",
+        "country": "LV",
+        "city": "Eleja",
+        "address": "Stacijas iela 2",
+        "pickup_point": "Omniva locker, Elejas TOP pakomāts"
+    },
+    {
+        "id": "73",
+        "country": "LV",
+        "city": "Grobiņa",
+        "address": "Lielā iela 74",
+        "pickup_point": "Omniva locker, Grobiņas TOP pakomāts"
+    },
+    {
+        "id": "74",
+        "country": "LV",
+        "city": "Gulbene",
+        "address": "Rīgas iela 41",
+        "pickup_point": "Omniva locker, Gulbenes Maxima pakomāts"
+    },
+    {
+        "id": "75",
+        "country": "LV",
+        "city": "Iecava",
+        "address": "Rīgas iela 27",
+        "pickup_point": "Omniva locker, Iecavas Maxima X pakomāts"
+    },
+    {
+        "id": "76",
+        "country": "LV",
+        "city": "Ikšķile",
+        "address": "Skolas iela 4a",
+        "pickup_point": "Omniva locker, Ikšķiles Maxima X pakomāts"
+    },
+    {
+        "id": "77",
+        "country": "LV",
+        "city": "Inčukalns",
+        "address": "Atmodas iela 6",
+        "pickup_point": "Omniva locker, Inčukalna Aibe pakomāts"
+    },
+    {
+        "id": "78",
+        "country": "LV",
+        "city": "Jelgava",
+        "address": "Katoļu iela 18",
+        "pickup_point": "Omniva locker, Jelgavas Vivo RIMI pakomāts"
+    },
+    {
+        "id": "79",
+        "country": "LV",
+        "city": "Jelgava",
+        "address": "Rīgas iela 11a",
+        "pickup_point": "Omniva locker, Jelgavas T/C Valdeka pakomāts"
+    },
+    {
+        "id": "80",
+        "country": "LV",
+        "city": "Jelgava",
+        "address": "Rīgas iela 48",
+        "pickup_point": "Omniva locker, Jelgavas T/C RAF Centrs pakomāts"
+    },
+    {
+        "id": "81",
+        "country": "LV",
+        "city": "Jelgava",
+        "address": "Satiksmes iela 35",
+        "pickup_point": "Omniva locker, Jelgavas T/C RIMI Satiksmes pakomāts"
+    },
+    {
+        "id": "82",
+        "country": "LV",
+        "city": "Jēkabpils",
+        "address": "Rīgas iela 109",
+        "pickup_point": "Omniva locker, Jēkabpils Maxima X pakomāts"
+    },
+    {
+        "id": "83",
+        "country": "LV",
+        "city": "Jēkabpils",
+        "address": "Vienības iela 1a",
+        "pickup_point": "Omniva locker, Jēkabpils Mego pakomāts"
+    },
+    {
+        "id": "84",
+        "country": "LV",
+        "city": "Jūrmala",
+        "address": "Talsu šoseja 29",
+        "pickup_point": "Omniva locker, Kauguru RIMI pakomāts"
+    },
+    {
+        "id": "85",
+        "country": "LV",
+        "city": "Jūrmala",
+        "address": "Ventspils šoseja 32",
+        "pickup_point": "Omniva locker, Slokas T/C Liedags pakomāts"
+    },
+    {
+        "id": "86",
+        "country": "LV",
+        "city": "Jūrmala",
+        "address": "Viestura iela 22",
+        "pickup_point": "Omniva locker, Lielupes RIMI pakomāts"
+    },
+    {
+        "id": "87",
+        "country": "LV",
+        "city": "Kandava",
+        "address": "Abavas iela 4b",
+        "pickup_point": "Omniva locker, Kandavas Maxima X pakomāts"
+    },
+    {
+        "id": "88",
+        "country": "LV",
+        "city": "Ķekava",
+        "address": "Rīgas iela 22",
+        "pickup_point": "Omniva locker, Ķekavas TC Liiba pakomāts"
+    },
+    {
+        "id": "89",
+        "country": "LV",
+        "city": "Koknese",
+        "address": "1905. gada iela 8A",
+        "pickup_point": "Omniva locker, Kokneses Maxima pakomāts"
+    },
+    {
+        "id": "90",
+        "country": "LV",
+        "city": "Krustkalni",
+        "address": "Ķekavas novads.",
+        "pickup_point": "Omniva locker, Ķekavas nov. T/C A7 pakomāts"
+    },
+    {
+        "id": "91",
+        "country": "LV",
+        "city": "Krāslava",
+        "address": "Rīgas iela 28",
+        "pickup_point": "Omniva locker, Krāslavas Maxima X pakomāts"
+    },
+    {
+        "id": "92",
+        "country": "LV",
+        "city": "Kuldīga",
+        "address": "Sūru iela 2",
+        "pickup_point": "Omniva locker, Kuldīgas RIMI pakomāts"
+    },
+    {
+        "id": "93",
+        "country": "LV",
+        "city": "Lielvārde",
+        "address": "Lāčplēša iela 14",
+        "pickup_point": "Omniva locker, Lielvārdes Maxima X pakomāts"
+    },
+    {
+        "id": "94",
+        "country": "LV",
+        "city": "Liepāja",
+        "address": "Jaunā Ostmala 3/5",
+        "pickup_point": "Omniva locker, Liepājas T/C Rietumu centrs pakomāts"
+    },
+    {
+        "id": "95",
+        "country": "LV",
+        "city": "Liepāja",
+        "address": "Klaipēdas iela 104c",
+        "pickup_point": "Omniva locker, Liepājas Baata pakomāts"
+    },
+    {
+        "id": "96",
+        "country": "LV",
+        "city": "Liepāja",
+        "address": "Lielā iela",
+        "pickup_point": "Omniva locker, Liepājas Rožu laukums pakomāts"
+    },
+    {
+        "id": "97",
+        "country": "LV",
+        "city": "Liepāja",
+        "address": "Ziemeļu iela 13",
+        "pickup_point": "Omniva locker, Liepājas Supernetto Ziemeļu iela pakomāts"
+    },
+    {
+        "id": "98",
+        "country": "LV",
+        "city": "Limbaži",
+        "address": "Stacijas iela 8",
+        "pickup_point": "Omniva locker, Limbažu Maxima XX pakomāts"
+    },
+    {
+        "id": "99",
+        "country": "LV",
+        "city": "Ludza",
+        "address": "Latgales iela 61",
+        "pickup_point": "Omniva locker, Ludzas Maxima X pakomāts"
+    },
+    {
+        "id": "100",
+        "country": "LV",
+        "city": "Līvāni",
+        "address": "Rīgas iela 89",
+        "pickup_point": "Omniva locker, Līvānu Rimi pakomāts"
+    },
+    {
+        "id": "101",
+        "country": "LV",
+        "city": "Madona",
+        "address": "Rūpniecības iela 49",
+        "pickup_point": "Omniva locker, Madonas Maxima XX pakomāts"
+    },
+    {
+        "id": "102",
+        "country": "LV",
+        "city": "Mālpils",
+        "address": "Pirts iela 5",
+        "pickup_point": "Omniva locker, Mālpils Pirts ielas TOP pakomāts"
+    },
+    {
+        "id": "103",
+        "country": "LV",
+        "city": "Mārupe",
+        "address": "Daugavas iela 29",
+        "pickup_point": "Omniva locker, Mārupes RIMI pakomāts"
+    },
+    {
+        "id": "104",
+        "country": "LV",
+        "city": "Ogre",
+        "address": "Mednieku iela 21/23",
+        "pickup_point": "Omniva locker, Ogres T/C Ogres prestižs pakomāts"
+    },
+    {
+        "id": "105",
+        "country": "LV",
+        "city": "Ogre",
+        "address": "Rīgas iela 23",
+        "pickup_point": "Omniva locker, Ogres T/C Dauga pakomāts"
+    },
+    {
+        "id": "106",
+        "country": "LV",
+        "city": "Ogre",
+        "address": "Rīgas iela 33",
+        "pickup_point": "Omniva locker, Ogres Rīgas ielas RIMI pakomāts"
+    },
+    {
+        "id": "107",
+        "country": "LV",
+        "city": "Olaine",
+        "address": "Veselības iela 1",
+        "pickup_point": "Omniva locker, Olaines Maxima pakomāts"
+    },
+    {
+        "id": "108",
+        "country": "LV",
+        "city": "Ozolnieki",
+        "address": "Rīgas iela 42",
+        "pickup_point": "Omniva locker, Ozolnieku Elvi pakomāts"
+    },
+    {
+        "id": "109",
+        "country": "LV",
+        "city": "Piņķi",
+        "address": "Rīgas iela 8",
+        "pickup_point": "Omniva locker, Piņķu Elvi pakomāts"
+    },
+    {
+        "id": "110",
+        "country": "LV",
+        "city": "Preiļi",
+        "address": "Rēzeknes iela 4",
+        "pickup_point": "Omniva locker, Preiļu Maxima X pakomāts"
+    },
+    {
+        "id": "111",
+        "country": "LV",
+        "city": "Priekule",
+        "address": "Galvenā iela 1",
+        "pickup_point": "Omniva locker, Priekules TOP pakomāts"
+    },
+    {
+        "id": "112",
+        "country": "LV",
+        "city": "Pļaviņas",
+        "address": "Daugavas iela 85",
+        "pickup_point": "Omniva locker, Pļaviņu TOP pakomāts"
+    },
+    {
+        "id": "113",
+        "country": "LV",
+        "city": "Ragana",
+        "address": "Mazā iela 4",
+        "pickup_point": "Omniva locker, Raganas pakomāts"
+    },
+    {
+        "id": "114",
+        "country": "LV",
+        "city": "Roja",
+        "address": "Selgas iela 2",
+        "pickup_point": "Omniva locker, Rojas Maxima pakomāts"
+    },
+    {
+        "id": "115",
+        "country": "LV",
+        "city": "Ropaži",
+        "address": "Rīgas iela 12",
+        "pickup_point": "Omniva locker, Ropažu Lats Pakomāts"
+    },
+    {
+        "id": "116",
+        "country": "LV",
+        "city": "Rēzekne",
+        "address": "Atbrīvošanas aleja 141",
+        "pickup_point": "Omniva locker, Rēzeknes Maxima XX pakomāts"
+    },
+    {
+        "id": "117",
+        "country": "LV",
+        "city": "Rēzekne",
+        "address": "Galdnieku iela 8",
+        "pickup_point": "Omniva locker, Rēzekne RIMI Galdnieku iela pakomāts"
+    },
+    {
+        "id": "118",
+        "country": "LV",
+        "city": "Rūjiena",
+        "address": "Brīvības iela 8",
+        "pickup_point": "Omniva locker, Rūjienas TOP pakomāts"
+    },
+    {
+        "id": "119",
+        "country": "LV",
+        "city": "Salacgrīva",
+        "address": "Vidzemes iela 3a",
+        "pickup_point": "Omniva locker, Salacgrīvas Maxima X pakomāts"
+    },
+    {
+        "id": "120",
+        "country": "LV",
+        "city": "Salaspils",
+        "address": "Skolas iela 4",
+        "pickup_point": "Omniva locker, Salaspils RIMI pakomāts"
+    },
+    {
+        "id": "121",
+        "country": "LV",
+        "city": "Saldus",
+        "address": "Brīvības iela 30",
+        "pickup_point": "Omniva locker, Saldus Maxima XX pakomāts"
+    },
+    {
+        "id": "122",
+        "country": "LV",
+        "city": "Saulkrasti",
+        "address": "Rīgas iela 51",
+        "pickup_point": "Omniva locker, Saulkrastu TOP pakomāts"
+    },
+    {
+        "id": "123",
+        "country": "LV",
+        "city": "Sigulda",
+        "address": "Strēlnieku iela 2",
+        "pickup_point": "Omniva locker, Siguldas T/C Šokolāde pakomāts"
+    },
+    {
+        "id": "124",
+        "country": "LV",
+        "city": "Sigulda",
+        "address": "Vidus iela 1",
+        "pickup_point": "Omniva locker, Siguldas ELVI Vidus iela pakomāts"
+    },
+    {
+        "id": "125",
+        "country": "LV",
+        "city": "Skrunda",
+        "address": "Ventas iela 13",
+        "pickup_point": "Omniva locker, Skrundas ELVI pakomāts"
+    },
+    {
+        "id": "126",
+        "country": "LV",
+        "city": "Smiltene",
+        "address": "Baznīcas laukums 2",
+        "pickup_point": "Omniva locker, Smiltenes T/C Centrs pakomāts"
+    },
+    {
+        "id": "127",
+        "country": "LV",
+        "city": "Strenči",
+        "address": "Valkas iela 2",
+        "pickup_point": "Omniva locker, Strenču TOP pakomāts"
+    },
+    {
+        "id": "128",
+        "country": "LV",
+        "city": "Talsi",
+        "address": "Dundagas iela 18",
+        "pickup_point": "Omniva locker, Talsu RIMI pakomāts"
+    },
+    {
+        "id": "129",
+        "country": "LV",
+        "city": "Talsi",
+        "address": "Rīgas iela 8",
+        "pickup_point": "Omniva locker, Talsu Maxima XX pakomāts"
+    },
+    {
+        "id": "130",
+        "country": "LV",
+        "city": "Tukums",
+        "address": "Kurzemes iela 36",
+        "pickup_point": "Omniva locker, Tukuma Maxima XX pakomāts"
+    },
+    {
+        "id": "131",
+        "country": "LV",
+        "city": "Tukums",
+        "address": "Pasta iela 14",
+        "pickup_point": "Omniva locker, Tukuma Pasta RIMI pakomāts"
+    },
+    {
+        "id": "132",
+        "country": "LV",
+        "city": "Ulbroka",
+        "address": "Peldu iela 2",
+        "pickup_point": "Omniva locker, Ulbrokas TOP pakomāts"
+    },
+    {
+        "id": "133",
+        "country": "LV",
+        "city": "Valdlauči",
+        "address": "Atpūtas iela 5",
+        "pickup_point": "Omniva locker, Valdlauču TOP pakomāts"
+    },
+    {
+        "id": "134",
+        "country": "LV",
+        "city": "Valka",
+        "address": "Ausekļa iela 54",
+        "pickup_point": "Omniva locker, Valkas T/C Walk pakomāts"
+    },
+    {
+        "id": "135",
+        "country": "LV",
+        "city": "Valmiera",
+        "address": "Nākotnes iela 2a",
+        "pickup_point": "Omniva locker, Valmieras Maxima X Nākotnes iela pakomāts"
+    },
+    {
+        "id": "136",
+        "country": "LV",
+        "city": "Valmiera",
+        "address": "Rīgas iela 4",
+        "pickup_point": "Omniva locker, Valmieras T/C Valleta pakomāts"
+    },
+    {
+        "id": "137",
+        "country": "LV",
+        "city": "Vangaži",
+        "address": "Gaujas iela 19a",
+        "pickup_point": "Omniva locker, Vangažu Aibes pakomāts"
+    },
+    {
+        "id": "138",
+        "country": "LV",
+        "city": "Vecpiebalga",
+        "address": "Alauksta iela 2",
+        "pickup_point": "Omniva locker, Vecpiebalgas TOP pakomāts"
+    },
+    {
+        "id": "139",
+        "country": "LV",
+        "city": "Ventspils",
+        "address": "Ganību iela 22/24",
+        "pickup_point": "Omniva locker, Ventspils Mego pakomāts"
+    },
+    {
+        "id": "140",
+        "country": "LV",
+        "city": "Ventspils",
+        "address": "J. Poruka iela 5",
+        "pickup_point": "Omniva locker, Ventspils RIMI Poruka pakomāts"
+    },
+    {
+        "id": "141",
+        "country": "LV",
+        "city": "Ventspils",
+        "address": "Lielais prospekts 3/5",
+        "pickup_point": "Omniva locker, Ventspils T/C Tobago pakomāts"
+    },
+    {
+        "id": "142",
+        "country": "LV",
+        "city": "Ventspils",
+        "address": "Tārgales iela 62",
+        "pickup_point": "Omniva locker, Ventspils Supernetto Tārgales pakomāts"
+    },
+    {
+        "id": "143",
+        "country": "LV",
+        "city": "Viļāni",
+        "address": "Brīvības iela 13",
+        "pickup_point": "Omniva locker, Viļānu pakomāts"
+    }
+]
