@@ -224,7 +224,7 @@
     flex-direction:column;
     justify-content:space-between;
     transition: transform .22s ease, box-shadow .22s ease;
-    min-height: auto; /* Changed to prevent stretching */
+    min-height: auto;
     cursor: pointer;
   }
   .product-card:hover{
@@ -233,8 +233,8 @@
   }
   .product-card img {
     width: 100%;
-    height: 250px; /* Reduced for better proportion */
-    object-fit: cover; /* Changed to fill the space */
+    height: 200px;
+    object-fit: contain;
     border-radius: 10px;
     margin-bottom: 14px;
     background: #f0f0f0;
@@ -475,7 +475,7 @@
   .modal .add-btn {
     display: inline-block;
     padding: 12px 18px;
-    background: Robinson
+    background: var(--accent-red);
     color: #fff;
     border-radius: 10px;
     font-weight: 700;
@@ -509,11 +509,22 @@
     .header-right { max-width: 300px; }
   }
   @media (max-width:700px){ 
-    .products-list{ grid-template-columns:repeat(2,1fr);}
+    .products-list{ 
+      grid-template-columns:repeat(2,1fr);
+      gap:15px;
+    }
+    .product-card {
+      padding:12px;
+    }
+    .product-card img {
+      height:150px;
+      object-fit:contain;
+      width:100%;
+    }
     header {
       flex-wrap: nowrap;
       gap: 10px;
-      justify-content: center; /* Center the header content */
+      justify-content: center;
       position: relative;
     }
     .header-image {
@@ -523,16 +534,16 @@
     .header-left {
       position: absolute;
       left: 10px;
-      z-index: 10; /* Ensure hamburger is above other elements */
+      z-index: 10;
     }
     .header-center {
-      flex: 0; /* Prevent stretching, allow natural width */
+      flex: 0;
       justify-content: center;
     }
     .header-right {
       position: absolute;
       right: 10px;
-      z-index: 10; /* Ensure language selector is above other elements */
+      z-index: 10;
       max-width: 100px;
     }
     .hamburger {
@@ -586,7 +597,6 @@
         <img src="photo/redd.jpg" alt="Logo" class="header-image">
       </div>
       <div class="header-right">
-        
         <div class="lang-selector">
           <button class="lang-btn" id="current-lang">LV</button>
           <div class="lang-dropdown">
@@ -941,24 +951,20 @@
       $('#order-id-label').text(t.orderIdLabel);
       $('#order-details-label').text(t.orderDetailsLabel);
 
-      // Update current language display
       $('#current-lang').text(lang.toUpperCase());
 
-      // Update contents of contacts dropdown
       const $contactsContent = $('#contacts');
       $contactsContent.empty();
       t.contactsContent.forEach(text => {
         $contactsContent.append(`<p>${text}</p>`);
       });
 
-      // Update contents of details dropdown
       const $detailsContent = $('#details');
       $detailsContent.empty();
       t.detailsContent.forEach(text => {
         $detailsContent.append(`<p>${text}</p>`);
       });
 
-      // Update contents of payment dropdown
       const $paymentContent = $('#payment');
       $paymentContent.empty();
       t.paymentContent.forEach(text => {
@@ -968,10 +974,8 @@
       loadProducts(lang);
       $('#product-modal .add-btn').text(t.addToCart);
 
-      // Load lockers based on language
       loadLockers(lang);
 
-      // Update HTML lang attribute
       $('html').attr('lang', lang);
     }
 
@@ -997,7 +1001,6 @@
     $(function() {
       setLanguage('lv');
 
-      // Handle language selection
       $('.lang-selector').on('mouseenter', function() {
         $('.lang-dropdown').show();
       });
@@ -1263,11 +1266,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
