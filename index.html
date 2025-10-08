@@ -6,570 +6,733 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
-  :root{
-    --bg-graphite:#0f1113;
-    --card-light:#ffffff;
-    --card-dark:#1e2023;
-    --muted:#9aa0a6;
-    --accent-red:#e60000;
-    --accent-red-dark:#b30000;
-    --text-light:#f5f5f5;
-    --text-dark:#111111;
-    --radius:12px;
-    --container-width:1100px;
-  }
+:root {
+  --bg-graphite: #0f1113;
+  --card-light: #ffffff;
+  --card-dark: #1e2023;
+  --muted: #9aa0a6;
+  --accent-red: #e60000;
+  --accent-red-dark: #b30000;
+  --text-light: #f5f5f5;
+  --text-dark: #111111;
+  --radius: 12px;
+  --container-width: 1100px;
+}
 
-  html,body{height:100%;}
-  body {
-    margin:0;
-    font-family: 'Lato', sans-serif;
-    background: var(--bg-graphite);
-    color: var(--text-light);
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    display:flex;
-    justify-content:center;
-    padding:28px 20px;
-  }
-  .wrap { width:100%; max-width:var(--container-width); }
+html, body {
+  height: 100%;
+}
 
-  .banner {
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  background: var(--bg-graphite);
+  color: var(--text-light);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  justify-content: center;
+  padding: 28px 20px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--container-width);
+}
+
+.banner {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius);
+  margin-bottom: 28px;
+  box-shadow: 0 6px 20px rgba(2,6,12,0.45);
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: relative;
+}
+
+.header-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-image {
+  max-height: 53px;
+  max-width: 165px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+.lang-selector {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lang-selector .lang-btn {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--accent-red);
+  background: var(--accent-red);
+  color: var(--text-light);
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  white-space: nowrap;
+}
+
+.lang-selector .lang-btn:hover {
+  background: var(--accent-red-dark);
+  border-color: var(--accent-red-dark);
+}
+
+.lang-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--card-dark);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  min-width: 100px;
+  z-index: 100;
+  padding: 10px 0;
+}
+
+.lang-selector:hover .lang-dropdown {
+  display: block;
+}
+
+.lang-dropdown button {
+  display: block;
+  width: 100%;
+  padding: 8px 20px;
+  background: var(--card-dark);
+  border: none;
+  color: var(--text-light);
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.lang-dropdown button:hover {
+  background: var(--card-dark);
+  color: var(--accent-red);
+}
+
+.phone-number {
+  color: var(--text-light);
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.hamburger span {
+  background: var(--text-light);
+  height: 4px;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--card-dark);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  min-width: 250px;
+  z-index: 100;
+  padding: 10px 0;
+}
+
+.dropdown-menu.active {
+  display: block;
+}
+
+.dropdown-menu button {
+  display: block;
+  width: 100%;
+  padding: 12px 20px;
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.dropdown-menu button:hover {
+  background: var(--accent-red-dark);
+}
+
+.dropdown-content {
+  display: none;
+  padding: 20px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.dropdown-content.active {
+  display: block;
+}
+
+.dropdown-content p {
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: var(--text-light);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.products-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.product-card {
+  background: var(--card-light);
+  color: var(--text-dark);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: 0 6px 20px rgba(2,6,12,0.45);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform .22s ease, box-shadow .22s ease;
+  min-height: auto;
+  cursor: pointer;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(2,6,12,0.55);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  background: #f0f0f0;
+}
+
+.product-card h3 {
+  margin: 0 0 8px 0;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.product-card .price {
+  font-weight: 700;
+  color: var(--accent-red);
+  font-size: 1.05rem;
+  margin-bottom: 12px;
+}
+
+.product-card .add-btn {
+  display: block;
+  width: calc(100% - 0px);
+  padding: 12px 0;
+  background: var(--accent-red);
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  transition: transform .14s ease, background .14s ease;
+  box-sizing: border-box;
+}
+
+.product-card .add-btn:active {
+  transform: translateY(1px);
+}
+
+.product-card .add-btn:hover {
+  background: var(--accent-red-dark);
+}
+
+.panel {
+  background: var(--card-dark);
+  border-radius: var(--radius);
+  padding: 20px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  color: var(--text-light);
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #f5f5f5;
+  display: inline-block;
+  margin: 0 0 14px 0;
+  pointer-events: auto;
+}
+
+.simpleCart_items table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 12px;
+  background: transparent;
+  overflow-x: auto;
+}
+
+.simpleCart_items th,
+.simpleCart_items td {
+  padding: 10px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-light);
+  background: transparent;
+  word-break: break-word;
+}
+
+.simpleCart_items th {
+  font-weight: 700;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.quantity-controls button {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: var(--accent-red);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.quantity-controls button:hover {
+  background: var(--accent-red-dark);
+}
+
+.quantity-controls input {
+  width: 40px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: #fff;
+  color: var(--text-dark);
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.empty-cart-btn,
+.simpleCart_items .simpleCart_remove {
+  display: inline-block;
+  color: #fff !important;
+  background: var(--accent-red);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none !important;
+  cursor: pointer;
+  border: none;
+  white-space: nowrap;
+}
+
+.empty-cart-btn:hover,
+.simpleCart_items .simpleCart_remove:hover,
+.empty-cart-btn:active,
+.simpleCart_items .simpleCart_remove:active {
+  background: var(--accent-red-dark) !important;
+}
+
+.cart-total {
+  margin-top: 8px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  font-size: 1rem;
+}
+
+.cart-total .label {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.cart-total .value {
+  color: var(--text-light);
+  font-size: 1.05rem;
+}
+
+#locker-field {
+  margin-top: 12px;
+}
+
+#locker-field select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: #fff;
+  color: var(--text-dark);
+  font-size: 14px;
+}
+
+.order-form label {
+  display: block;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.order-form input[type="text"],
+.order-form input[type="email"],
+.order-form input[type="tel"],
+.order-form textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: #fff;
+  color: var(--text-dark);
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.order-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.order-form button {
+  display: inline-block;
+  padding: 12px 20px;
+  background: var(--accent-red);
+  color: #fff;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(230,0,0,0.12);
+  transition: background .14s ease, transform .08s ease;
+}
+
+.order-form button:hover {
+  background: var(--accent-red-dark);
+}
+
+.order-form button:active {
+  transform: translateY(1px);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: var(--card-light);
+  margin: 5% auto 15% auto;
+  padding: 20px;
+  border-radius: var(--radius);
+  width: 80%;
+  max-width: 600px;
+  color: var(--text-dark);
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  color: var(--text-dark);
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--accent-red);
+  text-decoration: none;
+}
+
+.modal img {
+  width: 50%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.modal h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  margin: 0 0 10px 0;
+}
+
+.modal .description {
+  font-size: 14px;
+  margin-bottom: 14px;
+  color: var(--text-dark);
+}
+
+.modal .price {
+  font-weight: 700;
+  color: var(--accent-red);
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+}
+
+.modal .add-btn {
+  display: inline-block;
+  padding: 12px 18px;
+  background: var(--accent-red);
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  transition: transform .14s ease, background .14s ease;
+}
+
+.modal .add-btn:active {
+  transform: translateY(1px);
+}
+
+.modal .add-btn:hover {
+  background: var(--accent-red-dark);
+}
+
+#order-confirmation-modal .modal-content p {
+  font-size: 14px;
+  margin: 10px 0;
+  color: var(--text-dark);
+}
+
+#order-confirmation-modal .modal-content strong {
+  color: var(--accent-red);
+}
+
+.contact-soon {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: block;
+  margin-top: 10px;
+}
+
+.cart-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.cart-icon svg {
+  width: 24px;
+  height: 24px;
+  fill: var(--text-light);
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: var(--accent-red);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 600;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#cart-modal .modal-content {
+  max-width: 800px;
+  background: var(--card-dark);
+  color: var(--text-light);
+}
+
+#cart-modal .close {
+  color: var(--text-light);
+}
+
+#cart-modal .close:hover,
+#cart-modal .close:focus {
+  color: var(--accent-red);
+}
+
+@media (max-width:1100px) {
+  .products-list {
+    grid-template-columns: repeat(2,1fr);
+  }
+  .header-right {
+    max-width: 300px;
+  }
+}
+
+@media (max-width:700px) {
+  .products-list {
+    grid-template-columns: repeat(2,1fr);
+    gap: 15px;
+  }
+  .product-card {
+    padding: 12px;
+  }
+  .product-card img {
+    height: 150px;
+    object-fit: contain;
     width: 100%;
-    height: auto;
-    display: block;
-    border-radius: var(--radius);
-    margin-bottom: 28px;
-    box-shadow: 0 6px 20px rgba(2,6,12,0.45);
   }
-
   header {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    margin-bottom:28px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    gap: 10px;
+    justify-content: center;
     position: relative;
+  }
+  .header-image {
+    max-height: 40px;
+    max-width: 120px;
   }
   .header-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    position: relative;
+    position: absolute;
+    left: 10px;
+    z-index: 10;
   }
   .header-center {
-    flex: 1;
-    display: flex;
-    align-items: center;
+    flex: 0;
     justify-content: center;
   }
   .header-right {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  .header-image {
-    max-height: 53px;
-    max-width: 165px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-  }
-  .lang-selector {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .lang-selector .lang-btn {
-    padding: 6px 12px;
-    border-radius: 8px;
-    border: 1px solid var(--accent-red);
-    background: var(--accent-red);
-    color: var(--text-light);
-    font-size: 14px;
-    cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease;
-    white-space: nowrap;
-  }
-  .lang-selector .lang-btn:hover {
-    background: var(--accent-red-dark);
-    border-color: var(--accent-red-dark);
-  }
-  .lang-dropdown {
-    display: none;
     position: absolute;
-    top: 100%;
-    right: 0;
-    background: var(--card-dark);
-    border-radius: var(--radius);
-    border: 1px solid rgba(255,255,255,0.06);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-    min-width: 100px;
-    z-index: 100;
-    padding: 10px 0;
+    right: 10px;
+    z-index: 10;
+    max-width: 100px;
   }
-  .lang-selector:hover .lang-dropdown {
-    display: block;
-  }
-  .lang-dropdown button {
-    display: block;
-    width: 100%;
-    padding: 8px 20px;
-    background: var(--card-dark);
-    border: none;
-    color: var(--text-light);
-    font-size: 14px;
-    text-align: left;
-    cursor: pointer;
-    transition: color 0.2s ease;
-  }
-  .lang-dropdown button:hover {
-    background: var(--card-dark);
-    color: var(--accent-red);
-  }
-  .phone-number {
-    color: var(--text-light);
-    font-size: 14px;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
   .hamburger {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    cursor: pointer;
-    padding: 6px;
-  }
-  .hamburger span {
-    background: var(--text-light);
-    height: 4px;
-    margin: 4px 0;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-  }
-  .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
-  }
-  .hamburger.active span:nth-child(2) {
-    opacity: 0;
-  }
-  .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(8px, -8px);
-  }
-
-  .dropdown-menu {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: var(--card-dark);
-    border-radius: var(--radius);
-    border: 1px solid rgba(255,255,255,0.06);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-    min-width: 250px;
-    z-index: 100;
-    padding: 10px 0;
-  }
-  .dropdown-menu.active {
-    display: block;
-  }
-  .dropdown-menu button {
-    display: block;
-    width: 100%;
-    padding: 12px 20px;
-    background: none;
-    border: none;
-    color: var(--text-light);
-    font-family: 'Lato', sans-serif;
-    font-size: 14px;
-    text-align: left;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-  .dropdown-menu button:hover {
-    background: var(--accent-red-dark);
-  }
-  .dropdown-content {
-    display: none;
-    padding: 20px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-  .dropdown-content.active {
-    display: block;
-  }
-  .dropdown-content p {
-    margin: 0 0 10px;
-    font-size: 14px;
-    color: var(--text-light);
-  }
-
-  .grid { display:grid; grid-template-columns:1fr; gap:28px; align-items:start; }
-
-  .products-list {
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap:20px;
-  }
-  .product-card {
-    background: var(--card-light);
-    color: var(--text-dark);
-    border-radius: var(--radius);
-    padding:18px;
-    box-shadow: 0 6px 20px rgba(2,6,12,0.45);
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    transition: transform .22s ease, box-shadow .22s ease;
-    min-height: auto;
-    cursor: pointer;
-  }
-  .product-card:hover{
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(2,6,12,0.55);
-  }
-  .product-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: contain;
-    border-radius: 10px;
-    margin-bottom: 14px;
-    background: #f0f0f0;
-  }
-  .product-card h3 {
-    margin:0 0 8px 0;
-    font-family: 'Playfair Display', serif;
-    font-size:1.05rem;
-    font-weight:700;
-  }
-  .product-card .price {
-    font-weight:700;
-    color:var(--accent-red);
-    font-size:1.05rem;
-    margin-bottom:12px;
-  }
-  .product-card .add-btn {
-    display:block;
-    width: calc(100% - 0px);
-    padding:12px 0;
-    background:var(--accent-red);
-    color:#fff;
-    border-radius:10px;
-    font-weight:700;
-    cursor:pointer;
-    text-align:center;
-    border:none;
-    text-decoration:none;
-    transition: transform .14s ease, background .14s ease;
-    box-sizing: border-box;
-  }
-  .product-card .add-btn:active { transform: translateY(1px); }
-  .product-card .add-btn:hover { background:var(--accent-red-dark); }
-
-  .panel {
-    background: var(--card-dark);
-    border-radius: var(--radius);
-    padding:20px;
-    border:1px solid rgba(255,255,255,0.06);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
-    color: var(--text-light);
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size:1.35rem;
-    font-weight:700;
-    color:#f5f5f5;
-    display:inline-block;
-    margin:0 0 14px 0;
-    pointer-events:auto;
-  }
-
-  .simpleCart_items table {
-    width:100%;
-    max-width: 100%;
-    border-collapse:collapse;
-    margin-bottom:12px;
-    background:transparent;
-    overflow-x: auto;
-  }
-  .simpleCart_items th,
-  .simpleCart_items td {
-    padding:10px;
-    border-bottom:1px solid rgba(255,255,255,0.06);
-    text-align:center;
-    font-size:14px;
-    color:var(--text-light);
-    background:transparent;
-    word-break: break-word;
-  }
-  .simpleCart_items th { font-weight:700; }
-
-  .quantity-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-  }
-  .quantity-controls button {
     width: 30px;
     height: 30px;
-    border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.06);
-    background: var(--accent-red);
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background 0.2s ease;
+    padding: 5px;
   }
-  .quantity-controls button:hover {
-    background: var(--accent-red-dark);
+  .hamburger span {
+    height: 3px;
+    margin: 3px 0;
   }
-  .quantity-controls input {
-    width: 40px;
-    text-align: center;
-    border: 1px solid rgba(255,255,255,0.06);
-    background: #fff;
-    color: var(--text-dark);
-    border-radius: 6px;
-    font-size: 14px;
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
   }
-
-  .empty-cart-btn,
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
+  .simpleCart_items table {
+    font-size: 12px;
+  }
   .simpleCart_items .simpleCart_remove {
-    display:inline-block;
-    color:#fff !important;
-    background:var(--accent-red);
-    padding:6px 10px;
-    border-radius:8px;
-    font-weight:700;
-    font-size:14px;
-    text-decoration:none !important;
-    cursor:pointer;
-    border:none;
-    white-space: nowrap;
+    padding: 4px 8px;
+    font-size: 12px;
   }
-  .empty-cart-btn:hover,
-  .simpleCart_items .simpleCart_remove:hover,
-  .empty-cart-btn:active,
-  .simpleCart_items .simpleCart_remove:active {
-    background:var(--accent-red-dark) !important;
+  .dropdown-menu {
+    left: 10px;
   }
-
-  .cart-total {
-    margin-top:8px;
-    font-weight:700;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:10px;
-    font-size:1rem;
+  .lang-selector {
+    font-size: 12px;
   }
-  .cart-total .label { color:var(--muted); font-weight:600; }
-  .cart-total .value { color:var(--text-light); font-size:1.05rem; }
-
-  #locker-field { margin-top:12px; }
-  #locker-field select {
-    width:100%;
-    padding:10px;
-    border-radius:10px;
-    border:1px solid rgba(255,255,255,0.06);
-    background:#fff;
-    color:var(--text-dark);
-    font-size:14px;
+  .lang-selector .lang-btn {
+    padding: 4px 8px;
   }
-
-  .order-form label { display:block; color:var(--muted); font-weight:600; margin-bottom:6px; }
-  .order-form input[type="text"],
-  .order-form input[type="email"],
-  .order-form input[type="tel"],
-  .order-form textarea {
-    width:100%;
-    padding:10px 12px;
-    border-radius:10px;
-    border:1px solid rgba(255,255,255,0.06);
-    background:#fff;
-    color:var(--text-dark);
-    font-size:14px;
-    box-sizing:border-box;
+  .lang-dropdown {
+    min-width: 80px;
   }
-  .order-form textarea { min-height:90px; resize:vertical; }
-  .order-form button {
-    display:inline-block;
-    padding:12px 20px;
-    background:var(--accent-red);
-    color:#fff;
-    border-radius:10px;
-    border:none;
-    font-weight:700;
-    cursor:pointer;
-    box-shadow:0 6px 18px rgba(230,0,0,0.12);
-    transition: background .14s ease, transform .08s ease;
+  .phone-number {
+    font-size: 12px;
   }
-  .order-form button:hover { background:var(--accent-red-dark); }
-  .order-form button:active { transform:translateY(1px); }
-
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 10;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.5);
-    padding-top: 60px;
+  .header-right {
+    max-width: 200px;
   }
-  .modal-content {
-    background-color: var(--card-light);
-    margin: 5% auto 15% auto;
-    padding: 20px;
-    border-radius: var(--radius);
-    width: 80%;
-    max-width: 600px;
-    color: var(--text-dark);
-    position: relative;
-  }
-  .close {
-    position: absolute;
-    right: 20px;
-    top: 10px;
-    color: var(--text-dark);
-    font-size: 28px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  .close:hover,
-  .close:focus {
-    color: var(--accent-red);
-    text-decoration: none;
-  }
-  .modal img {
-    width: 50%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 14px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  .modal h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    margin: 0 0 10px 0;
-  }
-  .modal .description {
-    font-size: 14px;
-    margin-bottom: 14px;
-    color: var(--text-dark);
-  }
-  .modal .price {
-    font-weight: 700;
-    color: var(--accent-red);
-    font-size: 1.1rem;
-    margin-bottom: 14px;
-  }
-  .modal .add-btn {
-    display: inline-block;
-    padding: 12px 18px;
-    background: var(--accent-red);
-    color: #fff;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    text-align: center;
-    border: none;
-    text-decoration: none;
-    transition: transform .14s ease, background .14s ease;
-  }
-  .modal .add-btn:active { transform: translateY(1px); }
-  .modal .add-btn:hover { background: var(--accent-red-dark); }
-
-  #order-confirmation-modal .modal-content p {
-    font-size: 14px;
-    margin: 10px 0;
-    color: var(--text-dark);
-  }
-  #order-confirmation-modal .modal-content strong {
-    color: var(--accent-red);
-  }
-  .contact-soon {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    display: block;
-    margin-top: 10px;
-  }
-
-  @media (max-width:1100px){ 
-    .products-list{ grid-template-columns:repeat(2,1fr);} 
-    .header-right { max-width: 300px; }
-  }
-  @media (max-width:700px){ 
-    .products-list{ 
-      grid-template-columns:repeat(2,1fr);
-      gap:15px;
-    }
-    .product-card {
-      padding:12px;
-    }
-    .product-card img {
-      height:150px;
-      object-fit:contain;
-      width:100%;
-    }
-    header {
-      flex-wrap: nowrap;
-      gap: 10px;
-      justify-content: center;
-      position: relative;
-    }
-    .header-image {
-      max-height: 40px;
-      max-width: 120px;
-    }
-    .header-left {
-      position: absolute;
-      left: 10px;
-      z-index: 10;
-    }
-    .header-center {
-      flex: 0;
-      justify-content: center;
-    }
-    .header-right {
-      position: absolute;
-      right: 10px;
-      z-index: 10;
-      max-width: 100px;
-    }
-    .hamburger {
-      width: 30px;
-      height: 30px;
-      padding: 5px;
-    }
-    .hamburger span {
-      height: 3px;
-      margin: 3px 0;
-    }
-    .hamburger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(6px, 6px);
-    }
-    .hamburger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(6px, -6px);
-    }
-    .simpleCart_items table { font-size: 12px; }
-    .simpleCart_items .simpleCart_remove { padding: 4px 8px; font-size: 12px; }
-    .dropdown-menu { left: 10px; }
-    .lang-selector { font-size: 12px; }
-    .lang-selector .lang-btn { padding: 4px 8px; }
-    .lang-dropdown { min-width: 80px; }
-    .phone-number { font-size: 12px; }
-    .header-right { max-width: 200px; }
-  }
+}
 </style>
 </head>
 <body>
@@ -606,79 +769,108 @@
             <button class="lang-btn" data-lang="ee">EE</button>
           </div>
         </div>
+        <div class="cart-icon" id="cart-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM17 18c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zM2 2v2h1l3.6 7.59-1.35 2.44C4.52 15.37 5.48 17 7 17h12v-2H7l1.1-2h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H2zm16 2l-3.2 5.8H8.6L6 4h12z"/>
+          </svg>
+          <span class="cart-count" id="cart-count">0</span>
+        </div>
       </div>
     </header>
 
     <main>
       <img src="photo/baner.jpg" alt="Banner" class="banner">
-
       <div class="products-list" id="products-list"></div>
-
-      <section class="panel">
-        <div class="section-title" id="cart-title">Grozs</div>
-        <div class="cart-items" style="margin-top:14px;"><div class="simpleCart_items"></div></div>
-        <div class="cart-total" style="margin-top:12px;">
-          <div class="label" id="cart-total-label">Kopā:</div>
-          <div class="value"><span class="simpleCart_total">0.00</span> EUR</div>
-        </div>
-        <div style="margin-top:14px;">
-          <a href="javascript:;" class="empty-cart-btn simpleCart_empty" id="empty-cart">Iztīrīt grozu</a>
-        </div>
-      </section>
-
-      <section class="panel" style="margin-top:28px;">
-        <div class="section-title" id="delivery-title">Piegāde</div>
-        <div style="margin-top:14px;">
-          <label style="display:block; color:var(--text-light); font-weight:600; margin-bottom:8px;">
-            <input type="radio" name="delivery" value="Venipak pakomāts" required>
-            <span id="venipak-label" style="margin-left:8px; color:var(--muted); font-weight:600;">Venipak pakomāts (1–3 darba dienas, 4.00 EUR)</span>
-          </label>
-          <div id="locker-field" class="hidden">
-            <label id="choose-locker-label" style="display:block; color:var(--muted); margin-bottom:8px;">Izvēlieties pakomātu:</label>
-            <select id="locker-select" name="locker" required><option value="">Ielādē pakomātus...</option></select>
-          </div>
-          <label id="pickup-label-container" style="display:block; margin-top:12px; color:var(--text-light); font-weight:600;">
-            <input type="radio" name="delivery" value="Pašizņemšana Mārupē">
-            <span id="pickup-label" style="margin-left:8px; color:var(--muted); font-weight:600;">Pašizņemšana Mārupē, Lielā 19 k1 (BEZMAKSAS)</span>
-          </label>
-        </div>
-      </section>
-
-      <section class="panel" style="margin-top:28px;">
-        <div class="section-title" id="order-title">Noformēt pasūtījumu</div>
-        <form class="order-form" id="orderForm" action="https://api.web3forms.com/submit" method="POST">
-          <input type="hidden" name="access_key" value="c49dd88b-948d-4903-9295-d9ab1c7b8afc">
-          <input type="hidden" name="email_to" value="galasmail@inbox.lv">
-          <input type="hidden" name="cart_contents" id="cart_contents" value="">
-          <input type="hidden" name="order_id" id="order_id" value="">
-          <label id="name-label">Jūsu vārds:<input type="text" name="customer_name" required></label>
-          <label id="email-label">E-pasts:<input type="email" name="email" required></label>
-          <label id="phone-label">Telefons:<input type="tel" name="phone" required></label>
-          <label id="comments-label">Komentāri:<textarea name="message" rows="4"></textarea></label>
-          <button type="submit" id="order-button">Pasūtīt</button>
-        </form>
-      </section>
     </main>
-  </div>
 
-  <div id="product-modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <img src="" alt="">
-      <h3></h3>
-      <p class="description"></p>
-      <div class="price"></div>
-      <a href="javascript:;" class="add-btn">Pievienot grozam</a>
+    <div id="cart-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <section class="panel">
+          <div class="section-title" id="cart-title">Grozs</div>
+          <div class="cart-items" style="margin-top:14px;"><div class="simpleCart_items"></div></div>
+          <div class="cart-total" style="margin-top:12px;">
+            <div class="label" id="cart-total-label">Kopā:</div>
+            <div class="value"><span class="simpleCart_total">0.00</span> EUR</div>
+          </div>
+          <div style="margin-top:14px;">
+            <a href="javascript:;" class="empty-cart-btn simpleCart_empty" id="empty-cart">Iztīrīt grozu</a>
+          </div>
+        </section>
+
+        <section class="panel" style="margin-top:28px;">
+          <div class="section-title" id="delivery-title">Piegāde</div>
+          <div style="margin-top:14px;">
+            <label style="display:block; color:var(--text-light); font-weight:600; margin-bottom:8px;">
+              <input type="radio" name="delivery" value="Venipak pakomāts" required>
+              <span id="venipak-label" style="margin-left:8px; color:var(--muted); font-weight:600;">Venipak pakomāts (1–3 darba dienas, 4.00 EUR)</span>
+            </label>
+            <label style="display:block; color:var(--text-light); font-weight:600; margin-bottom:8px;">
+              <input type="radio" name="delivery" value="Omniva pakomāts">
+              <span id="omniva-label" style="margin-left:8px; color:var(--muted); font-weight:600;">Omniva pakomāts (1–3 darba dienas, 4.00 EUR)</span>
+            </label>
+            <div id="locker-field" class="hidden">
+              <label id="choose-locker-label" style="display:block; color:var(--muted); margin-bottom:8px;">Izvēlieties pakomātu:</label>
+              <select id="locker-select" name="locker" required><option value="">Ielādē pakomātus...</option></select>
+            </div>
+            <label id="pickup-label-container" style="display:block; margin-top:12px; color:var(--text-light); font-weight:600;">
+              <input type="radio" name="delivery" value="Pašizņemšana Mārupē">
+              <span id="pickup-label" style="margin-left:8px; color:var(--muted); font-weight:600;">Pašizņemšana Mārupē, Lielā 19 k1 (BEZMAKSAS)</span>
+            </label>
+          </div>
+        </section>
+
+        <section class="panel" style="margin-top:28px;">
+          <div class="section-title" id="payment-title">Apmaksas veids</div>
+          <div style="margin-top:14px;">
+            <label style="display:block; color:var(--text-light); font-weight:600; margin-bottom:8px;">
+              <input type="radio" name="payment" value="Skaidrā naudā vai ar karti" required>
+              <span id="cash-card-label" style="margin-left:8px; color:var(--muted); font-weight:600;">Skaidrā naudā vai ar kredītkarti veikalā</span>
+            </label>
+            <label style="display:block; color:var(--text-light); font-weight:600; margin-bottom:8px;">
+              <input type="radio" name="payment" value="Bankas pārskaitījums">
+              <span id="bank-transfer-label" style="margin-left:8px; color:var(--muted); font-weight:600;">Bankas pārskaitījums (mēs sagatavosim rēķinu un nosūtīsim uz Jūsu e-pastu)</span>
+            </label>
+          </div>
+        </section>
+
+        <section class="panel" style="margin-top:28px;">
+          <div class="section-title" id="order-title">Noformēt pasūtījumu</div>
+          <form class="order-form" id="orderForm" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="c49dd88b-948d-4903-9295-d9ab1c7b8afc">
+            <input type="hidden" name="email_to" value="galasmail@inbox.lv">
+            <input type="hidden" name="cart_contents" id="cart_contents" value="">
+            <input type="hidden" name="order_id" id="order_id" value="">
+            <input type="hidden" name="payment_method" id="payment_method" value="">
+            <label id="name-label">Jūsu vārds:<input type="text" name="customer_name" required></label>
+            <label id="email-label">E-pasts:<input type="email" name="email" required></label>
+            <label id="phone-label">Telefons:<input type="tel" name="phone" required></label>
+            <label id="comments-label">Komentāri:<textarea name="message" rows="4"></textarea></label>
+            <button type="submit" id="order-button">Pasūtīt</button>
+          </form>
+        </section>
+      </div>
     </div>
-  </div>
 
-  <div id="order-confirmation-modal" class="modal">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3 id="order-confirmation-title">Pasūtījums saņemts</h3>
-      <p><strong id="order-id-label">Pasūtījuma ID:</strong> <span id="confirmation-order-id"></span></p>
-      <p><strong id="order-details-label">Pasūtījuma detaļas:</strong></p>
-      <p id="confirmation-cart-details"></p>
+    <div id="product-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <img src="" alt="">
+        <h3></h3>
+        <p class="description"></p>
+        <div class="price"></div>
+        <a href="javascript:;" class="add-btn">Pievienot grozam</a>
+      </div>
+    </div>
+
+    <div id="order-confirmation-modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h3 id="order-confirmation-title">Pasūtījums saņemts</h3>
+        <p><strong id="order-id-label">Pasūtījuma ID:</strong> <span id="confirmation-order-id"></span></p>
+        <p><strong id="order-details-label">Pasūtījuma detaļas:</strong></p>
+        <p id="confirmation-cart-details"></p>
+      </div>
     </div>
   </div>
 
@@ -692,21 +884,25 @@
 
     const translations = {
       lv: { 
-        title:"RED", 
-        cartTitle:"Grozs", 
-        cartTotal:"Kopā:", 
-        emptyCart:"Iztīrīt grozu", 
-        deliveryTitle:"Piegāde",
-        venipak:"Venipak pakomāts (1–3 darba dienas, 4.00 EUR)", 
-        pickup:"Pašizņemšana Mārupē, Lielā 19 k1 (BEZMAKSAS)",
-        pickupOption:"Pašizņemšana Mārupē",
-        chooseLocker:"Izvēlieties pakomātu:", 
-        orderTitle:"Noformēt pasūtījumu", 
-        name:"Jūsu vārds:", 
-        email:"E-pasts:",
-        phone:"Telefons:", 
-        comments:"Komentāri:", 
-        orderButton:"Pasūtīt",
+        title: "RED", 
+        cartTitle: "Grozs", 
+        cartTotal: "Kopā:", 
+        emptyCart: "Iztīrīt grozu", 
+        deliveryTitle: "Piegāde",
+        venipak: "Venipak pakomāts (1–3 darba dienas, 4.00 EUR)", 
+        omniva: "Omniva pakomāts (1–3 darba dienas, 4.00 EUR)",
+        pickup: "Pašizņemšana Mārupē, Lielā 19 k1 (BEZMAKSAS)",
+        pickupOption: "Pašizņemšana Mārupē",
+        chooseLocker: "Izvēlieties pakomātu:", 
+        paymentTitle: "Apmaksas veids",
+        cashCard: "Skaidrā naudā vai ar kredītkarti veikalā",
+        bankTransfer: "Bankas pārskaitījums (mēs sagatavosim rēķinu un nosūtīsim uz Jūsu e-pastu)",
+        orderTitle: "Noformēt pasūtījumu", 
+        name: "Jūsu vārds:", 
+        email: "E-pasts:",
+        phone: "Telefons:", 
+        comments: "Komentāri:", 
+        orderButton: "Pasūtīt",
         addToCart: "Pievienot grozam",
         contacts: "Kontakti",
         details: "Rekvizīti",
@@ -717,10 +913,12 @@
         totalLabel: "Kopā:",
         deliveryLabel: "Piegāde:",
         lockerLabel: "Pakomāts:",
+        paymentLabel: "Apmaksas veids:",
         contactSoon: "Drīzumā mēs ar jums sazināsimies, lai precizētu detaļas",
         errorEmptyCart: "Grozs ir tukšs",
         errorDelivery: "Lūdzu, izvēlieties piegādes metodi",
         errorLocker: "Lūdzu, izvēlieties pakomātu",
+        errorPayment: "Lūdzu, izvēlieties apmaksas veidu",
         errorSubmission: "Pasūtījuma nosūtīšana neizdevās. Lūdzu, mēģiniet vēlreiz.",
         contactsContent: [
           "Lielā iela 19 K-1, Mārupe, LV-2167",
@@ -739,28 +937,32 @@
           "Skaidrā naudā vai ar kredītkarti veikalā",
           "Bankas pārskaitījums (mēs sagatavosim rēķinu un nosūtīsim uz Jūsu noradīto e-pastu)"
         ],
-        products:[
-          {name:"Multikatls RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Funkcijas: Automātiskā sildīšana līdz 12 st., Iepriekšēja automātiskās sildīšanas izslēgšana, Atliktais starts līdz 24 st., Ēdienu uzsildīšana, Multipavars, Vadības paneļa bloķēšana, Skaņas signālu izslēgšana, RGB indikācija, Programmas: Ātrā gatavošana (Ekspress), Rīsi/Putraimi, Zupa, Tvaicēšana, Vārīšana, Sautēšana, Sutināšana, Cepšana, Cepšana (Mīklas izstrādājumi), Pica, Plovs, Jogurts, Maize, Pasta, Piena putra, Vakuums, Fritēšana, Siera kūka, Multipavars (no 35 līdz 180 °C ar soli 1 °C), Jauda: 860 W"},
-          {name:"Tējkanna Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Krāsaina sensoru vadības panelis, 5 uzsildīšanas režīmi – 40°, 70°, 80°, 90°, 100° C, Automātiskā sildīšana – 2 stundas, Cool Touch tehnoloģija (inovatīva divsienu konstrukcija, kas nodrošina termosa efektu un aizsargā no apdegumiem), Programmu skaits: 5 (bērnu pārtika, baltā tēja, zaļā tēja, kafija, vārīšana), Temperatūras regulēšana 40°–100° C, solis 5°C, Rotācija par 360 grādiem, Tilpums: 1,7 l, Jauda: 2000 W"},
-          {name:"Tējkanna Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Krāsaina sensoru vadības panelis, 5 uzsildīšanas režīmi – 40°, 70°, 80°, 90°, 100° C, Automātiskā sildīšana – 2 stundas, Cool Touch tehnoloģija (inovatīva divsienu konstrukcija, kas nodrošina termosa efektu un aizsargā no apdegumiem), Programmu skaits: 5 (bērnu pārtika, baltā tēja, zaļā tēja, kafija, vārīšana), Temperatūras regulēšana 40°–100° C, solis 5°C, Rotācija par 360 grādiem, Tilpums: 1,7 l, Jauda: 2000 W"}
+        products: [
+          {name: "Multikatls RED COLORSENSE MC200", price: "139.00", img: "photo/200.jpg", description: "Funkcijas: Automātiskā sildīšana līdz 12 st., Iepriekšēja automātiskās sildīšanas izslēgšana, Atliktais starts līdz 24 st., Ēdienu uzsildīšana, Multipavars, Vadības paneļa bloķēšana, Skaņas signālu izslēgšana, RGB indikācija, Programmas: Ātrā gatavošana (Ekspress), Rīsi/Putraimi, Zupa, Tvaicēšana, Vārīšana, Sautēšana, Sutināšana, Cepšana, Cepšana (Mīklas izstrādājumi), Pica, Plovs, Jogurts, Maize, Pasta, Piena putra, Vakuums, Fritēšana, Siera kūka, Multipavars (no 35 līdz 180 °C ar soli 1 °C), Jauda: 860 W"},
+          {name: "Tējkanna Colorsense A11E", price: "45.00", img: "photo/11E.jpg", description: "Krāsaina sensoru vadības panelis, 5 uzsildīšanas režīmi – 40°, 70°, 80°, 90°, 100° C, Automātiskā sildīšana – 2 stundas, Cool Touch tehnoloģija (inovatīva divsienu konstrukcija, kas nodrošina termosa efektu un aizsargā no apdegumiem), Programmu skaits: 5 (bērnu pārtika, baltā tēja, zaļā tēja, kafija, vārīšana), Temperatūras regulēšana 40°–100° C, solis 5°C, Rotācija par 360 grādiem, Tilpums: 1,7 l, Jauda: 2000 W"},
+          {name: "Tējkanna Colorsense A15E", price: "49.00", img: "photo/15E1.jpg", description: "Krāsaina sensoru vadības panelis, 5 uzsildīšanas režīmi – 40°, 70°, 80°, 90°, 100° C, Automātiskā sildīšana – 2 stundas, Cool Touch tehnoloģija (inovatīva divsienu konstrukcija, kas nodrošina termosa efektu un aizsargā no apdegumiem), Programmu skaits: 5 (bērnu pārtika, baltā tēja, zaļā tēja, kafija, vārīšana), Temperatūras regulēšana 40°–100° C, solis 5°C, Rotācija par 360 grādiem, Tilpums: 1,7 l, Jauda: 2000 W"}
         ]
       },
       ru: { 
-        title:"Наши товары", 
-        cartTitle:"Корзина", 
-        cartTotal:"Итого:", 
-        emptyCart:"Очистить корзину", 
-        deliveryTitle:"Доставка",
-        venipak:"Venipak (1–3 рабочих дня, 4.00 EUR)", 
-        pickup:"Самовывоз Mārupe, Lielā 19 k1 (БЕСПЛАТНО)", 
-        pickupOption:"Самовывоз в Марупе",
-        chooseLocker:"Выберите пакомат:",
-        orderTitle:"Оформить заказ", 
-        name:"Ваше имя:", 
-        email:"E-mail:", 
-        phone:"Телефон:", 
-        comments:"Комментарии:", 
-        orderButton:"Заказать",
+        title: "Наши товары", 
+        cartTitle: "Корзина", 
+        cartTotal: "Итого:", 
+        emptyCart: "Очистить корзину", 
+        deliveryTitle: "Доставка",
+        venipak: "Venipak (1–3 рабочих дня, 4.00 EUR)", 
+        omniva: "Omniva (1–3 рабочих дня, 4.00 EUR)",
+        pickup: "Самовывоз Mārupe, Lielā 19 k1 (БЕСПЛАТНО)", 
+        pickupOption: "Самовывоз в Марупе",
+        chooseLocker: "Выберите пакомат:",
+        paymentTitle: "Способ оплаты",
+        cashCard: "Наличными или кредитной картой в магазине",
+        bankTransfer: "Банковский перевод (мы подготовим счёт и отправим на указанный вами e-mail)",
+        orderTitle: "Оформить заказ", 
+        name: "Ваше имя:", 
+        email: "E-mail:", 
+        phone: "Телефон:", 
+        comments: "Комментарии:", 
+        orderButton: "Заказать",
         addToCart: "Добавить в корзину",
         contacts: "Контакты",
         details: "Реквизиты",
@@ -771,10 +973,12 @@
         totalLabel: "Итого:",
         deliveryLabel: "Доставка:",
         lockerLabel: "Пакомат:",
+        paymentLabel: "Способ оплаты:",
         contactSoon: "В ближайшее время мы с Вами свяжемся для уточнения деталей",
         errorEmptyCart: "Корзина пуста",
         errorDelivery: "Пожалуйста, выберите способ доставки",
         errorLocker: "Пожалуйста, выберите пакомат",
+        errorPayment: "Пожалуйста, выберите способ оплаты",
         errorSubmission: "Не удалось отправить заказ. Пожалуйста, попробуйте снова.",
         contactsContent: [
           "Ул. Лиела 19 K-1, Марупе, LV-2167",
@@ -793,27 +997,31 @@
           "Наличными или кредитной картой в магазине",
           "Банковский перевод (мы подготовим счёт и отправим на указанный вами e-mail)"
         ],
-        products:[
-          {name:"Мультиварка RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Функции: Автоматический подогрев до 12 ч. ,Отключение автоматического подогрева заранее, Отложенный старт до 24 ч. ,Разогрев пищи ,Мультиповар ,Блокировка панели управления, Отключение звукового сигнала ,RGB индикация . Программы:  Быстрое приготовление (Экспресс), Рис/Крупы, Суп, На пару, Варка, Тушение, Томление, Жарка, Выпечка, Пицца, Плов, Йогурт, Хлеб, Паста, Молочная каша, Вакуумирование, Фритюр, Чизкейк, Мультиповар (от 35 до 180 °C с шагом 1 °C), Мощность: 860 W"},
-          {name:"Чайник Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Цветной сенсорный панель управления , 5 режимов подогрева — 40°, 70°, 80°, 90°, 100° C , Автоматический подогрев — 2 часа , Регулировка температуры 40°–100° C, шаг 5°C, Поворот на 360 градусов, Технология Cool Touch (инновационная двухслойная конструкция, обеспечивающая эффект термоса и защищающая от ожогов). Количество программ: 5 (прикорм для детей, белый чай, зеленый чай, кофе, кипячение). Объем: 1,7 l, Мощность: 2000 W"},
-          {name:"Чайник Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Цветной сенсорный панель управления , 5 режимов подогрева — 40°, 70°, 80°, 90°, 100° C , Автоматический подогрев — 2 часа , Регулировка температуры 40°–100° C, шаг 5°C, Поворот на 360 градусов, Технология Cool Touch (инновационная двухслойная конструкция, обеспечивающая эффект термоса и защищающая от ожогов). Количество программ: 5 (прикорм для детей, белый чай, зеленый чай, кофе, кипячение). Объем: 1,7 l, Мощность: 2000 W"}
+        products: [
+          {name: "Мультиварка RED COLORSENSE MC200", price: "139.00", img: "photo/200.jpg", description: "Функции: Автоматический подогрев до 12 ч. ,Отключение автоматического подогрева заранее, Отложенный старт до 24 ч. ,Разогрев пищи ,Мультиповар ,Блокировка панели управления, Отключение звукового сигнала ,RGB индикация . Программы:  Быстрое приготовление (Экспресс), Рис/Крупы, Суп, На пару, Варка, Тушение, Томление, Жарка, Выпечка, Пицца, Плов, Йогурт, Хлеб, Паста, Молочная каша, Вакуумирование, Фритюр, Чизкейк, Мультиповар (от 35 до 180 °C с шагом 1 °C), Мощность: 860 W"},
+          {name: "Чайник Colorsense A11E", price: "45.00", img: "photo/11E.jpg", description: "Цветной сенсорный панель управления , 5 режимов подогрева — 40°, 70°, 80°, 90°, 100° C , Автоматический подогрев — 2 часа , Регулировка температуры 40°–100° C, шаг 5°C, Поворот на 360 градусов, Технология Cool Touch (инновационная двухслойная конструкция, обеспечивающая эффект термоса и защищающая от ожогов). Количество программ: 5 (прикорм для детей, белый чай, зеленый чай, кофе, кипячение). Объем: 1,7 l, Мощность: 2000 W"},
+          {name: "Чайник Colorsense A15E", price: "49.00", img: "photo/15E1.jpg", description: "Цветной сенсорный панель управления , 5 режимов подогрева — 40°, 70°, 80°, 90°, 100° C , Автоматический подогрев — 2 часа , Регулировка температуры 40°–100° C, шаг 5°C, Поворот на 360 градусов, Технология Cool Touch (инновационная двухслойная конструкция, обеспечивающая эффект термоса и защищающая от ожогов). Количество программ: 5 (прикорм для детей, белый чай, зеленый чай, кофе, кипячение). Объем: 1,7 l, Мощность: 2000 W"}
         ]
       },
       ee: { 
-        title:"Meie tooted", 
-        cartTitle:"Ostukorv", 
-        cartTotal:"Kokku:", 
-        emptyCart:"Tühjenda korv", 
-        deliveryTitle:"Kohaletoimetamine",
-        venipak:"Venipak pakiautomaat (1–3 tööpäeva, 6.00 EUR)", 
-        pickupOption:"",
-        chooseLocker:"Vali pakiautomaat:", 
-        orderTitle:"Esita tellimus",
-        name:"Teie nimi:", 
-        email:"E-post:", 
-        phone:"Telefon:", 
-        comments:"Kommentaarid:", 
-        orderButton:"Esita",
+        title: "Meie tooted", 
+        cartTitle: "Ostukorv", 
+        cartTotal: "Kokku:", 
+        emptyCart: "Tühjenda korv", 
+        deliveryTitle: "Kohaletoimetamine",
+        venipak: "Venipak pakiautomaat (1–3 tööpäeva, 6.00 EUR)", 
+        omniva: "Omniva pakiautomaat (1–3 tööpäeva, 6.00 EUR)",
+        pickupOption: "",
+        chooseLocker: "Vali pakiautomaat:", 
+        paymentTitle: "Maksmise viis",
+        cashCard: "Sularahas või kaardiga poes",
+        bankTransfer: "Pangaülekanne (koostame arve ja saadame teie e-postile)",
+        orderTitle: "Esita tellimus",
+        name: "Teie nimi:", 
+        email: "E-post:", 
+        phone: "Telefon:", 
+        comments: "Kommentaarid:", 
+        orderButton: "Esita",
         addToCart: "Lisa ostukorvi",
         contacts: "Kontaktid",
         details: "Rekvisiidid",
@@ -824,10 +1032,12 @@
         totalLabel: "Kokku:",
         deliveryLabel: "Kohaletoimetamine:",
         lockerLabel: "Pakiautomaat:",
+        paymentLabel: "Maksmise viis:",
         contactSoon: "Võtame teiega peagi ühendust, et täpsustada üksikasju",
         errorEmptyCart: "Ostukorv on tühi",
         errorDelivery: "Palun valige kohaletoimetamise viis",
         errorLocker: "Palun valige pakiautomaat",
+        errorPayment: "Palun valige makseviis",
         errorSubmission: "Tellimuse saatmine ebaõnnestus. Palun proovige uuesti.",
         contactsContent: [
           "+37127552280",
@@ -842,27 +1052,31 @@
         paymentContent: [
           "Pangaülekanne (koostame arve ja saadame teie määratud e-postile)"
         ],
-        products:[
-          {name:"Multikeetja RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Programmid: Kiirkeetmine (Ekspress), Riis/Tangud, Supp, Aurutamine, Keetmine, Hautamine, Aeglane hautamine, Küpsetamine, Küpsetamine (taina tooted), Pitsa, Plov, Jogurt, Leib, Pasta, Piimapuder, Vaakumkeetmine, Fritüürimine, Juustukook, Multipott (35–180 °C, samm 1 °C). Võimsus: 860 W"},
-          {name:"Veeketja Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Värviline puutejuhtpaneel. 5 soojendusrežiimi – 40°, 70°, 80°, 90°, 100 °C. Automaatne soojas hoidmine – kuni 2 tundi. Cool Touch tehnoloogia (innovatiivne kahekordsete seinte konstruktsioon termose efektiga ja kaitsega põletuste eest). Programmide arv: 5 (beebitoit, valge tee, roheline tee, kohv, keetmine). Temperatuuri reguleerimine 40–100 °C, samm 5 °C. 360° pööratav alus. Maht: 1,7 l Võimsus: 2000 W"},
-          {name:"Veeketja Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Värviline puutejuhtpaneel. 5 soojendusrežiimi – 40°, 70°, 80°, 90°, 100 °C. Automaatne soojas hoidmine – kuni 2 tundi. Cool Touch tehnoloogia (innovatiivne kahekordsete seinte konstruktsioon termose efektiga ja kaitsega põletuste eest). Programmide arv: 5 (beebitoit, valge tee, roheline tee, kohv, keetmine). Temperatuuri reguleerimine 40–100 °C, samm 5 °C. 360° pööratav alus. Maht: 1,7 l Võimsus: 2000 W"}
+        products: [
+          {name: "Multikeetja RED COLORSENSE MC200", price: "139.00", img: "photo/200.jpg", description: "Programmid: Kiirkeetmine (Ekspress), Riis/Tangud, Supp, Aurutamine, Keetmine, Hautamine, Aeglane hautamine, Küpsetamine, Küpsetamine (taina tooted), Pitsa, Plov, Jogurt, Leib, Pasta, Piimapuder, Vaakumkeetmine, Fritüürimine, Juustukook, Multipott (35–180 °C, samm 1 °C). Võimsus: 860 W"},
+          {name: "Veeketja Colorsense A11E", price: "45.00", img: "photo/11E.jpg", description: "Värviline puutejuhtpaneel. 5 soojendusrežiimi – 40°, 70°, 80°, 90°, 100 °C. Automaatne soojas hoidmine – kuni 2 tundi. Cool Touch tehnoloogia (innovatiivne kahekordsete seinte konstruktsioon termose efektiga ja kaitsega põletuste eest). Programmide arv: 5 (beebitoit, valge tee, roheline tee, kohv, keetmine). Temperatuuri reguleerimine 40–100 °C, samm 5 °C. 360° pööratav alus. Maht: 1,7 l Võimsus: 2000 W"},
+          {name: "Veeketja Colorsense A15E", price: "49.00", img: "photo/15E1.jpg", description: "Värviline puutejuhtpaneel. 5 soojendusrežiimi – 40°, 70°, 80°, 90°, 100 °C. Automaatne soojas hoidmine – kuni 2 tundi. Cool Touch tehnoloogia (innovatiivne kahekordsete seinte konstruktsioon termose efektiga ja kaitsega põletuste eest). Programmide arv: 5 (beebitoit, valge tee, roheline tee, kohv, keetmine). Temperatuuri reguleerimine 40–100 °C, samm 5 °C. 360° pööratav alus. Maht: 1,7 l Võimsus: 2000 W"}
         ]
       },
       lt: { 
-        title:"Mūsų produktai", 
-        cartTitle:"Krepšelis", 
-        cartTotal:"Iš viso:", 
-        emptyCart:"Išvalyti krepšelį", 
-        deliveryTitle:"Pristatymas",
-        venipak:"Venipak paštomatas (1–3 darbo dienos, 4.00 EUR)", 
-        pickupOption:"",
-        chooseLocker:"Pasirinkite paštomatą:", 
-        orderTitle:"Užsakymo pateikimas",
-        name:"Jūsų vardas:", 
-        email:"El. paštas:", 
-        phone:"Telefonas:", 
-        comments:"Komentarai:", 
-        orderButton:"Užsakyti",
+        title: "Mūsų produktai", 
+        cartTitle: "Krepšelis", 
+        cartTotal: "Iš viso:", 
+        emptyCart: "Išvalyti krepšelį", 
+        deliveryTitle: "Pristatymas",
+        venipak: "Venipak paštomatas (1–3 darbo dienos, 4.00 EUR)", 
+        omniva: "Omniva paštomatas (1–3 darbo dienos, 4.00 EUR)",
+        pickupOption: "",
+        chooseLocker: "Pasirinkite paštomatą:", 
+        paymentTitle: "Mokėjimo būdas",
+        cashCard: "Grynaisiais arba kortele parduotuvėje",
+        bankTransfer: "Banko pavedimas (paruošime sąskaitą ir išsiųsime jūsų el. paštu)",
+        orderTitle: "Užsakymo pateikimas",
+        name: "Jūsų vardas:", 
+        email: "El. paštas:", 
+        phone: "Telefonas:", 
+        comments: "Komentarai:", 
+        orderButton: "Užsakyti",
         addToCart: "Pridėti į krepšelį",
         contacts: "Kontaktai",
         details: "Rekvizitai",
@@ -873,10 +1087,12 @@
         totalLabel: "Iš viso:",
         deliveryLabel: "Pristatymas:",
         lockerLabel: "Paštomatas:",
+        paymentLabel: "Mokėjimo būdas:",
         contactSoon: "Artimiausiu metu susisieksime su jumis dėl detalių patikslinimo",
         errorEmptyCart: "Krepšelis tuščias",
         errorDelivery: "Prašome pasirinkti pristatymo būdą",
         errorLocker: "Prašome pasirinkti paštomatą",
+        errorPayment: "Prašome pasirinkti mokėjimo būdą",
         errorSubmission: "Nepavyko išsiųsti užsakymo. Bandykite dar kartą.",
         contactsContent: [
           "+37127552280",
@@ -891,22 +1107,26 @@
         paymentContent: [
           "Banko pavedimas (paruošime sąskaitą ir išsiųsime jūsų nurodytu el. paštu)"
         ],
-        products:[
-          {name:"Daugiafunkcis puodas RED COLORSENSE MC200", price:"139.00", img:"photo/200.jpg", description: "Funkcijos:Automatinis šildymas iki 12 val., Išankstinis automatinio šildymo išjungimas, Atidėtas startas iki 24 val., Patiekalų pašildymas, Multipavirimo režimas, Valdymo skydelio blokavimas, Garso signalų išjungimas, RGB indikacija, Programos: Greitas virimas (Ekspresas), Ryžiai/Kruopos, Sriuba, Garinimas, Virimas, Troškinimas, Troškinimas (lėtas), Kepimas, Kepimas (tešlos gaminiai), Pica, Plovas, Jogurtas, Duona, Pasta, Pieniška košė, Vakuuminis virimas, Fritūravimas, Sūrio pyragas, Multipavirimo režimas (nuo 35 iki 180 °C kas 1 °C)., Galia: 860 W"},
-          {name:"Virdulys Colorsense A11E", price:"45.00", img:"photo/11E.jpg", description: "Spalvotas jutiklinis valdymo skydelis, 5 pašildymo režimai – 40°, 70°, 80°, 90°, 100 °C, Automatinis šildymo palaikymas – iki 2 val, Cool Touch technologija (inovatyvi dvigubų sienelių konstrukcija su termoso efektu ir apsauga nuo nudegimų), Programų skaičius: 5 (kūdikių maistas, balta arbata, žalia arbata, kava, virimas), Temperatūros reguliavimas 40–100 °C, žingsnis 5 °C, 360° pasukamas pagrindas, Talpa: 1,7 l, Galia: 2000 W"},
-          {name:"Virdulys Colorsense A15E", price:"49.00", img:"photo/15E1.jpg", description: "Spalvotas jutiklinis valdymo skydelis, 5 pašildymo režimai – 40°, 70°, 80°, 90°, 100 °C, Automatinis šildymo palaikymas – iki 2 val, Cool Touch technologija (inovatyvi dvigubų sienelių konstrukcija su termoso efektu ir apsauga nuo nudegimų), Programų skaičius: 5 (kūdikių maistas, balta arbata, žalia arbata, kava, virimas), Temperatūros reguliavimas 40–100 °C, žingsnis 5 °C, 360° pasukamas pagrindas, Talpa: 1,7 l, Galia: 2000 W"}
+        products: [
+          {name: "Daugiafunkcis puodas RED COLORSENSE MC200", price: "139.00", img: "photo/200.jpg", description: "Funkcijos:Automatinis šildymas iki 12 val., Išankstinis automatinio šildymo išjungimas, Atidėtas startas iki 24 val., Patiekalų pašildymas, Multipavirimo režimas, Valdymo skydelio blokavimas, Garso signalų išjungimas, RGB indikacija, Programos: Greitas virimas (Ekspresas), Ryžiai/Kruopos, Sriuba, Garinimas, Virimas, Troškinimas, Troškinimas (lėtas), Kepimas, Kepimas (tešlos gaminiai), Pica, Plovas, Jogurtas, Duona, Pasta, Pieniška košė, Vakuuminis virimas, Fritūravimas, Sūrio pyragas, Multipavirimo režimas (nuo 35 iki 180 °C kas 1 °C)., Galia: 860 W"},
+          {name: "Virdulys Colorsense A11E", price: "45.00", img: "photo/11E.jpg", description: "Spalvotas jutiklinis valdymo skydelis, 5 pašildymo režimai – 40°, 70°, 80°, 90°, 100 °C, Automatinis šildymo palaikymas – iki 2 val, Cool Touch technologija (inovatyvi dvigubų sienelių konstrukcija su termoso efektu ir apsauga nuo nudegimų), Programų skaičius: 5 (kūdikių maistas, balta arbata, žalia arbata, kava, virimas), Temperatūros reguliavimas 40–100 °C, žingsnis 5 °C, 360° pasukamas pagrindas, Talpa: 1,7 l, Galia: 2000 W"},
+          {name: "Virdulys Colorsense A15E", price: "49.00", img: "photo/15E1.jpg", description: "Spalvotas jutiklinis valdymo skydelis, 5 pašildymo režimai – 40°, 70°, 80°, 90°, 100 °C, Automatinis šildymo palaikymas – iki 2 val, Cool Touch technologija (inovatyvi dvigubų sienelių konstrukcija su termoso efektu ir apsauga nuo nudegimų), Programų skaičius: 5 (kūdikių maistas, balta arbata, žalia arbata, kava, virimas), Temperatūros reguliavimas 40–100 °C, žingsnis 5 °C, 360° pasukamas pagrindas, Talpa: 1,7 l, Galia: 2000 W"}
         ]
       }
     };
 
-    function loadLockers(lang) {
+    function loadLockers(lang, provider) {
       let jsonFile;
-      if (lang === 'lv' || lang === 'ru') {
-        jsonFile = 'venipak-points.json';
-      } else if (lang === 'lt') {
-        jsonFile = 'venipakLT-points.json';
-      } else if (lang === 'ee') {
-        jsonFile = 'venipakEE-points.json';
+      if (provider === 'venipak') {
+        if (lang === 'lv' || lang === 'ru') {
+          jsonFile = 'venipak-points.json';
+        } else if (lang === 'lt') {
+          jsonFile = 'venipakLT-points.json';
+        } else if (lang === 'ee') {
+          jsonFile = 'venipakEE-points.json';
+        }
+      } else if (provider === 'omniva') {
+        jsonFile = 'omniva.json';
       }
 
       const select = $('#locker-select');
@@ -928,10 +1148,12 @@
       const t = translations[lang];
       $('#cart-title').text(t.cartTitle);
       $('#delivery-title').text(t.deliveryTitle);
+      $('#payment-title').text(t.paymentTitle);
       $('#order-title').text(t.orderTitle);
       $('#cart-total-label').text(t.cartTotal);
       $('#empty-cart').text(t.emptyCart);
       $('#venipak-label').text(t.venipak);
+      $('#omniva-label').text(t.omniva);
       $('#choose-locker-label').text(t.chooseLocker);
       if (lang === 'lv' || lang === 'ru') {
         $('#pickup-label-container').show();
@@ -939,6 +1161,8 @@
       } else {
         $('#pickup-label-container').hide();
       }
+      $('#cash-card-label').text(t.cashCard);
+      $('#bank-transfer-label').text(t.bankTransfer);
       $('#name-label').contents().first()[0].textContent = t.name;
       $('#email-label').contents().first()[0].textContent = t.email;
       $('#phone-label').contents().first()[0].textContent = t.phone;
@@ -974,7 +1198,10 @@
       loadProducts(lang);
       $('#product-modal .add-btn').text(t.addToCart);
 
-      loadLockers(lang);
+      const deliveryType = $('input[name="delivery"]:checked').val();
+      if (deliveryType === "Venipak pakomāts" || deliveryType === "Omniva pakomāts") {
+        loadLockers(lang, deliveryType.includes("Venipak") ? 'venipak' : 'omniva');
+      }
 
       $('html').attr('lang', lang);
     }
@@ -1041,6 +1268,13 @@
         if (!$(e.target).closest('.lang-selector').length) {
           $('.lang-dropdown').hide();
         }
+        if (!$(e.target).closest('#cart-icon, #cart-modal').length) {
+          $('#cart-modal').hide();
+        }
+      });
+
+      $('#cart-icon').on('click', function() {
+        $('#cart-modal').show();
       });
 
       simpleCart({
@@ -1071,14 +1305,19 @@
         ]
       });
 
+      simpleCart.bind('update', function() {
+        const itemCount = simpleCart.quantity();
+        $('#cart-count').text(itemCount);
+      });
+
       $('input[name="delivery"]').on('change', function() {
         const deliveryType = $(this).val();
         const select = $('#locker-select');
-        if (deliveryType === "Venipak pakomāts") {
+        const lang = $('#current-lang').text().toLowerCase();
+        if (deliveryType === "Venipak pakomāts" || deliveryType === "Omniva pakomāts") {
           $('#locker-field').removeClass('hidden');
           select.prop('required', true);
-          const lang = $('#current-lang').text().toLowerCase();
-          loadLockers(lang);
+          loadLockers(lang, deliveryType.includes("Venipak") ? 'venipak' : 'omniva');
         } else {
           $('#locker-field').addClass('hidden');
           select.prop('required', false);
@@ -1092,7 +1331,9 @@
         const lang = $('#current-lang').text().toLowerCase();
         const t = translations[lang];
         const deliveryType = $('input[name="delivery"]:checked').val();
-        if (deliveryType === "Venipak pakomāts") deliveryCost = (lang === 'ee') ? 6 : 4;
+        if (deliveryType === "Venipak pakomāts" || deliveryType === "Omniva pakomāts") {
+          deliveryCost = (lang === 'ee') ? 6 : 4;
+        }
 
         $('.simpleCart_items .delivery-row').remove();
         const $tbody = $('.simpleCart_items table tbody');
@@ -1150,8 +1391,13 @@
           alert(t.errorDelivery);
           return false;
         }
-        if (deliveryType === "Venipak pakomāts" && $('#locker-select').val() === "") {
+        if ((deliveryType === "Venipak pakomāts" || deliveryType === "Omniva pakomāts") && $('#locker-select').val() === "") {
           alert(t.errorLocker);
+          return false;
+        }
+        var paymentMethod = $('input[name="payment"]:checked').val();
+        if (!paymentMethod) {
+          alert(t.errorPayment);
           return false;
         }
         var email = $('input[name="email"]').val();
@@ -1162,19 +1408,21 @@
 
         var summaryArr = items.map(it => it.get('quantity') + ' × ' + it.get('name') + ' (' + parseFloat(it.get('price')).toFixed(2) + ' EUR)');
         var itemsTotal = parseFloat(simpleCart.total()) || 0;
-        var deliveryCost = (deliveryType === "Venipak pakomāts") ? ((lang === 'ee') ? 6 : 4) : 0;
+        var deliveryCost = (deliveryType === "Venipak pakomāts" || deliveryType === "Omniva pakomāts") ? ((lang === 'ee') ? 6 : 4) : 0;
         var totalWithDelivery = (itemsTotal + deliveryCost).toFixed(2);
         var lockerAddr = $('#locker-select option:selected').text();
         var orderId = generateSimpleOrderId();
         var deliveryText = deliveryType === "Pašizņemšana Mārupē" ? t.pickupOption : deliveryType;
-        var cartTextForModal = `Order ID: ${orderId}\n\n` + summaryArr.join('\n') + `\n${t.totalLabel} ${totalWithDelivery} EUR\n${t.deliveryLabel} ${deliveryText}` + (deliveryType === "Venipak pakomāts" ? `\n${t.lockerLabel} ${lockerAddr}` : '') + `\n\n<span class="contact-soon">${t.contactSoon}</span>`;
-        var cartTextForEmail = `Order ID: ${orderId}\n\n` + summaryArr.join('\n') + `\n${t.totalLabel} ${totalWithDelivery} EUR\n${t.deliveryLabel} ${deliveryText}` + (deliveryType === "Venipak pakomāts" ? `\n${t.lockerLabel} ${lockerAddr}` : '') + `\n\n**${t.contactSoon}**`;
+        var cartTextForModal = `Order ID: ${orderId}\n\n` + summaryArr.join('\n') + `\n${t.totalLabel} ${totalWithDelivery} EUR\n${t.deliveryLabel} ${deliveryText}` + ((deliveryType === "Venipak pakomāts" || deliveryType === "Omniva pakomāts") ? `\n${t.lockerLabel} ${lockerAddr}` : '') + `\n${t.paymentLabel} ${paymentMethod}\n\n<span class="contact-soon">${t.contactSoon}</span>`;
+        var cartTextForEmail = `Order ID: ${orderId}\n\n` + summaryArr.join('\n') + `\n${t.totalLabel} ${totalWithDelivery} EUR\n${t.deliveryLabel} ${deliveryText}` + ((deliveryType === "Venipak pakomāts" || deliveryType === "Omniva pakomāts") ? `\n${t.lockerLabel} ${lockerAddr}` : '') + `\n${t.paymentLabel} ${paymentMethod}\n\n**${t.contactSoon}**`;
         $('#cart_contents').val(cartTextForEmail);
         $('#order_id').val(orderId);
+        $('#payment_method').val(paymentMethod);
 
         $('#confirmation-order-id').text(orderId);
         $('#confirmation-cart-details').html(cartTextForModal.replace(/\n/g, '<br>'));
         $('#order-confirmation-modal').show();
+        $('#cart-modal').hide();
 
         $.ajax({
           url: 'https://api.web3forms.com/submit',
@@ -1223,6 +1471,7 @@
       });
 
       const modal = $('#product-modal');
+      const cartModal = $('#cart-modal');
       const confirmationModal = $('#order-confirmation-modal');
       const closeBtn = $('.close');
 
@@ -1251,12 +1500,16 @@
 
       closeBtn.on('click', function() {
         modal.hide();
+        cartModal.hide();
         confirmationModal.hide();
       });
 
       $(window).on('click', function(e) {
         if (e.target === modal[0]) {
           modal.hide();
+        }
+        if (e.target === cartModal[0]) {
+          cartModal.hide();
         }
         if (e.target === confirmationModal[0]) {
           confirmationModal.hide();
