@@ -709,10 +709,38 @@ header {
   }
   .simpleCart_items table {
     font-size: 12px;
+    width: 100%;
+    table-layout: auto; /* Позволяет ячейкам адаптироваться к содержимому */
+  }
+  .simpleCart_items th,
+  .simpleCart_items td {
+    padding: 8px 4px; /* Уменьшаем отступы для компактности */
+    white-space: nowrap; /* Предотвращаем перенос текста в ячейках */
+    overflow: hidden; /* Скрываем переполнение текста */
+    text-overflow: ellipsis; /* Добавляем многоточие для длинного текста */
+    max-width: 120px; /* Ограничиваем ширину ячеек для названий товаров */
+  }
+  .simpleCart_items th:first-child,
+  .simpleCart_items td:first-child {
+    max-width: 150px; /* Даем больше места для столбца с названием товара */
+    white-space: normal; /* Разрешаем перенос для названий, чтобы они оставались читаемыми */
+    word-wrap: break-word; /* Обеспечиваем перенос слов для длинных названий */
+  }
+  .simpleCart_items .quantity-controls {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px; /* Уменьшаем промежуток между элементами */
+  }
+  .simpleCart_items .quantity-controls input {
+    width: 30px; /* Уменьшаем ширину поля ввода количества */
   }
   .simpleCart_items .simpleCart_remove {
-    padding: 4px 8px;
-    font-size: 12px;
+    padding: 4px 6px; /* Уменьшаем размер кнопки удаления */
+    font-size: 11px;
+  }
+  .cart-items {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Плавная прокрутка на мобильных устройствах */
   }
   .dropdown-menu {
     left: 10px;
@@ -896,7 +924,7 @@ header {
         chooseLocker: "Izvēlieties pakomātu:", 
         paymentTitle: "Apmaksas veids",
         cashCard: "Skaidrā naudā vai ar kredītkarti veikalā",
-        bankTransfer: "Bankas pārskaitījums (mēs sagatavosim rēķinu un nosūtīsim uz Jūsu e-pastu)",
+        bankTransfer: "Bankas pārskaitījums (mēs sagatavosim rēķinu un nosūtīsim uz Jūsu noradīto e-pastu)",
         orderTitle: "Noformēt pasūtījumu", 
         name: "Jūsu vārds:", 
         email: "E-pasts:",
